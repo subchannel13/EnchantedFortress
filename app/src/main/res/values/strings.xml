@@ -1,4 +1,27 @@
 <resources>
     <string name="app_name">Enchanted Fortress</string>
     <string name="newGame">New Game</string>
+    <string name="end_turn">End turn</string>
+    <string name="population">Population</string>
+    <string name="farmers">Farmers</string>
+    <string name="buttonPlus">+</string>
+    <string name="buttonMinus" >-</string>
+    <string name="scholars">Scholars</string>
+    <string name="builders">Builders</string>
+    <string name="soldiers">Soldiers</string>
+    <string name="popDelta">Population growth</string>
+    <string name="wallDelta">New walls</string>
+    <string name="militaryStrength">Strength</string>
+    <string name="researchDelta">Research</string>
+    <string name="walls">City walls</string>
+    <string name="scouted">Scout report</string>
+    <string name="demons">demons</string>
+    <string name="attacked">Attacked! Demon strength:</string>
+    <string name="victims">, victims:</string>
+    <string name="noVictims">Demon attack repeled without casualties</string>
+    <string name="farmingTech">Farming</string>
+    <string name="buildTech">Carpentry</string>
+    <string name="soldierTech">Training</string>
+    <string name="scholarTech">Scholarship</string>
+    <string name="banishTech">Banish demons</string>
 </resources>

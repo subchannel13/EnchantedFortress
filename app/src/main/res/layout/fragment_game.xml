@@ -1,7 +1,107 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="hr.kravarscan.enchantedfortress.GameFragment">
+    tools:context="hr.kravarscan.enchantedfortress.GameFragment"
+    android:orientation="vertical"
+    android:padding="8dp">
 
-</FrameLayout>
+    <TextView
+        android:id="@+id/popText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/population" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/farmMinusButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/buttonMinus"/>
+
+        <Button
+            android:id="@+id/farmPlusButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/buttonPlus"/>
+
+        <TextView
+            android:id="@+id/farmText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/farmers" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/builderMinusButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/buttonMinus"/>
+
+        <Button
+            android:id="@+id/builderPlusButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/buttonPlus"/>
+
+        <TextView
+            android:id="@+id/builderText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/builders" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/soldierMinusButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/buttonMinus"/>
+
+        <Button
+            android:id="@+id/soldierPlusButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/buttonPlus"/>
+
+        <TextView
+            android:id="@+id/soliderText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/soldiers" />
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/researchText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/scholars" />
+
+    <Spinner
+        android:id="@+id/researchSelection"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <Button
+        android:id="@+id/endTurnButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/end_turn" />
+
+</LinearLayout>
