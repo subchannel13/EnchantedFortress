@@ -30,56 +30,56 @@ public class Game {
     private static final int MaxPopulation = 100000;
     private static Random rand = new Random();
 
-    int turn = 0;
-    int population = 100;
-    double walls = 0;
-    int demons = 0;
-    int demonGates = 0;
-    int demonBanishCost = 10000;
+    public int turn = 0;
+    public int population = 100;
+    public double walls = 0;
+    private int demons = 0;
+    private int demonGates = 0;
+    private int demonBanishCost = 10000;
 
-    static final double SliderTicks = 10;
-    int farmerSlider = 5;
-    int builderSlider = 0;
-    int soldierSlider = 1;
-    int selectedTech = 0;
+    public static final double SliderTicks = 10;
+    public int farmerSlider = 5;
+    public int builderSlider = 0;
+    public int soldierSlider = 1;
+    private int selectedTech = 0;
 
     Technology farming = new Technology();
     Technology building = new Technology();
     Technology soldiering = new Technology();
     Technology scholarship = new Technology();
 
-    int reportAttackers = 0;
-    int reportVictims = 0;
-    int reportScoutedDemons = 0;
+    public int reportAttackers = 0;
+    public int reportVictims = 0;
+    public int reportScoutedDemons = 0;
 
     /*
         Sliders
      */
-    int getScholarSlider() {
+    public int getScholarSlider() {
         return (int)SliderTicks - this.farmerSlider - this.builderSlider - this.soldierSlider;
     }
 
-    void decBuilders() {
+    public void decBuilders() {
         this.builderSlider = moveSlider(this.builderSlider, -1);
     }
 
-    void incBuilders() {
+    public void incBuilders() {
         this.builderSlider = moveSlider(this.builderSlider, 1);
     }
 
-    void decFarmers() {
+    public void decFarmers() {
         this.farmerSlider = moveSlider(this.farmerSlider, -1);
     }
 
-    void incFarmers() {
+    public void incFarmers() {
         this.farmerSlider = moveSlider(this.farmerSlider, 1);
     }
 
-    void decSoldiers() {
+    public void decSoldiers() {
         this.soldierSlider = moveSlider(this.soldierSlider, -1);
     }
 
-    void incSoldiers() {
+    public void incSoldiers() {
         this.soldierSlider = moveSlider(this.soldierSlider, 1);
     }
 
@@ -130,16 +130,16 @@ public class Game {
         return this.population - this.farmers() - this.builders() - this.soldiers();
     }
 
-    int deltaPop()
+    public int deltaPop()
     {
         return (int)((this.farmers() * (3 + this.farming.level / 12.0) - this.population) / 20.0 - this.population / 50.0);
     }
 
-    double deltaWalls() {
+    public double deltaWalls() {
         return (this.builders() * (10 + this.building.level) - this.population - (int)this.walls) / WallCost;
     }
 
-    int militaryStrength() {
+    public int militaryStrength() {
         int civilians = this.population - this.soldiers();
 
         int wallSoldiers = (int)Math.min(this.soldiers(), this.walls);
@@ -150,14 +150,14 @@ public class Game {
         return groundCivils + wallCivils * 4 + (groundSoldiers + wallSoldiers * 2) * (10 + this.soldiering.level);
     }
 
-    double deltaResearch() {
+    public double deltaResearch() {
         return (this.population / 10.0 + this.scholars() * 0.9) * (1 + this.scholarship.level / 8.0);
     }
 
     /*
         Turn processing
      */
-    void endTurn() {
+    public void endTurn() {
         this.reportAttackers = 0;
         this.reportVictims = 0;
         this.turn++;
@@ -306,5 +306,9 @@ public class Game {
         else {
             this.reportScoutedDemons = this.demons;
         }
+    }
+
+    public boolean isOver() {
+        return this.population <= 0 || this.demonBanishCost <= 0;
     }
 }

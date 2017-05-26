@@ -24,4 +24,5 @@
     <string name="soldierTech">Training</string>
     <string name="scholarTech">Scholarship</string>
     <string name="banishTech">Banish demons</string>
+    <string name="gameOver">Game Over</string>
 </resources>
