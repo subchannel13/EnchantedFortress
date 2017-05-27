@@ -37,7 +37,7 @@ public class Game {
     public double walls = 0;
     private int demons = 0;
     private int demonGates = 0;
-    private int demonBanishCost = 10000;
+    public int demonBanishCost = 10000;
 
     public static final double SliderTicks = 20;
     public int farmerSlider = 10;
@@ -45,10 +45,10 @@ public class Game {
     public int soldierSlider = 0;
     private int selectedTech = 0;
 
-    Technology farming = new Technology();
-    Technology building = new Technology();
-    Technology soldiering = new Technology();
-    Technology scholarship = new Technology();
+    public Technology farming = new Technology();
+    public Technology building = new Technology();
+    public Technology soldiering = new Technology();
+    public Technology scholarship = new Technology();
 
     public int reportAttackers = 0;
     public int reportVictims = 0;

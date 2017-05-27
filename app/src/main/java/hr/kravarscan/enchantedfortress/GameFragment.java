@@ -13,6 +13,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import hr.kravarscan.enchantedfortress.logic.Game;
+import hr.kravarscan.enchantedfortress.logic.Technology;
 
 public class GameFragment extends Fragment {
 
@@ -141,11 +142,24 @@ public class GameFragment extends Fragment {
     }
 
     private void updateTechList() {
-        this.techList[0] = getResources().getString(R.string.farmingTech);
-        this.techList[1] = getResources().getString(R.string.buildTech);
-        this.techList[2] = getResources().getString(R.string.soldierTech);
-        this.techList[3] = getResources().getString(R.string.scholarTech);
-        this.techList[4] = getResources().getString(R.string.banishTech);
+        this.techList[0] = getResources().getString(R.string.farmingTech) + techDescription(this.game.farming);
+        this.techList[1] = getResources().getString(R.string.buildTech) + techDescription(this.game.building);
+        this.techList[2] = getResources().getString(R.string.soldierTech) + techDescription(this.game.soldiering);
+        this.techList[3] = getResources().getString(R.string.scholarTech) + techDescription(this.game.scholarship);
+        this.techList[4] = getResources().getString(R.string.banishTech) + techEta(this.game.demonBanishCost);
+    }
+
+    private String techDescription(Technology tech) {
+        return " " + (tech.level + 1) + techEta(tech.cost() - tech.points);
+    }
+
+    private String techEta(double cost) {
+        double rp = this.game.deltaResearch();
+
+        if (rp > cost / 1000)
+            return " - " + (int)Math.ceil(cost / rp) + " " + getResources().getString(R.string.turns);
+
+        return "";
     }
 
     private void endTurn() {

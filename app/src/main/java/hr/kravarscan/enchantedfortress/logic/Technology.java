@@ -19,7 +19,7 @@ package hr.kravarscan.enchantedfortress.logic;
  *  along with Enchanted Fortress.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-class Technology {
+public class Technology {
     private static final double LevelExp = 4 / 3.0;
     private static final double Level0Cost = 100;
 
@@ -28,12 +28,16 @@ class Technology {
 
     public void Invest(double researchPoints) {
         this.points += researchPoints;
-        double levelCost = Level0Cost * Math.pow(LevelExp, this.level);
+        double levelCost = this.cost();
 
         while (this.points > levelCost) {
             this.points -= levelCost;
             this.level++;
             levelCost *= LevelExp;
         }
+    }
+
+    public double cost() {
+        return Level0Cost * Math.pow(LevelExp, this.level);
     }
 }
