@@ -160,12 +160,6 @@ public class GameFragment extends Fragment {
 
     private void updateInfo()
     {
-        this.popInfo.setText(getResources().getString(R.string.population) + ": " + Integer.toString(this.game.population) + "\n" +
-                getResources().getString(R.string.walls) + ": " + Integer.toString((int)this.game.walls) + "\n" +
-                getResources().getString(R.string.scouted) + ": " + Integer.toString(this.game.reportScoutedDemons) + " " + getResources().getString(R.string.demons) +
-                this.battleInfo()
-        );
-
         this.farmerInfo.setText(sliderText(R.string.farmers, game.farmerSlider, R.string.popDelta, game.deltaPop()));
         this.builderInfo.setText( sliderText(R.string.builders, game.builderSlider, R.string.wallDelta, (int)game.deltaWalls()));
         this.soldierInfo.setText(sliderText(R.string.soldiers, game.soldierSlider, R.string.militaryStrength, game.militaryStrength()));
@@ -174,8 +168,16 @@ public class GameFragment extends Fragment {
         this.updateTechList();
         this.techListAdapter.notifyDataSetChanged();
 
-        if (this.game.isOver())
+        if (this.game.isOver()) {
+            this.popInfo.setText(this.game.population <= 0 ? R.string.defeat : R.string.victory);
             this.endTurnButton.setText(R.string.gameOver);
+        }
+        else
+            this.popInfo.setText(getResources().getString(R.string.population) + ": " + Integer.toString(this.game.population) + "\n" +
+                    getResources().getString(R.string.walls) + ": " + Integer.toString((int)this.game.walls) + "\n" +
+                    getResources().getString(R.string.scouted) + ": " + Integer.toString(this.game.reportScoutedDemons) + " " + getResources().getString(R.string.demons) +
+                    this.battleInfo()
+            );
     }
 
     private String sliderText(int sliderTextId, int sliderValue, int descriptionTextId, int effectValue)

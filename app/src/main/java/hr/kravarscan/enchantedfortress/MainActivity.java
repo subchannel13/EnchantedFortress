@@ -21,6 +21,7 @@ public class MainActivity extends FragmentActivity implements MainMenuFragment.O
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
 
         transaction.replace(R.id.fragment_container, fragment);
+        transaction.addToBackStack(null);
         transaction.commit();
     }
 

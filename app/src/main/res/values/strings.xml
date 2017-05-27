@@ -25,4 +25,6 @@
     <string name="scholarTech">Scholarship</string>
     <string name="banishTech">Banish demons</string>
     <string name="gameOver">Game Over</string>
+    <string name="defeat">Demons have defeated you!\nNobody in your fortress survived and the realm in the great peril.</string>
+    <string name="victory">Victory!\nYou have banished all demons and the realm is safe now.</string>
 </resources>
