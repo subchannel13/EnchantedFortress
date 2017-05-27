@@ -21,7 +21,8 @@ public class MainActivity extends FragmentActivity implements MainMenuFragment.O
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
 
         transaction.replace(R.id.fragment_container, fragment);
-        transaction.addToBackStack(null);
+        if (!(fragment instanceof MainMenuFragment))
+            transaction.addToBackStack(null);
         transaction.commit();
     }
 
@@ -32,6 +33,16 @@ public class MainActivity extends FragmentActivity implements MainMenuFragment.O
         gameFragment.setArguments(args);
 
         this.switchMainView(gameFragment);
+    }
+
+    @Override
+    public void onHelp() {
+        this.switchMainView(new HelpFragment());
+    }
+
+    @Override
+    public void onAbout() {
+        this.switchMainView(new AboutFragment());
     }
 
     @Override

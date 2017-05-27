@@ -5,7 +5,7 @@
     <string name="population">Population</string>
     <string name="farmers">Farmers</string>
     <string name="buttonPlus">+</string>
-    <string name="buttonMinus" >-</string>
+    <string name="buttonMinus">-</string>
     <string name="scholars">Scholars</string>
     <string name="builders">Builders</string>
     <string name="soldiers">Soldiers</string>
@@ -27,4 +27,9 @@
     <string name="gameOver">Game Over</string>
     <string name="defeat">Demons have defeated you!\nNobody in your fortress survived and the realm in the great peril.</string>
     <string name="victory">Victory!\nYou have banished all demons and the realm is safe now.</string>
+    <string name="help">Story &amp; Help</string>
+    <string name="helpText">Dark days are upon us, twisted people have made a pact with demons. Hell gates have been opened and demon kind has started to roam this world. As the time passes more hell gates open and demon army grow stronger. If they are not stopped the realm will be overrun.\n\nYour scholars speculate if there is a ritual to summon the demons then there must be the one to banish them. Help them perform the ritual and defend them from demons who will try to stop them.\n\nAs a ruler you can order people to do the work in following areas: farming, construction and guard duty and scholarship. Farming will produce food for your local population and surplus food will attract more people. Construction will improve fortress walls and keep them in shape. Guard duty will increase your army strength and greatly help in defending demon attacks. Scholarship will let you improve efficiency of your population and ultimately perform banishment ritual.</string>
+    <string name="aboutMe">About</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="aboutText">Developed by Ivan Kravarščan 2017\n\nReport bugs at: \nhttps://github.com/subchannel13/EnchantedFortress/issues\n\nCode: \nhttps://github.com/subchannel13/EnchantedFortress\n\nSupport development: \nhttps://www.paypal.me/IvanKravarscan/5</string>
 </resources>

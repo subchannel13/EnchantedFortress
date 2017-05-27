@@ -6,7 +6,6 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 
 public class MainMenuFragment extends Fragment {
 
@@ -25,6 +24,24 @@ public class MainMenuFragment extends Fragment {
                     @Override
                     public void onClick(View view) {
                         listener.onNewGame();
+                    }
+                }
+        );
+
+        layout.findViewById(R.id.helpButton).setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        listener.onHelp();
+                    }
+                }
+        );
+
+        layout.findViewById(R.id.aboutButton).setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        listener.onAbout();
                     }
                 }
         );
@@ -51,5 +68,7 @@ public class MainMenuFragment extends Fragment {
 
     public interface OnFragmentInteractionListener {
         void onNewGame();
+        void onHelp();
+        void onAbout();
     }
 }
