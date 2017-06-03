@@ -22,7 +22,7 @@ public class MainActivity extends FragmentActivity implements MainMenuFragment.O
         boolean isMain = fragment instanceof MainMenuFragment;
         FragmentManager manager = getSupportFragmentManager();
         FragmentTransaction transaction = manager.beginTransaction();
-        
+
         for (int i = 0; isMain && i < manager.getBackStackEntryCount(); i++)
             manager.popBackStack();
 
