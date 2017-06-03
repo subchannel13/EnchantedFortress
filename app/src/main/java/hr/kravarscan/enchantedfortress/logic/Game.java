@@ -215,6 +215,9 @@ public class Game {
                 break;
             case 4:
                 this.demonBanishCost -= (int) researchPoints;
+                if (this.demonBanishCost < 0)
+                    this.demonBanishCost = 0;
+
                 this.demonGates -= (int) (researchPoints / 100);
                 if (this.demonGates < 0)
                     this.demonGates = 0;
@@ -254,13 +257,16 @@ public class Game {
             defenderStr = 0;
 
         attackers /= DemonStrength;
-        this.reportScoutedDemons = (int) (this.reportScoutedDemons * this.demons / (double) (this.demons + attackers) + attackers);
         this.demons += attackers / DemonStrength;
         if (this.demons < 0)
             this.demons = 0;
 
         this.reportVictims = (int) ((this.militaryStrength() - defenderStr) / peopleStr);
         this.population -= this.reportVictims;
+
+        this.reportScoutedDemons -= this.reportAttackers;
+        if (this.reportScoutedDemons < 0)
+            this.reportScoutedDemons = 0;
     }
 
     private void spawnDemons() {
