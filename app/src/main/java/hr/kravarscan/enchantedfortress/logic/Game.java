@@ -4,19 +4,19 @@ import java.util.Random;
 
 /**
  * Copyright 2017 Ivan Kravarščan
- * <p>
+ *
  * This file is part of Enchanted Fortress.
- * <p>
+ *
  * Enchanted Fortress is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- * <p>
- * Enchanted Fortess is distributed in the hope that it will be useful,
+ *
+ * Enchanted Fortress is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * <p>
+ *
  * You should have received a copy of the GNU General Public License
  * along with Enchanted Fortress.  If not, see <http://www.gnu.org/licenses/>.
  */
@@ -32,7 +32,7 @@ public class Game {
     private static final double Mortality = 1 / 50.0;
     private static Random rand = new Random();
 
-    public int turn = 0;
+    public int turn = 1;
     public int population = 100;
     public double walls = 0;
     private int demons = 0;
@@ -119,7 +119,7 @@ public class Game {
     }
 
     /*
-        Derivate values
+        Derivative values
      */
     private int farmers() {
         return (int) (this.population * this.farmerSlider / SliderTicks);
