@@ -187,7 +187,8 @@ public class GameFragment extends Fragment {
             this.endTurnButton.setText(R.string.gameOver);
         }
         else
-            this.popInfo.setText(getResources().getString(R.string.population) + ": " + Integer.toString(this.game.population) + "\n" +
+            this.popInfo.setText(getResources().getString(R.string.turn) + ": " + Integer.toString(this.game.turn) + "\n" +
+                    getResources().getString(R.string.population) + ": " + Integer.toString(this.game.population) + "\n" +
                     getResources().getString(R.string.walls) + ": " + Integer.toString((int)this.game.walls) + "\n" +
                     getResources().getString(R.string.scouted) + ": " + Integer.toString(this.game.reportScoutedDemons) + " " + getResources().getString(R.string.demons) +
                     this.battleInfo()
