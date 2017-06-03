@@ -21,3 +21,4 @@ gradle-app.setting
 .DS_Store
 /captures
 .externalNativeBuild
+.idea/dictionaries/*.xml
