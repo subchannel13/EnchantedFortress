@@ -13,8 +13,10 @@ public class MainActivity extends FragmentActivity implements MainMenuFragment.O
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        MainMenuFragment mainMenu = new MainMenuFragment();
-        getSupportFragmentManager().beginTransaction().add(R.id.fragment_container, mainMenu).commit();
+        if (getSupportFragmentManager().getFragments() == null) {
+            MainMenuFragment mainMenu = new MainMenuFragment();
+            getSupportFragmentManager().beginTransaction().add(R.id.fragment_container, mainMenu).commit();
+        }
     }
 
     private void switchMainView(Fragment fragment)
