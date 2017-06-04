@@ -3,6 +3,7 @@ package hr.kravarscan.enchantedfortress;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 
 public class MainActivity extends FragmentActivity implements MainMenuFragment.OnFragmentInteractionListener, GameFragment.OnFragmentInteractionListener {
@@ -12,17 +13,25 @@ public class MainActivity extends FragmentActivity implements MainMenuFragment.O
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        MainMenuFragment mainMenu = new MainMenuFragment();
-        getSupportFragmentManager().beginTransaction().add(R.id.fragment_container, mainMenu).commit();
+        if (getSupportFragmentManager().getFragments() == null) {
+            MainMenuFragment mainMenu = new MainMenuFragment();
+            getSupportFragmentManager().beginTransaction().add(R.id.fragment_container, mainMenu).commit();
+        }
     }
 
     private void switchMainView(Fragment fragment)
     {
-        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        boolean isMain = fragment instanceof MainMenuFragment;
+        FragmentManager manager = getSupportFragmentManager();
+        FragmentTransaction transaction = manager.beginTransaction();
+
+        for (int i = 0; isMain && i < manager.getBackStackEntryCount(); i++)
+            manager.popBackStack();
 
         transaction.replace(R.id.fragment_container, fragment);
-        if (!(fragment instanceof MainMenuFragment))
+        if (!isMain)
             transaction.addToBackStack(null);
+
         transaction.commit();
     }
 

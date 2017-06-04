@@ -2,21 +2,23 @@ package hr.kravarscan.enchantedfortress.logic;
 
 import java.util.Random;
 
+import hr.kravarscan.enchantedfortress.BuildConfig;
+
 /**
  * Copyright 2017 Ivan Kravarščan
- * <p>
+ *
  * This file is part of Enchanted Fortress.
- * <p>
+ *
  * Enchanted Fortress is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- * <p>
- * Enchanted Fortess is distributed in the hope that it will be useful,
+ *
+ * Enchanted Fortress is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * <p>
+ *
  * You should have received a copy of the GNU General Public License
  * along with Enchanted Fortress.  If not, see <http://www.gnu.org/licenses/>.
  */
@@ -32,7 +34,7 @@ public class Game {
     private static final double Mortality = 1 / 50.0;
     private static Random rand = new Random();
 
-    public int turn = 0;
+    public int turn = 1;
     public int population = 100;
     public double walls = 0;
     private int demons = 0;
@@ -119,7 +121,7 @@ public class Game {
     }
 
     /*
-        Derivate values
+        Derivative values
      */
     private int farmers() {
         return (int) (this.population * this.farmerSlider / SliderTicks);
@@ -215,6 +217,9 @@ public class Game {
                 break;
             case 4:
                 this.demonBanishCost -= (int) researchPoints;
+                if (this.demonBanishCost < 0)
+                    this.demonBanishCost = 0;
+
                 this.demonGates -= (int) (researchPoints / 100);
                 if (this.demonGates < 0)
                     this.demonGates = 0;
@@ -254,13 +259,16 @@ public class Game {
             defenderStr = 0;
 
         attackers /= DemonStrength;
-        this.reportScoutedDemons = (int) (this.reportScoutedDemons * this.demons / (double) (this.demons + attackers) + attackers);
         this.demons += attackers / DemonStrength;
         if (this.demons < 0)
             this.demons = 0;
 
         this.reportVictims = (int) ((this.militaryStrength() - defenderStr) / peopleStr);
         this.population -= this.reportVictims;
+
+        this.reportScoutedDemons -= this.reportAttackers;
+        if (this.reportScoutedDemons < 0)
+            this.reportScoutedDemons = 0;
     }
 
     private void spawnDemons() {
@@ -305,5 +313,70 @@ public class Game {
 
     private int sliderOverflow() {
         return this.farmerSlider + this.builderSlider + this.soldierSlider - (int) SliderTicks;
+    }
+
+    /*
+        Saving and loading
+     */
+    public double[] save() {
+        return new double[]
+                {
+                        BuildConfig.VERSION_CODE,
+
+                        this.turn,
+                        this.population,
+                        this.walls,
+                        this.demons,
+                        this.demonGates,
+                        this.demonBanishCost,
+
+                        this.farmerSlider,
+                        this.builderSlider,
+                        this.soldierSlider,
+                        this.selectedTech,
+
+                        this.farming.level,
+                        this.farming.points,
+                        this.building.level,
+                        this.building.points,
+                        this.soldiering.level,
+                        this.soldiering.points,
+                        this.scholarship.level,
+                        this.scholarship.points,
+
+                        this.reportAttackers,
+                        this.reportVictims,
+                        this.reportScoutedDemons,
+                };
+    }
+
+    public void load(double[] data) {
+        if (data.length != 22 || data[0] != BuildConfig.VERSION_CODE)
+            return;
+
+        this.turn = (int) data[1];
+        this.population = (int) data[2];
+        this.walls = data[3];
+        this.demons = (int) data[4];
+        this.demonGates = (int) data[5];
+        this.demonBanishCost = (int) data[6];
+
+        this.farmerSlider = (int) data[7];
+        this.builderSlider = (int) data[8];
+        this.soldierSlider = (int) data[9];
+        this.selectedTech = (int) data[10];
+
+        this.farming.level = (int) data[11];
+        this.farming.points = data[12];
+        this.building.level = (int) data[13];
+        this.building.points = data[14];
+        this.soldiering.level = (int) data[15];
+        this.soldiering.points = data[16];
+        this.scholarship.level = (int) data[17];
+        this.scholarship.points = data[18];
+
+        this.reportAttackers = (int) data[19];
+        this.reportVictims = (int) data[20];
+        this.reportScoutedDemons = (int) data[21];
     }
 }
