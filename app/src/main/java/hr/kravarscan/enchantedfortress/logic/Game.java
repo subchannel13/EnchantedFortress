@@ -2,6 +2,8 @@ package hr.kravarscan.enchantedfortress.logic;
 
 import java.util.Random;
 
+import hr.kravarscan.enchantedfortress.BuildConfig;
+
 /**
  * Copyright 2017 Ivan Kravarščan
  *
@@ -311,5 +313,70 @@ public class Game {
 
     private int sliderOverflow() {
         return this.farmerSlider + this.builderSlider + this.soldierSlider - (int) SliderTicks;
+    }
+
+    /*
+        Saving and loading
+     */
+    public double[] save() {
+        return new double[]
+                {
+                        BuildConfig.VERSION_CODE,
+
+                        this.turn,
+                        this.population,
+                        this.walls,
+                        this.demons,
+                        this.demonGates,
+                        this.demonBanishCost,
+
+                        this.farmerSlider,
+                        this.builderSlider,
+                        this.soldierSlider,
+                        this.selectedTech,
+
+                        this.farming.level,
+                        this.farming.points,
+                        this.building.level,
+                        this.building.points,
+                        this.soldiering.level,
+                        this.soldiering.points,
+                        this.scholarship.level,
+                        this.scholarship.points,
+
+                        this.reportAttackers,
+                        this.reportVictims,
+                        this.reportScoutedDemons,
+                };
+    }
+
+    public void load(double[] data) {
+        if (data.length != 22 || data[0] != BuildConfig.VERSION_CODE)
+            return;
+
+        this.turn = (int) data[1];
+        this.population = (int) data[2];
+        this.walls = data[3];
+        this.demons = (int) data[4];
+        this.demonGates = (int) data[5];
+        this.demonBanishCost = (int) data[6];
+
+        this.farmerSlider = (int) data[7];
+        this.builderSlider = (int) data[8];
+        this.soldierSlider = (int) data[9];
+        this.selectedTech = (int) data[10];
+
+        this.farming.level = (int) data[11];
+        this.farming.points = data[12];
+        this.building.level = (int) data[13];
+        this.building.points = data[14];
+        this.soldiering.level = (int) data[15];
+        this.soldiering.points = data[16];
+        this.scholarship.level = (int) data[17];
+        this.scholarship.points = data[18];
+
+        this.reportAttackers = (int) data[19];
+        this.reportVictims = (int) data[20];
+        this.reportScoutedDemons = (int) data[21];
     }
 }

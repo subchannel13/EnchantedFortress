@@ -16,6 +16,7 @@ import hr.kravarscan.enchantedfortress.logic.Game;
 import hr.kravarscan.enchantedfortress.logic.Technology;
 
 public class GameFragment extends Fragment {
+    private static final String SaveKey = "GameState";
 
     private Game game = new Game();
     private String[] techList = new String[5];
@@ -41,6 +42,10 @@ public class GameFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_game, container, false);
+
+        if (savedInstanceState != null) {
+            this.game.load(savedInstanceState.getDoubleArray(SaveKey));
+        }
 
         view.findViewById(R.id.farmPlusButton).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -139,6 +144,12 @@ public class GameFragment extends Fragment {
     public void onDetach() {
         super.onDetach();
         listener = null;
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+       outState.putDoubleArray(SaveKey, this.game.save());
     }
 
     private void updateTechList() {
