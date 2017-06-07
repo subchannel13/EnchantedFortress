@@ -32,6 +32,20 @@ public class Game {
     private static final int MaxPopulation = 100000;
     private static final double NatalityPerFood = 1 / 12.0;
     private static final double Mortality = 1 / 50.0;
+
+    private static final double FarmingBase = 3;
+    private static final double BuilderBase = 10;
+    private static final double CivilStrength = 1;
+    private static final double WallCivilStrength = 4;
+    private static final double SoldierStrength = 10;
+    private static final double WallSoldierStrength = 20;
+    private static final double ResearchBase = 0.1;
+    private static final double ScholarResearch = 1 - ResearchBase;
+    private static final double FarmingTechBouns = 1 / 12.0;
+    private static final double BuildingTechBouns = 1;
+    private static final double SoldieringTechBouns = 1 / 1.0;
+    private static final double ResearchTechBouns = 1 / 8.0;
+
     private static Random rand = new Random();
 
     public int turn = 1;
@@ -144,11 +158,11 @@ public class Game {
     }
 
     private double builderEfficiency() {
-        return 10 + this.building.level;
+        return BuilderBase + this.building.level * BuildingTechBouns;
     }
 
     private double farmerEfficiency() {
-        return 3 + this.farming.level / 12.0;
+        return FarmingBase + this.farming.level * FarmingTechBouns;
     }
 
     public int realDeltaPop() {
@@ -161,7 +175,7 @@ public class Game {
                 0);
     }
 
-    public int militaryStrength() {
+    public double militaryStrength() {
         int civilians = (int)this.effectivePop() - this.soldiers();
 
         int wallSoldiers = (int) Math.min(this.soldiers(), this.walls);
@@ -169,11 +183,14 @@ public class Game {
         int wallCivils = Math.min((int) this.walls - wallSoldiers, civilians);
         int groundCivils = civilians - wallCivils;
 
-        return groundCivils + wallCivils * 4 + (groundSoldiers + wallSoldiers * 2) * (10 + this.soldiering.level);
+        return groundCivils * CivilStrength +
+                wallCivils * WallCivilStrength +
+                (groundSoldiers * SoldierStrength +
+                wallSoldiers * WallSoldierStrength) * (1 + this.soldiering.level * SoldieringTechBouns);
     }
 
     public double deltaResearch() {
-        return (this.effectivePop() / 10.0 + this.scholars() * 0.9) * (1 + this.scholarship.level / 8.0);
+        return (this.effectivePop() * ResearchBase + this.scholars() * ScholarResearch) * (1 + this.scholarship.level * ResearchTechBouns);
     }
 
     public boolean isOver() {
@@ -238,8 +255,8 @@ public class Game {
             return;
 
         int attackers = rand.nextInt(this.demons + 1);
-        int defenderStr = this.militaryStrength();
-        double peopleStr = (double) defenderStr / this.effectivePop();
+        double defenderStr = this.militaryStrength();
+        double peopleStr = defenderStr / this.effectivePop();
 
         this.demons -= attackers;
         this.reportAttackers = attackers;
