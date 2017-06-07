@@ -35,7 +35,7 @@ public class Game {
     private static Random rand = new Random();
 
     public int turn = 1;
-    public int population = 100;
+    public double population = 100;
     public double walls = 0;
     private int demons = 0;
     private int demonGates = 0;
@@ -93,7 +93,7 @@ public class Game {
             return sliderValue;
 
         sliderValue += delta;
-        int minSlider = (int) Math.ceil(SliderTicks * minimumPop / this.population);
+        int minSlider = (int) Math.ceil(SliderTicks * minimumPop / this.effectivePop());
 
         if (sliderValue < minSlider) {
             sliderValue = minSlider;
@@ -106,11 +106,11 @@ public class Game {
     }
 
     private double minBuilders() {
-        return this.population / this.builderEfficiency();
+        return this.effectivePop() / this.builderEfficiency();
     }
 
     private double minFarmers() {
-        return this.population * (1 + Mortality / NatalityPerFood) / this.farmerEfficiency();
+        return this.effectivePop() * (1 + Mortality / NatalityPerFood) / this.farmerEfficiency();
     }
 
     public void selectTech(int i) {
@@ -123,20 +123,24 @@ public class Game {
     /*
         Derivative values
      */
+    private double effectivePop()
+    {
+        return Math.floor(this.population);
+    }
     private int farmers() {
-        return (int) (this.population * this.farmerSlider / SliderTicks);
+        return (int) (this.effectivePop() * this.farmerSlider / SliderTicks);
     }
 
     private int builders() {
-        return (int) (this.population * this.builderSlider / SliderTicks);
+        return (int) (this.effectivePop() * this.builderSlider / SliderTicks);
     }
 
     private int soldiers() {
-        return (int) (this.population * this.soldierSlider / SliderTicks);
+        return (int) (this.effectivePop() * this.soldierSlider / SliderTicks);
     }
 
     private int scholars() {
-        return this.population - this.farmers() - this.builders() - this.soldiers();
+        return (int)this.effectivePop() - this.farmers() - this.builders() - this.soldiers();
     }
 
     private double builderEfficiency() {
@@ -147,18 +151,18 @@ public class Game {
         return 3 + this.farming.level / 12.0;
     }
 
-    public int deltaPop() {
-        return (int) ((this.farmers() * farmerEfficiency() - this.population) * NatalityPerFood - this.population * Mortality);
+    public int realDeltaPop() {
+        return Utils.integerDelta(this.population, this.deltaPop());
     }
 
     public double deltaWalls() {
         return Math.max(
-                (this.builders() * builderEfficiency() - this.population - (int) this.walls) / WallCost,
+                (this.builders() * builderEfficiency() - this.effectivePop() - (int) this.walls) / WallCost,
                 0);
     }
 
     public int militaryStrength() {
-        int civilians = this.population - this.soldiers();
+        int civilians = (int)this.effectivePop() - this.soldiers();
 
         int wallSoldiers = (int) Math.min(this.soldiers(), this.walls);
         int groundSoldiers = this.soldiers() - wallSoldiers;
@@ -169,13 +173,16 @@ public class Game {
     }
 
     public double deltaResearch() {
-        return (this.population / 10.0 + this.scholars() * 0.9) * (1 + this.scholarship.level / 8.0);
+        return (this.effectivePop() / 10.0 + this.scholars() * 0.9) * (1 + this.scholarship.level / 8.0);
     }
 
     public boolean isOver() {
         return this.population <= 0 || this.demonBanishCost <= 0;
     }
 
+    private double deltaPop() {
+        return (this.farmers() * farmerEfficiency() - this.effectivePop()) * NatalityPerFood - this.effectivePop() * Mortality;
+    }
     /*
         Turn processing
      */
@@ -185,8 +192,7 @@ public class Game {
         this.turn++;
 
         this.population += this.deltaPop();
-        if (this.population > MaxPopulation)
-            this.population = MaxPopulation;
+        this.population = Utils.clamp(this.population, 0, MaxPopulation);
 
         this.walls += this.deltaWalls();
         if (this.walls > MaxPopulation)
@@ -228,12 +234,12 @@ public class Game {
     }
 
     private void doCombat() {
-        if (rand.nextDouble() * this.population > this.demons)
+        if (rand.nextDouble() * this.effectivePop() > this.demons)
             return;
 
         int attackers = rand.nextInt(this.demons + 1);
         int defenderStr = this.militaryStrength();
-        float peopleStr = (float) defenderStr / this.population;
+        double peopleStr = (double) defenderStr / this.effectivePop();
 
         this.demons -= attackers;
         this.reportAttackers = attackers;
@@ -273,12 +279,12 @@ public class Game {
 
     private void spawnDemons() {
         if (this.demonBanishCost > 0) {
-            this.demonGates += this.population + this.demonBanishCost / 100;
+            this.demonGates += this.effectivePop() + this.demonBanishCost / 100;
             if (this.demonGates > MaxDemonGates)
                 this.demonGates = MaxDemonGates;
 
             int deltaCost = this.demonGates / 100;
-            this.demonBanishCost += deltaCost < this.population ? this.population : deltaCost;
+            this.demonBanishCost += deltaCost < this.effectivePop() ? this.effectivePop() : deltaCost;
             if (this.demonBanishCost > MaxBanishCost)
                 this.demonBanishCost = MaxBanishCost;
         }
@@ -355,7 +361,7 @@ public class Game {
             return;
 
         this.turn = (int) data[1];
-        this.population = (int) data[2];
+        this.population = data[2];
         this.walls = data[3];
         this.demons = (int) data[4];
         this.demonGates = (int) data[5];
