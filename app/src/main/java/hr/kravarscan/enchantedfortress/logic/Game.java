@@ -2,7 +2,7 @@ package hr.kravarscan.enchantedfortress.logic;
 
 import java.util.Random;
 
-import hr.kravarscan.enchantedfortress.BuildConfig;
+import hr.kravarscan.enchantedfortress.storage.LatestSaveKeys;
 
 /**
  * Copyright 2017 Ivan Kravarščan
@@ -344,8 +344,6 @@ public class Game {
     public double[] save() {
         return new double[]
                 {
-                        BuildConfig.VERSION_CODE,
-
                         this.turn,
                         this.population,
                         this.walls,
@@ -374,32 +372,29 @@ public class Game {
     }
 
     public void load(double[] data) {
-        if (data.length != 22 || data[0] != BuildConfig.VERSION_CODE)
-            return;
+        this.turn = (int) data[LatestSaveKeys.TURN.ordinal()];
+        this.population = (int) data[LatestSaveKeys.POPULATION.ordinal()];
+        this.walls = data[LatestSaveKeys.WALLS.ordinal()];
+        this.demons = (int) data[LatestSaveKeys.DEMONS.ordinal()];
+        this.demonGates = (int) data[LatestSaveKeys.DEMON_GATES.ordinal()];
+        this.demonBanishCost = (int) data[LatestSaveKeys.DEMON_BANISH_COST.ordinal()];
 
-        this.turn = (int) data[1];
-        this.population = data[2];
-        this.walls = data[3];
-        this.demons = (int) data[4];
-        this.demonGates = (int) data[5];
-        this.demonBanishCost = (int) data[6];
+        this.farmerSlider = (int) data[LatestSaveKeys.FARMER_SLIDER.ordinal()];
+        this.builderSlider = (int) data[LatestSaveKeys.BUILDER_SLIDER.ordinal()];
+        this.soldierSlider = (int) data[LatestSaveKeys.SOLDIER_SLIDER.ordinal()];
+        this.selectedTech = (int) data[LatestSaveKeys.SELECTED_TECH.ordinal()];
 
-        this.farmerSlider = (int) data[7];
-        this.builderSlider = (int) data[8];
-        this.soldierSlider = (int) data[9];
-        this.selectedTech = (int) data[10];
+        this.farming.level = (int) data[LatestSaveKeys.FARMING_LEVEL.ordinal()];
+        this.farming.points = data[LatestSaveKeys.FARMING_POINTS.ordinal()];
+        this.building.level = (int) data[LatestSaveKeys.BUILDING_LEVEL.ordinal()];
+        this.building.points = data[LatestSaveKeys.BUILDING_POINTS.ordinal()];
+        this.soldiering.level = (int) data[LatestSaveKeys.SOLDIERING_LEVEL.ordinal()];
+        this.soldiering.points = data[LatestSaveKeys.SOLDIERING_POINTS.ordinal()];
+        this.scholarship.level = (int) data[LatestSaveKeys.SCHOLARSHIP_LEVEL.ordinal()];
+        this.scholarship.points = data[LatestSaveKeys.SCHOLARSHIP_POINTS.ordinal()];
 
-        this.farming.level = (int) data[11];
-        this.farming.points = data[12];
-        this.building.level = (int) data[13];
-        this.building.points = data[14];
-        this.soldiering.level = (int) data[15];
-        this.soldiering.points = data[16];
-        this.scholarship.level = (int) data[17];
-        this.scholarship.points = data[18];
-
-        this.reportAttackers = (int) data[19];
-        this.reportVictims = (int) data[20];
-        this.reportScoutedDemons = (int) data[21];
+        this.reportAttackers = (int) data[LatestSaveKeys.REPORT_ATTACKERS.ordinal()];
+        this.reportVictims = (int) data[LatestSaveKeys.REPORT_VICTIMS.ordinal()];
+        this.reportScoutedDemons = (int) data[LatestSaveKeys.REPORT_SCOUTED_DEMONS.ordinal()];
     }
 }

@@ -22,3 +22,5 @@ gradle-app.setting
 /captures
 .externalNativeBuild
 .idea/dictionaries/*.xml
+.idea/codeStyleSettings.xml
+.idea/misc.xml
