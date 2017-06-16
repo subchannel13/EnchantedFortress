@@ -33,4 +33,5 @@
     <string name="aboutText">Developed by Ivan Kravarščan\n\nReport bugs at: \nhttps://github.com/subchannel13/EnchantedFortress/issues\n\nCode: \nhttps://github.com/subchannel13/EnchantedFortress\n\nSupport development: \nhttps://www.paypal.me/IvanKravarscan/5\n\nVersion: v1.1</string>
     <string name="turns">turns</string>
     <string name="turn">Turn</string>
+    <string name="continueText">Continue</string>
 </resources>

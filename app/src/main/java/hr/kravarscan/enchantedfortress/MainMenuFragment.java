@@ -7,6 +7,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import hr.kravarscan.enchantedfortress.storage.SaveLoad;
+
 public class MainMenuFragment extends Fragment {
 
     private OnFragmentInteractionListener listener;
@@ -18,6 +20,16 @@ public class MainMenuFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View layout = inflater.inflate(R.layout.fragment_main_menu, container, false);
+
+        View continueButton = layout.findViewById(R.id.continueButton);
+        continueButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                listener.onContinue();
+            }
+        });
+        if (!SaveLoad.get().hasAutosave(this.getContext()))
+            continueButton.setVisibility(View.GONE);
 
         layout.findViewById(R.id.newGameButton).setOnClickListener(
                 new View.OnClickListener() {
@@ -67,6 +79,7 @@ public class MainMenuFragment extends Fragment {
     }
 
     public interface OnFragmentInteractionListener {
+        void onContinue();
         void onNewGame();
         void onHelp();
         void onAbout();

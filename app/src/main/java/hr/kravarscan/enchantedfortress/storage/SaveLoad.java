@@ -1,5 +1,14 @@
 package hr.kravarscan.enchantedfortress.storage;
 
+import android.content.Context;
+import android.util.Log;
+
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.nio.ByteBuffer;
+import java.util.ArrayList;
+import java.util.List;
+
 import hr.kravarscan.enchantedfortress.BuildConfig;
 import hr.kravarscan.enchantedfortress.logic.Game;
 
@@ -23,6 +32,9 @@ import hr.kravarscan.enchantedfortress.logic.Game;
  */
 
 public final class SaveLoad {
+    public static final String SaveKey = "GameState";
+    private static final String SaveFileName = "autosave.dat";
+    private static final int MaxSaveLength = LatestSaveKeys.KEY_COUNT.ordinal();
     private static SaveLoad instance = null;
 
     public static SaveLoad get() {
@@ -35,6 +47,51 @@ public final class SaveLoad {
     private SaveLoad() {
     }
 
+    public boolean hasAutosave(Context context) {
+        return context.getFileStreamPath(SaveFileName).exists();
+    }
+
+    public void save(Game game, Context context) {
+        byte[] byteBuffer = new byte[Double.SIZE / Byte.SIZE];
+        double[] data = this.serialize(game);
+
+        try {
+            FileOutputStream stream = context.openFileOutput(SaveFileName, Context.MODE_PRIVATE);
+
+            for (double val : data) {
+                ByteBuffer.wrap(byteBuffer).putDouble(val);
+                stream.write(byteBuffer);
+            }
+
+            stream.close();
+        } catch (Exception e) {
+            Log.e("SaveLoad", "Autosave failed", e);
+        }
+    }
+
+    public double[] load(Context context) {
+        byte[] byteBuffer = new byte[Double.SIZE / Byte.SIZE];
+        List<Double> data = new ArrayList<>();
+
+        try {
+            FileInputStream stream = context.openFileInput(SaveFileName);
+
+            while (stream.read(byteBuffer) == byteBuffer.length && data.size() < MaxSaveLength)
+                data.add(ByteBuffer.wrap(byteBuffer).getDouble());
+
+            stream.close();
+        } catch (Exception e) {
+            Log.e("SaveLoad", "Loading autosave failed", e);
+            return null;
+        }
+
+        double[] result = new double[data.size()];
+        for (int i = 0; i < result.length; i++)
+            result[i] = data.get(i);
+
+        return result;
+    }
+
     public double[] serialize(Game game) {
         double[] result = new double[LatestSaveKeys.KEY_COUNT.ordinal()];
 
@@ -44,8 +101,8 @@ public final class SaveLoad {
         return result;
     }
 
-    public boolean load(Game game, double[] rawData) {
-        if (rawData.length == 0)
+    public boolean deserialize(Game game, double[] rawData) {
+        if (rawData == null || rawData.length == 0)
             return false;
 
         int version = (int) rawData[0];

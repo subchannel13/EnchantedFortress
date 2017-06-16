@@ -6,6 +6,8 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 
+import hr.kravarscan.enchantedfortress.storage.SaveLoad;
+
 public class MainActivity extends FragmentActivity implements MainMenuFragment.OnFragmentInteractionListener, GameFragment.OnFragmentInteractionListener {
 
     @Override
@@ -33,6 +35,16 @@ public class MainActivity extends FragmentActivity implements MainMenuFragment.O
             transaction.addToBackStack(null);
 
         transaction.commit();
+    }
+
+    @Override
+    public void onContinue() {
+        GameFragment gameFragment = new GameFragment();
+        Bundle args = new Bundle();
+        args.putDoubleArray(SaveLoad.SaveKey, SaveLoad.get().load(this));
+        gameFragment.setArguments(args);
+
+        this.switchMainView(gameFragment);
     }
 
     @Override
