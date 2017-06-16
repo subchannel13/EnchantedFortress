@@ -34,4 +34,8 @@
     <string name="turns">turns</string>
     <string name="turn">Turn</string>
     <string name="continueText">Continue</string>
+    <string name="difficultySelect">Choose difficulty:</string>
+    <string name="difficultyEasy">Easy</string>
+    <string name="difficultyNormal">Normal</string>
+    <string name="difficultyHard">Hard</string>
 </resources>
