@@ -31,7 +31,7 @@
     <string name="aboutMe">Über</string>
     <string name="turns">Runden</string>
     <string name="turn">Runde</string>
-    <string name="continueText">Continue</string>
+    <string name="continueText">Weiter</string>
     <string name="difficultySelect">Schwierigkeit auswählen:</string>
     <string name="difficultyEasy">Einfach</string>
     <string name="difficultyNormal">Normal</string>
