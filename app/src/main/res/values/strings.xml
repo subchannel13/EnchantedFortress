@@ -38,4 +38,11 @@
     <string name="difficultyEasy">Easy</string>
     <string name="difficultyNormal">Normal</string>
     <string name="difficultyHard">Hard</string>
+    <string name="aboutDevelopBy">Developed by</string>
+    <string name="aboutTranslateBy">Translation</string>
+    <string name="aboutTrackerAt">Report bugs at:</string>
+    <string name="aboutCodeAt">Code:</string>
+    <string name="aboutDonateAt">Support development:</string>
+    <string name="aboutVersion">Version</string>
+    <string name="aboutSupportAt">Support development:</string>
 </resources>
