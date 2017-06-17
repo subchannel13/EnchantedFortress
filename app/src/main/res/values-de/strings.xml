@@ -29,7 +29,18 @@
     <string name="victory">Sieg!\nDu hast alle Dämonen verbannt und dein Königreich ist jetzt wieder sicher.</string>
     <string name="help">Story &amp; Hilfe</string>
     <string name="aboutMe">Über</string>
-    <string name="aboutText">Entwickelt von Ivan Kravarščan\n\nMelde Fehler: \nhttps://github.com/subchannel13/EnchantedFortress/issues\n\nCode: \nhttps://github.com/subchannel13/EnchantedFortress\n\nUnterstütze die Entwicklung: \nhttps://www.paypal.me/IvanKravarscan/5\n\nVersion: v1.1</string>
     <string name="turns">Runden</string>
     <string name="turn">Runde</string>
+    <string name="continueText">Continue</string>
+    <string name="difficultySelect">Schwierigkeit auswählen:</string>
+    <string name="difficultyEasy">Einfach</string>
+    <string name="difficultyNormal">Normal</string>
+    <string name="difficultyHard">Schwer</string>
+    <string name="aboutDevelopBy">Entwickelt von</string>
+    <string name="aboutTranslateBy">Übersetzung</string>
+    <string name="aboutTrackerAt">Melde Fehler unter:</string>
+    <string name="aboutCodeAt">Code:</string>
+    <string name="aboutDonateAt">Spenden:</string>
+    <string name="aboutVersion">Version</string>
+    <string name="aboutSupportAt">Unterstütze die Entwicklung:</string>
 </resources>
