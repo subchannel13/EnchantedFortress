@@ -33,6 +33,6 @@ public final class Utils {
     }
 
     public static int integerDelta(double x, double delta) {
-        return (int)(Math.floor(x) - Math.floor(x + delta));
+        return (int)(Math.floor(x + delta) - Math.floor(x));
     }
 }
