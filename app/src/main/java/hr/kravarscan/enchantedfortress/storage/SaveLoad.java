@@ -55,6 +55,7 @@ public final class SaveLoad {
         byte[] byteBuffer = new byte[Double.SIZE / Byte.SIZE];
         double[] data = this.serialize(game);
 
+        Log.i("SaveLoad", "Saving");
         try {
             FileOutputStream stream = context.openFileOutput(SaveFileName, Context.MODE_PRIVATE);
 
@@ -64,6 +65,7 @@ public final class SaveLoad {
             }
 
             stream.close();
+            Log.i("SaveLoad", "Saved");
         } catch (Exception e) {
             Log.e("SaveLoad", "Autosave failed", e);
         }
@@ -73,6 +75,7 @@ public final class SaveLoad {
         byte[] byteBuffer = new byte[Double.SIZE / Byte.SIZE];
         List<Double> data = new ArrayList<>();
 
+        Log.i("SaveLoad", "Loading");
         try {
             FileInputStream stream = context.openFileInput(SaveFileName);
 
@@ -80,6 +83,7 @@ public final class SaveLoad {
                 data.add(ByteBuffer.wrap(byteBuffer).getDouble());
 
             stream.close();
+            Log.i("SaveLoad", "loaded");
         } catch (Exception e) {
             Log.e("SaveLoad", "Loading autosave failed", e);
             return null;

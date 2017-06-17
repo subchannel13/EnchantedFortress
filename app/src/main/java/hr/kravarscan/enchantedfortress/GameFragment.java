@@ -37,6 +37,10 @@ public class GameFragment extends Fragment {
         // Required empty public constructor
     }
 
+    public void setGame(Game game) {
+        this.game = game;
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -146,10 +150,16 @@ public class GameFragment extends Fragment {
     }
 
     @Override
+    public void onPause() {
+        super.onPause();
+        if (!this.game.isOver())
+            SaveLoad.get().save(this.game, this.getContext());
+    }
+
+    @Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         outState.putDoubleArray(SaveLoad.SaveKey, SaveLoad.get().serialize(this.game));
-        SaveLoad.get().save(this.game, this.getContext());
     }
 
     private void updateTechList() {
