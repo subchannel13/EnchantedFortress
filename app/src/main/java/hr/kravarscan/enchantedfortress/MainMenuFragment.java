@@ -1,15 +1,13 @@
 package hr.kravarscan.enchantedfortress;
 
-import android.content.Context;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import hr.kravarscan.enchantedfortress.storage.SaveLoad;
 
-public class MainMenuFragment extends Fragment {
+public class MainMenuFragment extends AAttachableFragment {
 
     private OnFragmentInteractionListener listener;
 
@@ -28,7 +26,8 @@ public class MainMenuFragment extends Fragment {
                 listener.onContinue();
             }
         });
-        if (!SaveLoad.get().hasAutosave(this.getContext()))
+
+        if (!SaveLoad.get().hasAutosave(container.getContext()))
             continueButton.setVisibility(View.GONE);
 
         layout.findViewById(R.id.newGameButton).setOnClickListener(
@@ -62,23 +61,22 @@ public class MainMenuFragment extends Fragment {
     }
 
     @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        if (context instanceof OnFragmentInteractionListener) {
-            listener = (OnFragmentInteractionListener) context;
-        } else {
-            throw new RuntimeException(context.toString()
-                    + " must implement OnFragmentInteractionListener");
-        }
-    }
-
-    @Override
     public void onDetach() {
         super.onDetach();
         listener = null;
     }
 
-    public interface OnFragmentInteractionListener {
+    @Override
+    public void attach(Object listener) {
+        if (listener instanceof OnFragmentInteractionListener) {
+            this.listener = (OnFragmentInteractionListener) listener;
+        } else {
+            throw new RuntimeException(listener.toString()
+                    + " must implement OnFragmentInteractionListener");
+        }
+    }
+
+    interface OnFragmentInteractionListener {
         void onContinue();
         void onNewGame();
         void onHelp();

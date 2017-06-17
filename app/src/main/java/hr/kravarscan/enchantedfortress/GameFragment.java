@@ -1,8 +1,6 @@
 package hr.kravarscan.enchantedfortress;
 
-import android.content.Context;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,7 +14,7 @@ import hr.kravarscan.enchantedfortress.logic.Game;
 import hr.kravarscan.enchantedfortress.logic.Technology;
 import hr.kravarscan.enchantedfortress.storage.SaveLoad;
 
-public class GameFragment extends Fragment {
+public class GameFragment extends AAttachableFragment {
     private Game game = new Game();
     private String[] techList = new String[5];
     private ArrayAdapter<String> techListAdapter;
@@ -133,12 +131,11 @@ public class GameFragment extends Fragment {
     }
 
     @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        if (context instanceof OnFragmentInteractionListener) {
-            listener = (OnFragmentInteractionListener) context;
+    public void attach(Object listener) {
+        if (listener instanceof OnFragmentInteractionListener) {
+            this.listener = (OnFragmentInteractionListener) listener;
         } else {
-            throw new RuntimeException(context.toString()
+            throw new RuntimeException(listener.toString()
                     + " must implement OnFragmentInteractionListener");
         }
     }
@@ -153,7 +150,7 @@ public class GameFragment extends Fragment {
     public void onPause() {
         super.onPause();
         if (!this.game.isOver())
-            SaveLoad.get().save(this.game, this.getContext());
+            SaveLoad.get().save(this.game, this.getActivity());
     }
 
     @Override
