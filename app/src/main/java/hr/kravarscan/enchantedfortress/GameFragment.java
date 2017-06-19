@@ -201,7 +201,7 @@ public class GameFragment extends AAttachableFragment {
         this.techListAdapter.notifyDataSetChanged();
 
         if (this.game.isOver()) {
-            this.popInfo.setText(this.game.population <= 0 ? R.string.defeat : R.string.victory);
+            this.popInfo.setText(this.game.population < 1 ? R.string.defeat : R.string.victory);
             this.endTurnButton.setText(R.string.gameOver);
         }
         else

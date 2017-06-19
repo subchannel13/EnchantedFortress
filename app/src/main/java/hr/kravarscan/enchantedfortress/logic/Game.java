@@ -194,7 +194,7 @@ public class Game {
     }
 
     public boolean isOver() {
-        return this.population <= 0 || this.demonBanishCost <= 0;
+        return this.population < 1 || this.demonBanishCost <= 0;
     }
 
     private double deltaPop() {
