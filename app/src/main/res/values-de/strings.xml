@@ -20,7 +20,7 @@
     <string name="victims">, Opfer:</string>
     <string name="noVictims">Dämonenangriff ohne Verlust zurückgeschlagen</string>
     <string name="farmingTech">Landwirtschaft</string>
-    <string name="buildTech">Carpentry</string>
+    <string name="buildTech">Maurerarbeiten</string>
     <string name="soldierTech">Übung</string>
     <string name="scholarTech">Wissenschaft</string>
     <string name="banishTech">Dämonen verbannen</string>
