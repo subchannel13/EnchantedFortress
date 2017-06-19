@@ -16,7 +16,7 @@ import hr.kravarscan.enchantedfortress.storage.SaveLoad;
 
 public class GameFragment extends AAttachableFragment {
     private Game game = new Game();
-    private String[] techList = new String[5];
+    private final String[] techList = new String[5];
     private ArrayAdapter<String> techListAdapter;
     private TextView popInfo;
     private TextView farmerInfo;
@@ -96,7 +96,7 @@ public class GameFragment extends AAttachableFragment {
             }
         });
 
-        this.endTurnButton = (Button) view.findViewById(R.id.endTurnButton);
+        this.endTurnButton = view.findViewById(R.id.endTurnButton);
         this.endTurnButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -104,7 +104,7 @@ public class GameFragment extends AAttachableFragment {
             }
         });
 
-        Spinner researchSelector = (Spinner) view.findViewById(R.id.researchSelection);
+        Spinner researchSelector = view.findViewById(R.id.researchSelection);
         this.updateTechList();
         this.techListAdapter = new ArrayAdapter<>(view.getContext(), android.R.layout.simple_spinner_item, this.techList);
         researchSelector.setAdapter(this.techListAdapter);
@@ -119,11 +119,11 @@ public class GameFragment extends AAttachableFragment {
                 //No operation
             }
         });
-        this.farmerInfo = (TextView) view.findViewById(R.id.farmText);
-        this.builderInfo = (TextView) view.findViewById(R.id.builderText);
-        this.popInfo = (TextView) view.findViewById(R.id.popText);
-        this.soldierInfo = (TextView) view.findViewById(R.id.soliderText);
-        this.researchInfo = (TextView) view.findViewById(R.id.researchText);
+        this.farmerInfo = view.findViewById(R.id.farmText);
+        this.builderInfo = view.findViewById(R.id.builderText);
+        this.popInfo = view.findViewById(R.id.popText);
+        this.soldierInfo = view.findViewById(R.id.soliderText);
+        this.researchInfo = view.findViewById(R.id.researchText);
 
         this.updateInfo();
 

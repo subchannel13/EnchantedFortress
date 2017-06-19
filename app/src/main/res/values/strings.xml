@@ -42,7 +42,6 @@
     <string name="aboutTranslateBy">Translation by</string>
     <string name="aboutTrackerAt">Report bugs at:</string>
     <string name="aboutCodeAt">Code:</string>
-    <string name="aboutDonateAt">Support development:</string>
     <string name="aboutVersion">Version</string>
     <string name="aboutSupportAt">Support development:</string>
 </resources>

@@ -25,7 +25,7 @@ public class AboutFragment extends AAttachableFragment {
                 getResources().getString(R.string.aboutDevelopBy) + " Ivan Kravarščan"
         );
 
-        TextView translators = (TextView) view.findViewById(R.id.aboutTranslator);
+        TextView translators = view.findViewById(R.id.aboutTranslator);
         if (getResources().getStringArray(R.array.translators).length > 0) {
             translators.setText(
                     getResources().getString(R.string.aboutTranslateBy) + " "

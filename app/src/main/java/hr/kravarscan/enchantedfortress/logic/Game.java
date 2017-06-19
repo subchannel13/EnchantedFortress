@@ -46,7 +46,7 @@ public class Game {
     private static final double SoldieringTechBouns = 1 / 1.0;
     private static final double ResearchTechBouns = 1 / 8.0;
 
-    private static Random rand = new Random();
+    private static final Random rand = new Random();
 
     public int turn = 1;
     public double population = 100;
@@ -61,10 +61,10 @@ public class Game {
     public int soldierSlider = 0;
     private int selectedTech = 0;
 
-    public Technology farming = new Technology();
-    public Technology building = new Technology();
-    public Technology soldiering = new Technology();
-    public Technology scholarship = new Technology();
+    public final Technology farming = new Technology();
+    public final Technology building = new Technology();
+    public final Technology soldiering = new Technology();
+    public final Technology scholarship = new Technology();
 
     public int reportAttackers = 0;
     public int reportVictims = 0;

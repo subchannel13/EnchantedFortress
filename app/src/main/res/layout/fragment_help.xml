@@ -1,19 +1,16 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:layout_margin="8dp"
-    tools:context="hr.kravarscan.enchantedfortress.HelpFragment">
-
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:scrollbars="vertical">
-
-        <TextView
-            android:id="@+id/helpText"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:tools="http://schemas.android.com/tools"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/helpText" />
-    </ScrollView>
-</FrameLayout>
+            android:layout_height="match_parent"
+            android:layout_margin="8dp"
+            android:scrollbars="vertical"
+            tools:context="hr.kravarscan.enchantedfortress.HelpFragment">
+
+
+    <TextView
+        android:id="@+id/helpText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/helpText"/>
+
+</ScrollView>
