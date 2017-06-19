@@ -20,7 +20,7 @@
     <string name="victims">, victims:</string>
     <string name="noVictims">Demon attack repelled without casualties</string>
     <string name="farmingTech">Farming</string>
-    <string name="buildTech">Carpentry</string>
+    <string name="buildTech">Masonry</string>
     <string name="soldierTech">Training</string>
     <string name="scholarTech">Scholarship</string>
     <string name="banishTech">Banish demons</string>
@@ -39,7 +39,7 @@
     <string name="difficultyNormal">Normal</string>
     <string name="difficultyHard">Hard</string>
     <string name="aboutDevelopBy">Developed by</string>
-    <string name="aboutTranslateBy">Translation</string>
+    <string name="aboutTranslateBy">Translation by</string>
     <string name="aboutTrackerAt">Report bugs at:</string>
     <string name="aboutCodeAt">Code:</string>
     <string name="aboutDonateAt">Support development:</string>
