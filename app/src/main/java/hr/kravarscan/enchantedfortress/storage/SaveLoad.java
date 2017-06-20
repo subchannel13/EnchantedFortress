@@ -105,15 +105,14 @@ public final class SaveLoad {
         return result;
     }
 
-    public boolean deserialize(Game game, double[] rawData) {
+    public void deserialize(Game game, double[] rawData) {
         if (rawData == null || rawData.length == 0)
-            return false;
+            return;
 
         int version = (int) rawData[0];
         if (rawData.length != LatestSaveKeys.KEY_COUNT.ordinal() || version > BuildConfig.VERSION_CODE)
-            return false;
+            return;
 
         game.load(rawData);
-        return true;
     }
 }

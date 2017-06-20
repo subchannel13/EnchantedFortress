@@ -36,11 +36,10 @@
     <string name="difficultyEasy">Einfach</string>
     <string name="difficultyNormal">Normal</string>
     <string name="difficultyHard">Schwer</string>
-    <string name="aboutDevelopBy">Entwickelt von</string>
-    <string name="aboutTranslateBy">Übersetzung</string>
-    <string name="aboutTrackerAt">Melde Fehler unter:</string>
-    <string name="aboutCodeAt">Code:</string>
-    <string name="aboutDonateAt">Spenden:</string>
-    <string name="aboutVersion">Version</string>
-    <string name="aboutSupportAt">Unterstütze die Entwicklung:</string>
+    <string name="aboutDevelopBy">Entwickelt von %1$s</string>
+    <string name="aboutTranslateBy">Übersetzung\n%1$s</string>
+    <string name="aboutTrackerAt">Melde Fehler unter:\n%1$s</string>
+    <string name="aboutCodeAt">Code:\n%1$s</string>
+    <string name="aboutVersion">Version: %1$s</string>
+    <string name="aboutSupportAt">Unterstütze die Entwicklung:\n%1$s</string>
 </resources>
