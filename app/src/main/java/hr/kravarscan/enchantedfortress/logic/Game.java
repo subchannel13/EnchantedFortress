@@ -2,7 +2,7 @@ package hr.kravarscan.enchantedfortress.logic;
 
 import java.util.Random;
 
-import hr.kravarscan.enchantedfortress.BuildConfig;
+import hr.kravarscan.enchantedfortress.storage.LatestSaveKeys;
 
 /**
  * Copyright 2017 Ivan Kravarščan
@@ -32,10 +32,24 @@ public class Game {
     private static final int MaxPopulation = 100000;
     private static final double NatalityPerFood = 1 / 12.0;
     private static final double Mortality = 1 / 50.0;
-    private static Random rand = new Random();
+
+    private static final double FarmingBase = 3;
+    private static final double BuilderBase = 10;
+    private static final double CivilStrength = 1;
+    private static final double WallCivilStrength = 4;
+    private static final double SoldierStrength = 10;
+    private static final double WallSoldierStrength = 20;
+    private static final double ResearchBase = 0.1;
+    private static final double ScholarResearch = 1 - ResearchBase;
+    private static final double FarmingTechBouns = 1 / 12.0;
+    private static final double BuildingTechBouns = 1;
+    private static final double SoldieringTechBouns = 1 / 1.0;
+    private static final double ResearchTechBouns = 1 / 8.0;
+
+    private static final Random rand = new Random();
 
     public int turn = 1;
-    public int population = 100;
+    public double population = 100;
     public double walls = 0;
     private int demons = 0;
     private int demonGates = 0;
@@ -47,10 +61,10 @@ public class Game {
     public int soldierSlider = 0;
     private int selectedTech = 0;
 
-    public Technology farming = new Technology();
-    public Technology building = new Technology();
-    public Technology soldiering = new Technology();
-    public Technology scholarship = new Technology();
+    public final Technology farming = new Technology();
+    public final Technology building = new Technology();
+    public final Technology soldiering = new Technology();
+    public final Technology scholarship = new Technology();
 
     public int reportAttackers = 0;
     public int reportVictims = 0;
@@ -93,7 +107,7 @@ public class Game {
             return sliderValue;
 
         sliderValue += delta;
-        int minSlider = (int) Math.ceil(SliderTicks * minimumPop / this.population);
+        int minSlider = (int) Math.ceil(SliderTicks * minimumPop / this.effectivePop());
 
         if (sliderValue < minSlider) {
             sliderValue = minSlider;
@@ -106,11 +120,11 @@ public class Game {
     }
 
     private double minBuilders() {
-        return this.population / this.builderEfficiency();
+        return this.effectivePop() / this.builderEfficiency();
     }
 
     private double minFarmers() {
-        return this.population * (1 + Mortality / NatalityPerFood) / this.farmerEfficiency();
+        return this.effectivePop() * (1 + Mortality / NatalityPerFood) / this.farmerEfficiency();
     }
 
     public void selectTech(int i) {
@@ -123,59 +137,69 @@ public class Game {
     /*
         Derivative values
      */
+    private double effectivePop()
+    {
+        return Math.floor(this.population);
+    }
     private int farmers() {
-        return (int) (this.population * this.farmerSlider / SliderTicks);
+        return (int) (this.effectivePop() * this.farmerSlider / SliderTicks);
     }
 
     private int builders() {
-        return (int) (this.population * this.builderSlider / SliderTicks);
+        return (int) (this.effectivePop() * this.builderSlider / SliderTicks);
     }
 
     private int soldiers() {
-        return (int) (this.population * this.soldierSlider / SliderTicks);
+        return (int) (this.effectivePop() * this.soldierSlider / SliderTicks);
     }
 
     private int scholars() {
-        return this.population - this.farmers() - this.builders() - this.soldiers();
+        return (int)this.effectivePop() - this.farmers() - this.builders() - this.soldiers();
     }
 
     private double builderEfficiency() {
-        return 10 + this.building.level;
+        return BuilderBase + this.building.level * BuildingTechBouns;
     }
 
     private double farmerEfficiency() {
-        return 3 + this.farming.level / 12.0;
+        return FarmingBase + this.farming.level * FarmingTechBouns;
     }
 
-    public int deltaPop() {
-        return (int) ((this.farmers() * farmerEfficiency() - this.population) * NatalityPerFood - this.population * Mortality);
+    public int realDeltaPop() {
+        return Utils.integerDelta(this.population, this.deltaPop());
     }
 
     public double deltaWalls() {
         return Math.max(
-                (this.builders() * builderEfficiency() - this.population - (int) this.walls) / WallCost,
+                (this.builders() * builderEfficiency() - this.effectivePop() - (int) this.walls) / WallCost,
                 0);
     }
 
-    public int militaryStrength() {
-        int civilians = this.population - this.soldiers();
+    public double militaryStrength() {
+        int civilians = (int)this.effectivePop() - this.soldiers();
 
         int wallSoldiers = (int) Math.min(this.soldiers(), this.walls);
         int groundSoldiers = this.soldiers() - wallSoldiers;
         int wallCivils = Math.min((int) this.walls - wallSoldiers, civilians);
         int groundCivils = civilians - wallCivils;
 
-        return groundCivils + wallCivils * 4 + (groundSoldiers + wallSoldiers * 2) * (10 + this.soldiering.level);
+        return groundCivils * CivilStrength +
+                wallCivils * WallCivilStrength +
+                (groundSoldiers * SoldierStrength +
+                wallSoldiers * WallSoldierStrength) * (1 + this.soldiering.level * SoldieringTechBouns);
     }
 
     public double deltaResearch() {
-        return (this.population / 10.0 + this.scholars() * 0.9) * (1 + this.scholarship.level / 8.0);
+        return (this.effectivePop() * ResearchBase + this.scholars() * ScholarResearch) * (1 + this.scholarship.level * ResearchTechBouns);
     }
 
     public boolean isOver() {
-        return this.population <= 0 || this.demonBanishCost <= 0;
+        return this.population < 1 || this.demonBanishCost <= 0;
     }
 
+    private double deltaPop() {
+        return (this.farmers() * farmerEfficiency() - this.effectivePop()) * NatalityPerFood - this.effectivePop() * Mortality;
+    }
     /*
         Turn processing
      */
@@ -185,8 +209,7 @@ public class Game {
         this.turn++;
 
         this.population += this.deltaPop();
-        if (this.population > MaxPopulation)
-            this.population = MaxPopulation;
+        this.population = Utils.clamp(this.population, 0, MaxPopulation);
 
         this.walls += this.deltaWalls();
         if (this.walls > MaxPopulation)
@@ -228,12 +251,12 @@ public class Game {
     }
 
     private void doCombat() {
-        if (rand.nextDouble() * this.population > this.demons)
+        if (rand.nextDouble() * this.effectivePop() > this.demons)
             return;
 
         int attackers = rand.nextInt(this.demons + 1);
-        int defenderStr = this.militaryStrength();
-        float peopleStr = (float) defenderStr / this.population;
+        double defenderStr = this.militaryStrength();
+        double peopleStr = defenderStr / this.effectivePop();
 
         this.demons -= attackers;
         this.reportAttackers = attackers;
@@ -273,12 +296,12 @@ public class Game {
 
     private void spawnDemons() {
         if (this.demonBanishCost > 0) {
-            this.demonGates += this.population + this.demonBanishCost / 100;
+            this.demonGates += this.effectivePop() + this.demonBanishCost / 100;
             if (this.demonGates > MaxDemonGates)
                 this.demonGates = MaxDemonGates;
 
             int deltaCost = this.demonGates / 100;
-            this.demonBanishCost += deltaCost < this.population ? this.population : deltaCost;
+            this.demonBanishCost += deltaCost < this.effectivePop() ? this.effectivePop() : deltaCost;
             if (this.demonBanishCost > MaxBanishCost)
                 this.demonBanishCost = MaxBanishCost;
         }
@@ -321,8 +344,6 @@ public class Game {
     public double[] save() {
         return new double[]
                 {
-                        BuildConfig.VERSION_CODE,
-
                         this.turn,
                         this.population,
                         this.walls,
@@ -351,32 +372,29 @@ public class Game {
     }
 
     public void load(double[] data) {
-        if (data.length != 22 || data[0] != BuildConfig.VERSION_CODE)
-            return;
+        this.turn = (int) data[LatestSaveKeys.TURN.ordinal()];
+        this.population = (int) data[LatestSaveKeys.POPULATION.ordinal()];
+        this.walls = data[LatestSaveKeys.WALLS.ordinal()];
+        this.demons = (int) data[LatestSaveKeys.DEMONS.ordinal()];
+        this.demonGates = (int) data[LatestSaveKeys.DEMON_GATES.ordinal()];
+        this.demonBanishCost = (int) data[LatestSaveKeys.DEMON_BANISH_COST.ordinal()];
 
-        this.turn = (int) data[1];
-        this.population = (int) data[2];
-        this.walls = data[3];
-        this.demons = (int) data[4];
-        this.demonGates = (int) data[5];
-        this.demonBanishCost = (int) data[6];
+        this.farmerSlider = (int) data[LatestSaveKeys.FARMER_SLIDER.ordinal()];
+        this.builderSlider = (int) data[LatestSaveKeys.BUILDER_SLIDER.ordinal()];
+        this.soldierSlider = (int) data[LatestSaveKeys.SOLDIER_SLIDER.ordinal()];
+        this.selectedTech = (int) data[LatestSaveKeys.SELECTED_TECH.ordinal()];
 
-        this.farmerSlider = (int) data[7];
-        this.builderSlider = (int) data[8];
-        this.soldierSlider = (int) data[9];
-        this.selectedTech = (int) data[10];
+        this.farming.level = (int) data[LatestSaveKeys.FARMING_LEVEL.ordinal()];
+        this.farming.points = data[LatestSaveKeys.FARMING_POINTS.ordinal()];
+        this.building.level = (int) data[LatestSaveKeys.BUILDING_LEVEL.ordinal()];
+        this.building.points = data[LatestSaveKeys.BUILDING_POINTS.ordinal()];
+        this.soldiering.level = (int) data[LatestSaveKeys.SOLDIERING_LEVEL.ordinal()];
+        this.soldiering.points = data[LatestSaveKeys.SOLDIERING_POINTS.ordinal()];
+        this.scholarship.level = (int) data[LatestSaveKeys.SCHOLARSHIP_LEVEL.ordinal()];
+        this.scholarship.points = data[LatestSaveKeys.SCHOLARSHIP_POINTS.ordinal()];
 
-        this.farming.level = (int) data[11];
-        this.farming.points = data[12];
-        this.building.level = (int) data[13];
-        this.building.points = data[14];
-        this.soldiering.level = (int) data[15];
-        this.soldiering.points = data[16];
-        this.scholarship.level = (int) data[17];
-        this.scholarship.points = data[18];
-
-        this.reportAttackers = (int) data[19];
-        this.reportVictims = (int) data[20];
-        this.reportScoutedDemons = (int) data[21];
+        this.reportAttackers = (int) data[LatestSaveKeys.REPORT_ATTACKERS.ordinal()];
+        this.reportVictims = (int) data[LatestSaveKeys.REPORT_VICTIMS.ordinal()];
+        this.reportScoutedDemons = (int) data[LatestSaveKeys.REPORT_SCOUTED_DEMONS.ordinal()];
     }
 }

@@ -2,12 +2,11 @@ package hr.kravarscan.enchantedfortress;
 
 
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-public class HelpFragment extends Fragment {
+public class HelpFragment extends AAttachableFragment {
 
     public HelpFragment() {
         // Required empty public constructor
@@ -18,4 +17,7 @@ public class HelpFragment extends Fragment {
                              Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_help, container, false);
     }
+
+    @Override
+    public void attach(Object listener) {}
 }

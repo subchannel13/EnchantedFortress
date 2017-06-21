@@ -1,8 +1,6 @@
 package hr.kravarscan.enchantedfortress;
 
-import android.content.Context;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,12 +12,11 @@ import android.widget.TextView;
 
 import hr.kravarscan.enchantedfortress.logic.Game;
 import hr.kravarscan.enchantedfortress.logic.Technology;
+import hr.kravarscan.enchantedfortress.storage.SaveLoad;
 
-public class GameFragment extends Fragment {
-    private static final String SaveKey = "GameState";
-
+public class GameFragment extends AAttachableFragment {
     private Game game = new Game();
-    private String[] techList = new String[5];
+    private final String[] techList = new String[5];
     private ArrayAdapter<String> techListAdapter;
     private TextView popInfo;
     private TextView farmerInfo;
@@ -38,13 +35,17 @@ public class GameFragment extends Fragment {
         // Required empty public constructor
     }
 
+    public void setGame(Game game) {
+        this.game = game;
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_game, container, false);
 
         if (savedInstanceState != null) {
-            this.game.load(savedInstanceState.getDoubleArray(SaveKey));
+            SaveLoad.get().deserialize(this.game, savedInstanceState.getDoubleArray(SaveLoad.SaveKey));
         }
 
         view.findViewById(R.id.farmPlusButton).setOnClickListener(new View.OnClickListener() {
@@ -95,7 +96,7 @@ public class GameFragment extends Fragment {
             }
         });
 
-        this.endTurnButton = (Button) view.findViewById(R.id.endTurnButton);
+        this.endTurnButton = view.findViewById(R.id.endTurnButton);
         this.endTurnButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -103,7 +104,7 @@ public class GameFragment extends Fragment {
             }
         });
 
-        Spinner researchSelector = (Spinner) view.findViewById(R.id.researchSelection);
+        Spinner researchSelector = view.findViewById(R.id.researchSelection);
         this.updateTechList();
         this.techListAdapter = new ArrayAdapter<>(view.getContext(), android.R.layout.simple_spinner_item, this.techList);
         researchSelector.setAdapter(this.techListAdapter);
@@ -118,11 +119,11 @@ public class GameFragment extends Fragment {
                 //No operation
             }
         });
-        this.farmerInfo = (TextView) view.findViewById(R.id.farmText);
-        this.builderInfo = (TextView) view.findViewById(R.id.builderText);
-        this.popInfo = (TextView) view.findViewById(R.id.popText);
-        this.soldierInfo = (TextView) view.findViewById(R.id.soliderText);
-        this.researchInfo = (TextView) view.findViewById(R.id.researchText);
+        this.farmerInfo = view.findViewById(R.id.farmText);
+        this.builderInfo = view.findViewById(R.id.builderText);
+        this.popInfo = view.findViewById(R.id.popText);
+        this.soldierInfo = view.findViewById(R.id.soliderText);
+        this.researchInfo = view.findViewById(R.id.researchText);
 
         this.updateInfo();
 
@@ -130,12 +131,11 @@ public class GameFragment extends Fragment {
     }
 
     @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        if (context instanceof OnFragmentInteractionListener) {
-            listener = (OnFragmentInteractionListener) context;
+    public void attach(Object listener) {
+        if (listener instanceof OnFragmentInteractionListener) {
+            this.listener = (OnFragmentInteractionListener) listener;
         } else {
-            throw new RuntimeException(context.toString()
+            throw new RuntimeException(listener.toString()
                     + " must implement OnFragmentInteractionListener");
         }
     }
@@ -147,9 +147,16 @@ public class GameFragment extends Fragment {
     }
 
     @Override
+    public void onPause() {
+        super.onPause();
+        if (!this.game.isOver())
+            SaveLoad.get().save(this.game, this.getActivity());
+    }
+
+    @Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-       outState.putDoubleArray(SaveKey, this.game.save());
+        outState.putDoubleArray(SaveLoad.SaveKey, SaveLoad.get().serialize(this.game));
     }
 
     private void updateTechList() {
@@ -185,21 +192,21 @@ public class GameFragment extends Fragment {
 
     private void updateInfo()
     {
-        this.farmerInfo.setText(sliderText(R.string.farmers, game.farmerSlider, R.string.popDelta, game.deltaPop()));
+        this.farmerInfo.setText(sliderText(R.string.farmers, game.farmerSlider, R.string.popDelta, game.realDeltaPop()));
         this.builderInfo.setText( sliderText(R.string.builders, game.builderSlider, R.string.wallDelta, (int)game.deltaWalls()));
-        this.soldierInfo.setText(sliderText(R.string.soldiers, game.soldierSlider, R.string.militaryStrength, game.militaryStrength()));
+        this.soldierInfo.setText(sliderText(R.string.soldiers, game.soldierSlider, R.string.militaryStrength, (int)game.militaryStrength()));
         this.researchInfo.setText(sliderText(R.string.scholars, game.getScholarSlider(), R.string.researchDelta, (int)game.deltaResearch()));
 
         this.updateTechList();
         this.techListAdapter.notifyDataSetChanged();
 
         if (this.game.isOver()) {
-            this.popInfo.setText(this.game.population <= 0 ? R.string.defeat : R.string.victory);
+            this.popInfo.setText(this.game.population < 1 ? R.string.defeat : R.string.victory);
             this.endTurnButton.setText(R.string.gameOver);
         }
         else
             this.popInfo.setText(getResources().getString(R.string.turn) + ": " + Integer.toString(this.game.turn) + "\n" +
-                    getResources().getString(R.string.population) + ": " + Integer.toString(this.game.population) + "\n" +
+                    getResources().getString(R.string.population) + ": " + Integer.toString((int)this.game.population) + "\n" +
                     getResources().getString(R.string.walls) + ": " + Integer.toString((int)this.game.walls) + "\n" +
                     getResources().getString(R.string.scouted) + ": " + Integer.toString(this.game.reportScoutedDemons) + " " + getResources().getString(R.string.demons) +
                     this.battleInfo()
