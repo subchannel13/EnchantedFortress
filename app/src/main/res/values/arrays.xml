@@ -2,5 +2,6 @@
 <resources>
     <string-array name="translators">
         <item>German (de) - mueller-ma</item>
+        <item>French (fr) - Julien Lepiller</item>
     </string-array>
 </resources>
