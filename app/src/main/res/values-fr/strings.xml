@@ -35,9 +35,6 @@
     <string name="turn">Tour</string>
     <string name="continueText">Continuer</string>
     <string name="difficultySelect">Choisir la difficulté :</string>
-    <string name="difficultyEasy">Facile</string>
-    <string name="difficultyNormal">Normal</string>
-    <string name="difficultyHard">Dificille</string>
     <string name="aboutDevelopBy">Développé par %1$s</string>
     <string name="aboutTranslateBy">Traduit par\n%1$s</string>
     <string name="aboutTrackerAt">Rapportez les bogues sur :\n%1$s</string>

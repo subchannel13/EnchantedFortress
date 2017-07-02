@@ -34,9 +34,6 @@
     <string name="turn">Turn</string>
     <string name="continueText">Continue</string>
     <string name="difficultySelect">Choose difficulty:</string>
-    <string name="difficultyEasy">Easy</string>
-    <string name="difficultyNormal">Normal</string>
-    <string name="difficultyHard">Hard</string>
     <string name="aboutDevelopBy">Developed by %1$s</string>
     <string name="aboutTranslateBy">Translation by\n%1$s</string>
     <string name="aboutTrackerAt">Report bugs at:\n%1$s</string>

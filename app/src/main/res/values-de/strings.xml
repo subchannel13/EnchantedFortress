@@ -33,9 +33,6 @@
     <string name="turn">Runde</string>
     <string name="continueText">Weiter</string>
     <string name="difficultySelect">Schwierigkeit auswählen:</string>
-    <string name="difficultyEasy">Einfach</string>
-    <string name="difficultyNormal">Normal</string>
-    <string name="difficultyHard">Schwer</string>
     <string name="aboutDevelopBy">Entwickelt von %1$s</string>
     <string name="aboutTranslateBy">Übersetzung\n%1$s</string>
     <string name="aboutTrackerAt">Melde Fehler unter:\n%1$s</string>
