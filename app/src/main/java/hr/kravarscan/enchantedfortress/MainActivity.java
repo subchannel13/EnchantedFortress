@@ -1,6 +1,7 @@
 package hr.kravarscan.enchantedfortress;
 
 import android.app.Activity;
+import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.os.Bundle;
@@ -9,7 +10,9 @@ import android.view.ViewGroup;
 import hr.kravarscan.enchantedfortress.logic.Game;
 import hr.kravarscan.enchantedfortress.storage.SaveLoad;
 
-public class MainActivity extends Activity implements MainMenuFragment.OnFragmentInteractionListener, GameFragment.OnFragmentInteractionListener {
+public class MainActivity extends Activity implements MainMenuFragment.OnFragmentInteractionListener, GameFragment.OnFragmentInteractionListener, NewGameFragment.OnFragmentInteractionListener {
+
+    private Fragment lastMainFragment = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,19 +28,14 @@ public class MainActivity extends Activity implements MainMenuFragment.OnFragmen
 
     private void switchMainView(AAttachableFragment fragment)
     {
-        boolean isMain = fragment instanceof MainMenuFragment;
         FragmentManager manager = getFragmentManager();
         FragmentTransaction transaction = manager.beginTransaction();
-        fragment.attach(this);
-
-        for (int i = 0; isMain && i < manager.getBackStackEntryCount(); i++)
-            manager.popBackStack();
 
         transaction.replace(R.id.fragment_container, fragment);
-        if (!isMain)
-            transaction.addToBackStack(null);
-
         transaction.commit();
+
+        fragment.attach(this);
+        this.lastMainFragment = fragment;
     }
 
     @Override
@@ -47,14 +45,29 @@ public class MainActivity extends Activity implements MainMenuFragment.OnFragmen
         SaveLoad.get().deserialize(game, SaveLoad.get().load(this));
         gameFragment.setGame(game);
 
-        this.switchMainView(gameFragment);
+        this.switchMainView(gameFragment);this.onBackPressed();
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (this.lastMainFragment != null && this.lastMainFragment instanceof MainMenuFragment)
+            super.onBackPressed();
+        else
+            this.switchMainView(new MainMenuFragment());
     }
 
     @Override
     public void onNewGame() {
-        GameFragment gameFragment = new GameFragment();
+        NewGameFragment fragment = new NewGameFragment();
 
-        this.switchMainView(gameFragment);
+        this.switchMainView(fragment);
+    }
+
+    @Override
+    public void onNewGameStart(int difficulty) {
+        GameFragment fragment = new GameFragment();
+
+        this.switchMainView(fragment);
     }
 
     @Override
