@@ -2,12 +2,17 @@
 All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
+
+## [v1.3] - 2017-07-12
 ### Added
 - Change log file
 - French translation
 - Difficulty levels
 
-## [v1.2] - 2017-05-27
+### Fixed
+- Back button always navigates from other views to main menu
+
+## [v1.2] - 2017-06-21
 ### Added
 - Autosave and continue game session
 - German translation
@@ -21,7 +26,7 @@ All notable changes to this project will be documented in this file.
 - Fixed licence statement, GLP text included too
 - Fixed defeat condition to work with decimal population count
 
-## [v1.1] - 2017-05-27
+## [v1.1] - 2017-06-04
 ### Added
 - Current game turn is now visible
 
