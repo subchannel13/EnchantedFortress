@@ -46,7 +46,7 @@ public class MainActivity extends Activity implements MainMenuFragment.OnFragmen
         SaveLoad.get().deserialize(game, SaveLoad.get().load(this));
         gameFragment.setGame(game);
 
-        this.switchMainView(gameFragment);this.onBackPressed();
+        this.switchMainView(gameFragment);
     }
 
     @Override

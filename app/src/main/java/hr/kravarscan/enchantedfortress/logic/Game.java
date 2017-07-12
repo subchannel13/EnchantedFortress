@@ -351,6 +351,7 @@ public class Game {
     public double[] save() {
         return new double[]
                 {
+                        this.difficulty.getIndex(),
                         this.turn,
                         this.population,
                         this.walls,
@@ -379,6 +380,7 @@ public class Game {
     }
 
     public void load(double[] data) {
+        this.difficulty = Difficulty.Levels[(int)data[LatestSaveKeys.DIFFICULTY.ordinal()]];
         this.turn = (int) data[LatestSaveKeys.TURN.ordinal()];
         this.population = (int) data[LatestSaveKeys.POPULATION.ordinal()];
         this.walls = data[LatestSaveKeys.WALLS.ordinal()];

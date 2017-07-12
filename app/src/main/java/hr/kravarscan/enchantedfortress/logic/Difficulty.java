@@ -1,5 +1,7 @@
 package hr.kravarscan.enchantedfortress.logic;
 
+import android.util.Log;
+
 /**
  * Copyright 2017 Ivan Kravarščan
  *
@@ -42,5 +44,14 @@ public class Difficulty {
 
     public double getDemonSpawnFactor() {
         return demonSpawnFactor;
+    }
+
+    public int getIndex(){
+        for (int i = 0; i < Levels.length; i++)
+            if (Levels[i] == this)
+                return i;
+
+        Log.e("Difficulty", "Failed to find index of a difficulty level");
+        return 1;
     }
 }
