@@ -20,10 +20,9 @@ package hr.kravarscan.enchantedfortress.storage;
  */
 
 @SuppressWarnings("unused")
-public enum LatestSaveKeys {
+public enum SaveKeysV3 {
     VERSION,
 
-    DIFFICULTY,
     TURN,
     POPULATION,
     WALLS,

@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import hr.kravarscan.enchantedfortress.BuildConfig;
+import hr.kravarscan.enchantedfortress.logic.Difficulty;
 import hr.kravarscan.enchantedfortress.logic.Game;
 
 /**
@@ -84,6 +85,7 @@ public final class SaveLoad {
 
             stream.close();
             Log.i("SaveLoad", "loaded");
+            upgradeSave(data);
         } catch (Exception e) {
             Log.e("SaveLoad", "Loading autosave failed", e);
             return null;
@@ -94,6 +96,11 @@ public final class SaveLoad {
             result[i] = data.get(i);
 
         return result;
+    }
+
+    private void upgradeSave(List<Double> data) {
+        if (data.get(LatestSaveKeys.VERSION.ordinal()) <= 3)
+            data.add(LatestSaveKeys.DIFFICULTY.ordinal(), (double)Difficulty.Medium.getIndex());
     }
 
     public double[] serialize(Game game) {

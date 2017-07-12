@@ -54,6 +54,7 @@ public class Game {
     private int demons = 0;
     private int demonGates = 0;
     public int demonBanishCost = 10000;
+    private Difficulty difficulty;
 
     public static final double SliderTicks = 20;
     public int farmerSlider = 10;
@@ -69,6 +70,12 @@ public class Game {
     public int reportAttackers = 0;
     public int reportVictims = 0;
     public int reportScoutedDemons = 0;
+
+    public Game(Difficulty difficulty)
+    {
+        this.difficulty = difficulty;
+        this.population = difficulty.getStartingPop();
+    }
 
     /*
         Sliders
@@ -107,7 +114,7 @@ public class Game {
             return sliderValue;
 
         sliderValue += delta;
-        int minSlider = (int) Math.ceil(SliderTicks * minimumPop / this.effectivePop());
+        int minSlider = (int) Math.ceil(SliderTicks * minimumPop / this.roundedPop());
 
         if (sliderValue < minSlider) {
             sliderValue = minSlider;
@@ -120,11 +127,11 @@ public class Game {
     }
 
     private double minBuilders() {
-        return this.effectivePop() / this.builderEfficiency();
+        return this.roundedPop() / this.builderEfficiency();
     }
 
     private double minFarmers() {
-        return this.effectivePop() * (1 + Mortality / NatalityPerFood) / this.farmerEfficiency();
+        return this.roundedPop() * (1 + Mortality / NatalityPerFood) / this.farmerEfficiency();
     }
 
     public void selectTech(int i) {
@@ -137,24 +144,24 @@ public class Game {
     /*
         Derivative values
      */
-    private double effectivePop()
+    private double roundedPop()
     {
         return Math.floor(this.population);
     }
     private int farmers() {
-        return (int) (this.effectivePop() * this.farmerSlider / SliderTicks);
+        return (int) (this.roundedPop() * this.farmerSlider / SliderTicks);
     }
 
     private int builders() {
-        return (int) (this.effectivePop() * this.builderSlider / SliderTicks);
+        return (int) (this.roundedPop() * this.builderSlider / SliderTicks);
     }
 
     private int soldiers() {
-        return (int) (this.effectivePop() * this.soldierSlider / SliderTicks);
+        return (int) (this.roundedPop() * this.soldierSlider / SliderTicks);
     }
 
     private int scholars() {
-        return (int)this.effectivePop() - this.farmers() - this.builders() - this.soldiers();
+        return (int)this.roundedPop() - this.farmers() - this.builders() - this.soldiers();
     }
 
     private double builderEfficiency() {
@@ -171,12 +178,12 @@ public class Game {
 
     public double deltaWalls() {
         return Math.max(
-                (this.builders() * builderEfficiency() - this.effectivePop() - (int) this.walls) / WallCost,
+                (this.builders() * builderEfficiency() - this.roundedPop() - (int) this.walls) / WallCost,
                 0);
     }
 
     public double militaryStrength() {
-        int civilians = (int)this.effectivePop() - this.soldiers();
+        int civilians = (int)this.roundedPop() - this.soldiers();
 
         int wallSoldiers = (int) Math.min(this.soldiers(), this.walls);
         int groundSoldiers = this.soldiers() - wallSoldiers;
@@ -190,7 +197,7 @@ public class Game {
     }
 
     public double deltaResearch() {
-        return (this.effectivePop() * ResearchBase + this.scholars() * ScholarResearch) * (1 + this.scholarship.level * ResearchTechBouns);
+        return (this.roundedPop() * ResearchBase + this.scholars() * ScholarResearch) * (1 + this.scholarship.level * ResearchTechBouns);
     }
 
     public boolean isOver() {
@@ -198,7 +205,7 @@ public class Game {
     }
 
     private double deltaPop() {
-        return (this.farmers() * farmerEfficiency() - this.effectivePop()) * NatalityPerFood - this.effectivePop() * Mortality;
+        return (this.farmers() * farmerEfficiency() - this.roundedPop()) * NatalityPerFood - this.roundedPop() * Mortality;
     }
     /*
         Turn processing
@@ -251,12 +258,12 @@ public class Game {
     }
 
     private void doCombat() {
-        if (rand.nextDouble() * this.effectivePop() > this.demons)
+        if (rand.nextDouble() * this.roundedPop() > this.demons)
             return;
 
         int attackers = rand.nextInt(this.demons + 1);
         double defenderStr = this.militaryStrength();
-        double peopleStr = defenderStr / this.effectivePop();
+        double peopleStr = defenderStr / this.roundedPop();
 
         this.demons -= attackers;
         this.reportAttackers = attackers;
@@ -296,18 +303,18 @@ public class Game {
 
     private void spawnDemons() {
         if (this.demonBanishCost > 0) {
-            this.demonGates += this.effectivePop() + this.demonBanishCost / 100;
+            this.demonGates += this.roundedPop() + this.demonBanishCost / 100;
             if (this.demonGates > MaxDemonGates)
                 this.demonGates = MaxDemonGates;
 
             int deltaCost = this.demonGates / 100;
-            this.demonBanishCost += deltaCost < this.effectivePop() ? this.effectivePop() : deltaCost;
+            this.demonBanishCost += deltaCost < this.roundedPop() ? this.roundedPop() : deltaCost;
             if (this.demonBanishCost > MaxBanishCost)
                 this.demonBanishCost = MaxBanishCost;
         }
 
         if (this.demonGates > 0) {
-            this.demons += this.demonGates / 1000;
+            this.demons += this.demonGates * this.difficulty.getDemonSpawnFactor() / 1000;
             if (this.demons > MaxPopulation) this.demons = MaxPopulation;
         }
     }
@@ -344,6 +351,7 @@ public class Game {
     public double[] save() {
         return new double[]
                 {
+                        this.difficulty.getIndex(),
                         this.turn,
                         this.population,
                         this.walls,
@@ -372,6 +380,7 @@ public class Game {
     }
 
     public void load(double[] data) {
+        this.difficulty = Difficulty.Levels[(int)data[LatestSaveKeys.DIFFICULTY.ordinal()]];
         this.turn = (int) data[LatestSaveKeys.TURN.ordinal()];
         this.population = (int) data[LatestSaveKeys.POPULATION.ordinal()];
         this.walls = data[LatestSaveKeys.WALLS.ordinal()];
