@@ -7,6 +7,7 @@ import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.view.ViewGroup;
 
+import hr.kravarscan.enchantedfortress.logic.Difficulty;
 import hr.kravarscan.enchantedfortress.logic.Game;
 import hr.kravarscan.enchantedfortress.storage.SaveLoad;
 
@@ -41,7 +42,7 @@ public class MainActivity extends Activity implements MainMenuFragment.OnFragmen
     @Override
     public void onContinue() {
         GameFragment gameFragment = new GameFragment();
-        Game game = new Game();
+        Game game = new Game(Difficulty.Medium);
         SaveLoad.get().deserialize(game, SaveLoad.get().load(this));
         gameFragment.setGame(game);
 
@@ -66,6 +67,8 @@ public class MainActivity extends Activity implements MainMenuFragment.OnFragmen
     @Override
     public void onNewGameStart(int difficulty) {
         GameFragment fragment = new GameFragment();
+        Game game = new Game(Difficulty.Levels[difficulty]);
+        fragment.setGame(game);
 
         this.switchMainView(fragment);
     }

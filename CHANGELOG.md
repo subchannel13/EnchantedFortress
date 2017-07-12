@@ -2,7 +2,10 @@
 All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
+### Added
+- Change log file
 - French translation
+- Difficulty levels
 
 ## [v1.2] - 2017-05-27
 ### Added

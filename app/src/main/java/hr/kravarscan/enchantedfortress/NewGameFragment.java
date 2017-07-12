@@ -36,6 +36,7 @@ public class NewGameFragment extends AAttachableFragment {
                 //No operation
             }
         });
+        difficultySelector.setSelection(1);
 
         view.findViewById(R.id.startButton).setOnClickListener(new View.OnClickListener() {
             @Override

@@ -10,12 +10,13 @@ import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import hr.kravarscan.enchantedfortress.logic.Difficulty;
 import hr.kravarscan.enchantedfortress.logic.Game;
 import hr.kravarscan.enchantedfortress.logic.Technology;
 import hr.kravarscan.enchantedfortress.storage.SaveLoad;
 
 public class GameFragment extends AAttachableFragment {
-    private Game game = new Game();
+    private Game game = new Game(Difficulty.Medium);
     private final String[] techList = new String[5];
     private ArrayAdapter<String> techListAdapter;
     private TextView popInfo;
