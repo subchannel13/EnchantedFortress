@@ -20,11 +20,27 @@ package hr.kravarscan.enchantedfortress.logic;
  */
 
 public class Difficulty {
-    public static final Difficulty Medium = new Difficulty();
+    public static final Difficulty Medium = new Difficulty(100, 1);
     public static final Difficulty[] Levels = new Difficulty[]
             {
-                    new Difficulty(),
+                    new Difficulty(120, 0.75),
                     Medium,
-                    new Difficulty(),
+                    new Difficulty(80, 2),
             };
+
+    private double startingPop;
+    private double demonSpawnFactor;
+
+    private Difficulty(double startingPop, double demonSpawnFactor) {
+        this.startingPop = startingPop;
+        this.demonSpawnFactor = demonSpawnFactor;
+    }
+
+    public double getStartingPop() {
+        return startingPop;
+    }
+
+    public double getDemonSpawnFactor() {
+        return demonSpawnFactor;
+    }
 }

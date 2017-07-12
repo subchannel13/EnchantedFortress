@@ -74,6 +74,7 @@ public class Game {
     public Game(Difficulty difficulty)
     {
         this.difficulty = difficulty;
+        this.population = difficulty.getStartingPop();
     }
 
     /*
@@ -313,7 +314,7 @@ public class Game {
         }
 
         if (this.demonGates > 0) {
-            this.demons += this.demonGates / 1000;
+            this.demons += this.demonGates * this.difficulty.getDemonSpawnFactor() / 1000;
             if (this.demons > MaxPopulation) this.demons = MaxPopulation;
         }
     }
