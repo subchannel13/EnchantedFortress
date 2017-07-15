@@ -3,6 +3,10 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+## [v1.4] - 2017-07-15
+### Fixed
+- Lint error stopping build in F-Droid
+
 ## [v1.3] - 2017-07-12
 ### Added
 - Change log file
