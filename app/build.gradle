@@ -7,8 +7,8 @@ android {
         applicationId "hr.kravarscan.enchantedfortress"
         minSdkVersion 15
         targetSdkVersion 26
-        versionCode 4
-        versionName "1.3"
+        versionCode 5
+        versionName "1.4"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
@@ -16,15 +16,17 @@ android {
             minifyEnabled true
             shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            lintOptions {
+                disable 'MissingTranslation'
+            }
         }
     }
 }
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile fileTree(include: ['*.jar'], dir: 'libs')
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-
     testCompile 'junit:junit:4.12'
 }
