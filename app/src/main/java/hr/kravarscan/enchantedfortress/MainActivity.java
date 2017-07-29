@@ -20,10 +20,10 @@ public class MainActivity extends Activity implements MainMenuFragment.OnFragmen
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        if (((ViewGroup)findViewById(R.id.fragment_container)).getChildCount() == 0) {
+        if (savedInstanceState == null) {
             MainMenuFragment mainMenu = new MainMenuFragment();
             mainMenu.attach(this);
-            getFragmentManager().beginTransaction().add(R.id.fragment_container, mainMenu).commit();
+            getFragmentManager().beginTransaction().replace(R.id.fragment_container, mainMenu).commit();
         }
     }
 
