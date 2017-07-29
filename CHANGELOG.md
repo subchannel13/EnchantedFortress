@@ -3,6 +3,13 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+## [v1.5] - 2017-07-29
+### Changed
+- Launcher icon
+
+### Fixed
+- Main menu duplication after phone rotation
+
 ## [v1.4] - 2017-07-15
 ### Fixed
 - Lint error stopping build in F-Droid
