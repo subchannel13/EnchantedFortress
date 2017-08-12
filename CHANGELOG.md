@@ -3,6 +3,7 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 ### Changed
+- Increased item size in research selection
 - German translation
 
 ## [v1.5] - 2017-07-29

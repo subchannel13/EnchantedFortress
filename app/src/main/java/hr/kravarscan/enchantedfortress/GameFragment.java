@@ -107,7 +107,7 @@ public class GameFragment extends AAttachableFragment {
 
         Spinner researchSelector = view.findViewById(R.id.researchSelection);
         this.updateTechList();
-        this.techListAdapter = new ArrayAdapter<>(view.getContext(), android.R.layout.simple_spinner_item, this.techList);
+        this.techListAdapter = new ArrayAdapter<>(view.getContext(), R.layout.research_item, this.techList);
         researchSelector.setAdapter(this.techListAdapter);
         researchSelector.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
