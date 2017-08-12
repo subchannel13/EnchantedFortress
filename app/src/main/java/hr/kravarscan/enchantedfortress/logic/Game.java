@@ -41,10 +41,10 @@ public class Game {
     private static final double WallSoldierStrength = 20;
     private static final double ResearchBase = 0.1;
     private static final double ScholarResearch = 1 - ResearchBase;
-    private static final double FarmingTechBouns = 1 / 12.0;
-    private static final double BuildingTechBouns = 1;
-    private static final double SoldieringTechBouns = 1 / 1.0;
-    private static final double ResearchTechBouns = 1 / 8.0;
+    private static final double FarmingTechBonus = 1 / 12.0;
+    private static final double BuildingTechBonus = 1;
+    private static final double SoldieringTechBonus = 1 / 1.0;
+    private static final double ResearchTechBonus = 1 / 8.0;
 
     private static final Random rand = new Random();
 
@@ -165,11 +165,11 @@ public class Game {
     }
 
     private double builderEfficiency() {
-        return BuilderBase + this.building.level * BuildingTechBouns;
+        return BuilderBase + this.building.level * BuildingTechBonus;
     }
 
     private double farmerEfficiency() {
-        return FarmingBase + this.farming.level * FarmingTechBouns;
+        return FarmingBase + this.farming.level * FarmingTechBonus;
     }
 
     public int realDeltaPop() {
@@ -193,11 +193,11 @@ public class Game {
         return groundCivils * CivilStrength +
                 wallCivils * WallCivilStrength +
                 (groundSoldiers * SoldierStrength +
-                wallSoldiers * WallSoldierStrength) * (1 + this.soldiering.level * SoldieringTechBouns);
+                wallSoldiers * WallSoldierStrength) * (1 + this.soldiering.level * SoldieringTechBonus);
     }
 
     public double deltaResearch() {
-        return (this.roundedPop() * ResearchBase + this.scholars() * ScholarResearch) * (1 + this.scholarship.level * ResearchTechBouns);
+        return (this.roundedPop() * ResearchBase + this.scholars() * ScholarResearch) * (1 + this.scholarship.level * ResearchTechBonus);
     }
 
     public boolean isOver() {

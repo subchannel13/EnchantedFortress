@@ -30,8 +30,8 @@ public class Difficulty {
                     new Difficulty(80, 2),
             };
 
-    private double startingPop;
-    private double demonSpawnFactor;
+    private final double startingPop;
+    private final double demonSpawnFactor;
 
     private Difficulty(double startingPop, double demonSpawnFactor) {
         this.startingPop = startingPop;
