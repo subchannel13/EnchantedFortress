@@ -44,4 +44,6 @@
     <string name="gatesClosed">Closed %1d hell gates</string>
     <string name="gatesOpened">, demons reopened %1d gates</string>
     <string name="gatesLeft">%1d gates</string>
+    <string name="difficultyStartingPop">Starting population: %1s</string>
+    <string name="difficultyDemonSpawn">Demon spawn rate: %1s</string>
 </resources>

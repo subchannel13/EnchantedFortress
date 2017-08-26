@@ -7,11 +7,17 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
+import android.widget.TextView;
+
+import hr.kravarscan.enchantedfortress.logic.Difficulty;
 
 public class NewGameFragment extends AAttachableFragment {
 
     private NewGameFragment.OnFragmentInteractionListener listener;
     private Spinner difficultySelector;
+
+    private TextView startPopText;
+    private TextView demonSpawnText;
 
     public NewGameFragment() {
         // Required empty public constructor
@@ -23,12 +29,23 @@ public class NewGameFragment extends AAttachableFragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_new_game, container, false);
 
+        this.startPopText = (TextView) view.findViewById(R.id.difficultyStartPop);
+        this.demonSpawnText = (TextView) view.findViewById(R.id.difficultyDemonSpawn);
+
         this.difficultySelector = view.findViewById(R.id.difficultySelection);
-        difficultySelector.setAdapter(ArrayAdapter.createFromResource(view.getContext(), R.array.difficultyLevels, android.R.layout.simple_spinner_item));
+        difficultySelector.setAdapter(ArrayAdapter.createFromResource(view.getContext(), R.array.difficultyLevels, R.layout.research_item));
         difficultySelector.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                //TODO
+                Difficulty data = Difficulty.Levels[i];
+
+                int visibility = (data == Difficulty.Medium) ? View.GONE : View.VISIBLE;
+                startPopText.setVisibility(visibility);
+                demonSpawnText.setVisibility(visibility);
+
+                double startPop = data.getStartingPop() / Difficulty.Medium.getStartingPop();
+                startPopText.setText(getResources().getString(R.string.difficultyStartingPop, bonusPercent(startPop)));
+                demonSpawnText.setText(getResources().getString(R.string.difficultyDemonSpawn, bonusPercent(data.getDemonSpawnFactor())));
             }
 
             @Override
@@ -36,7 +53,7 @@ public class NewGameFragment extends AAttachableFragment {
                 //No operation
             }
         });
-        difficultySelector.setSelection(1);
+        difficultySelector.setSelection(Difficulty.Medium.getIndex());
 
         view.findViewById(R.id.startButton).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -62,6 +79,12 @@ public class NewGameFragment extends AAttachableFragment {
             throw new RuntimeException(listener.toString()
                     + " must implement OnFragmentInteractionListener");
         }
+    }
+
+    private static String bonusPercent(double factor)
+    {
+        String sign = factor >= 1 ? "+" : "";
+        return sign + Integer.toString((int)(factor * 100 - 100)) + "%";
     }
 
     interface OnFragmentInteractionListener {
