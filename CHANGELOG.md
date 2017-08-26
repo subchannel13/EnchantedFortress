@@ -3,7 +3,7 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
-## [v1.7] - 2017-08-26
+## [v1.6] - 2017-08-26
 ### Added
 - Difficulty level info when starting new game
 - Hell gate opening and closing report during banishment ritual
