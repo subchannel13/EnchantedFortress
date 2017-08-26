@@ -3,6 +3,16 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+## [v1.7] - 2017-08-26
+### Added
+- Difficulty level info when starting new game
+- Hell gate opening and closing report during banishment ritual
+
+### Changed
+- Banishment ritual shows remaining hell gates instead of time estimation
+- Increased item size in research selection
+- German translation
+
 ## [v1.5] - 2017-07-29
 ### Changed
 - Launcher icon

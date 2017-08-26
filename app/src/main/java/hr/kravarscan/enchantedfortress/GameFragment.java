@@ -107,7 +107,7 @@ public class GameFragment extends AAttachableFragment {
 
         Spinner researchSelector = view.findViewById(R.id.researchSelection);
         this.updateTechList();
-        this.techListAdapter = new ArrayAdapter<>(view.getContext(), android.R.layout.simple_spinner_item, this.techList);
+        this.techListAdapter = new ArrayAdapter<>(view.getContext(), R.layout.research_item, this.techList);
         researchSelector.setAdapter(this.techListAdapter);
         researchSelector.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -165,7 +165,7 @@ public class GameFragment extends AAttachableFragment {
         this.techList[1] = getResources().getString(R.string.buildTech) + techDescription(this.game.building);
         this.techList[2] = getResources().getString(R.string.soldierTech) + techDescription(this.game.soldiering);
         this.techList[3] = getResources().getString(R.string.scholarTech) + techDescription(this.game.scholarship);
-        this.techList[4] = getResources().getString(R.string.banishTech) + techEta(this.game.demonBanishCost);
+        this.techList[4] = getResources().getString(R.string.banishTech) + " - " + getResources().getString(R.string.gatesLeft, this.game.demonGates);
     }
 
     private String techDescription(Technology tech) {
@@ -191,12 +191,11 @@ public class GameFragment extends AAttachableFragment {
         this.updateInfo();
     }
 
-    private void updateInfo()
-    {
+    private void updateInfo() {
         this.farmerInfo.setText(sliderText(R.string.farmers, game.farmerSlider, R.string.popDelta, game.realDeltaPop()));
-        this.builderInfo.setText( sliderText(R.string.builders, game.builderSlider, R.string.wallDelta, (int)game.deltaWalls()));
-        this.soldierInfo.setText(sliderText(R.string.soldiers, game.soldierSlider, R.string.militaryStrength, (int)game.militaryStrength()));
-        this.researchInfo.setText(sliderText(R.string.scholars, game.getScholarSlider(), R.string.researchDelta, (int)game.deltaResearch()));
+        this.builderInfo.setText(sliderText(R.string.builders, game.builderSlider, R.string.wallDelta, (int) game.deltaWalls()));
+        this.soldierInfo.setText(sliderText(R.string.soldiers, game.soldierSlider, R.string.militaryStrength, (int) game.militaryStrength()));
+        this.researchInfo.setText(sliderText(R.string.scholars, game.getScholarSlider(), R.string.researchDelta, (int) game.deltaResearch()));
 
         this.updateTechList();
         this.techListAdapter.notifyDataSetChanged();
@@ -204,13 +203,13 @@ public class GameFragment extends AAttachableFragment {
         if (this.game.isOver()) {
             this.popInfo.setText(this.game.population < 1 ? R.string.defeat : R.string.victory);
             this.endTurnButton.setText(R.string.gameOver);
-        }
-        else
+        } else
             this.popInfo.setText(getResources().getString(R.string.turn) + ": " + Integer.toString(this.game.turn) + "\n" +
-                    getResources().getString(R.string.population) + ": " + Integer.toString((int)this.game.population) + "\n" +
-                    getResources().getString(R.string.walls) + ": " + Integer.toString((int)this.game.walls) + "\n" +
+                    getResources().getString(R.string.population) + ": " + Integer.toString((int) this.game.population) + "\n" +
+                    getResources().getString(R.string.walls) + ": " + Integer.toString((int) this.game.walls) + "\n" +
                     getResources().getString(R.string.scouted) + ": " + Integer.toString(this.game.reportScoutedDemons) + " " + getResources().getString(R.string.demons) +
-                    this.battleInfo()
+                    this.battleInfo() +
+                    this.banishInfo()
             );
     }
 
@@ -231,5 +230,14 @@ public class GameFragment extends AAttachableFragment {
             return "\n" + getResources().getString(R.string.attacked) + Integer.toString(this.game.reportAttackers) + getResources().getString(R.string.victims) + Integer.toString(this.game.reportVictims);
         else
             return "\n" + getResources().getString(R.string.noVictims);
+    }
+
+    private String banishInfo() {
+        if (this.game.reportHellgateClose <= 0)
+            return "";
+
+        String closed = getResources().getString(R.string.gatesClosed, this.game.reportHellgateClose);
+        String opened = getResources().getString(R.string.gatesOpened, this.game.reportHellgateOpen);
+        return "\n" + closed + (this.game.reportHellgateOpen > 0 ? opened : "");
     }
 }

@@ -41,10 +41,10 @@ public class Game {
     private static final double WallSoldierStrength = 20;
     private static final double ResearchBase = 0.1;
     private static final double ScholarResearch = 1 - ResearchBase;
-    private static final double FarmingTechBouns = 1 / 12.0;
-    private static final double BuildingTechBouns = 1;
-    private static final double SoldieringTechBouns = 1 / 1.0;
-    private static final double ResearchTechBouns = 1 / 8.0;
+    private static final double FarmingTechBonus = 1 / 12.0;
+    private static final double BuildingTechBonus = 1;
+    private static final double SoldieringTechBonus = 1 / 1.0;
+    private static final double ResearchTechBonus = 1 / 8.0;
 
     private static final Random rand = new Random();
 
@@ -52,7 +52,7 @@ public class Game {
     public double population = 100;
     public double walls = 0;
     private int demons = 0;
-    private int demonGates = 0;
+    public int demonGates = 0;
     public int demonBanishCost = 10000;
     private Difficulty difficulty;
 
@@ -68,6 +68,8 @@ public class Game {
     public final Technology scholarship = new Technology();
 
     public int reportAttackers = 0;
+    public int reportHellgateClose = 0;
+    public int reportHellgateOpen = 0;
     public int reportVictims = 0;
     public int reportScoutedDemons = 0;
 
@@ -165,11 +167,11 @@ public class Game {
     }
 
     private double builderEfficiency() {
-        return BuilderBase + this.building.level * BuildingTechBouns;
+        return BuilderBase + this.building.level * BuildingTechBonus;
     }
 
     private double farmerEfficiency() {
-        return FarmingBase + this.farming.level * FarmingTechBouns;
+        return FarmingBase + this.farming.level * FarmingTechBonus;
     }
 
     public int realDeltaPop() {
@@ -193,11 +195,11 @@ public class Game {
         return groundCivils * CivilStrength +
                 wallCivils * WallCivilStrength +
                 (groundSoldiers * SoldierStrength +
-                wallSoldiers * WallSoldierStrength) * (1 + this.soldiering.level * SoldieringTechBouns);
+                wallSoldiers * WallSoldierStrength) * (1 + this.soldiering.level * SoldieringTechBonus);
     }
 
     public double deltaResearch() {
-        return (this.roundedPop() * ResearchBase + this.scholars() * ScholarResearch) * (1 + this.scholarship.level * ResearchTechBouns);
+        return (this.roundedPop() * ResearchBase + this.scholars() * ScholarResearch) * (1 + this.scholarship.level * ResearchTechBonus);
     }
 
     public boolean isOver() {
@@ -212,6 +214,8 @@ public class Game {
      */
     public void endTurn() {
         this.reportAttackers = 0;
+        this.reportHellgateClose = 0;
+        this.reportHellgateOpen = 0;
         this.reportVictims = 0;
         this.turn++;
 
@@ -250,9 +254,10 @@ public class Game {
                 if (this.demonBanishCost < 0)
                     this.demonBanishCost = 0;
 
-                this.demonGates -= (int) (researchPoints / 100);
-                if (this.demonGates < 0)
-                    this.demonGates = 0;
+                this.reportHellgateClose = (int) (researchPoints / 100);
+                if (this.reportHellgateClose > this.demonGates)
+                    this.reportHellgateClose = this.demonGates;
+                this.demonGates -= this.reportHellgateClose;
                 break;
         }
     }
@@ -303,9 +308,10 @@ public class Game {
 
     private void spawnDemons() {
         if (this.demonBanishCost > 0) {
-            this.demonGates += this.roundedPop() + this.demonBanishCost / 100;
-            if (this.demonGates > MaxDemonGates)
-                this.demonGates = MaxDemonGates;
+            this.reportHellgateOpen += this.roundedPop() + this.demonBanishCost / 100;
+            if (this.demonGates + this.reportHellgateOpen > MaxDemonGates)
+                this.reportHellgateOpen = MaxDemonGates - this.demonGates;
+            this.demonGates += this.reportHellgateOpen;
 
             int deltaCost = this.demonGates / 100;
             this.demonBanishCost += deltaCost < this.roundedPop() ? this.roundedPop() : deltaCost;
