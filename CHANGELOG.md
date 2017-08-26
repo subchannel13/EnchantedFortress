@@ -2,6 +2,9 @@
 All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
+### Added
+- Hell gate opening and closing report during banishment ritual
+
 ### Changed
 - Increased item size in research selection
 - German translation

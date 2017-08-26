@@ -68,6 +68,8 @@ public class Game {
     public final Technology scholarship = new Technology();
 
     public int reportAttackers = 0;
+    public int reportHellgateClose = 0;
+    public int reportHellgateOpen = 0;
     public int reportVictims = 0;
     public int reportScoutedDemons = 0;
 
@@ -212,6 +214,8 @@ public class Game {
      */
     public void endTurn() {
         this.reportAttackers = 0;
+        this.reportHellgateClose = 0;
+        this.reportHellgateOpen = 0;
         this.reportVictims = 0;
         this.turn++;
 
@@ -250,9 +254,10 @@ public class Game {
                 if (this.demonBanishCost < 0)
                     this.demonBanishCost = 0;
 
-                this.demonGates -= (int) (researchPoints / 100);
-                if (this.demonGates < 0)
-                    this.demonGates = 0;
+                this.reportHellgateClose = (int) (researchPoints / 100);
+                if (this.reportHellgateClose > this.demonGates)
+                    this.reportHellgateClose = this.demonGates;
+                this.demonGates -= this.reportHellgateClose;
                 break;
         }
     }
@@ -303,9 +308,10 @@ public class Game {
 
     private void spawnDemons() {
         if (this.demonBanishCost > 0) {
-            this.demonGates += this.roundedPop() + this.demonBanishCost / 100;
-            if (this.demonGates > MaxDemonGates)
-                this.demonGates = MaxDemonGates;
+            this.reportHellgateOpen += this.roundedPop() + this.demonBanishCost / 100;
+            if (this.demonGates + this.reportHellgateOpen > MaxDemonGates)
+                this.reportHellgateOpen = MaxDemonGates - this.demonGates;
+            this.demonGates += this.reportHellgateOpen;
 
             int deltaCost = this.demonGates / 100;
             this.demonBanishCost += deltaCost < this.roundedPop() ? this.roundedPop() : deltaCost;

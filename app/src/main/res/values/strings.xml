@@ -41,4 +41,6 @@
     <string name="aboutVersion">Version: %1$s</string>
     <string name="aboutSupportAt">Support development:\n%1$s</string>
     <string name="startGame">Start game</string>
+    <string name="gatesClosed">Closed %1d hell gates</string>
+    <string name="gatesOpened">, demons reopened %1d gates</string>
 </resources>
