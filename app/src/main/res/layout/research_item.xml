@@ -9,7 +9,8 @@
           android:paddingLeft="?android:attr/listPreferredItemPaddingLeft"
           android:paddingRight="?android:attr/listPreferredItemPaddingRight"
           android:paddingStart="?android:attr/listPreferredItemPaddingStart"
-          android:paddingVertical="8dp"
+          android:paddingTop="8dp"
+          android:paddingBottom="8dp"
     >
 
 </TextView>

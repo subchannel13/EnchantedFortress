@@ -29,8 +29,8 @@ public class NewGameFragment extends AAttachableFragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_new_game, container, false);
 
-        this.startPopText = (TextView) view.findViewById(R.id.difficultyStartPop);
-        this.demonSpawnText = (TextView) view.findViewById(R.id.difficultyDemonSpawn);
+        this.startPopText = view.findViewById(R.id.difficultyStartPop);
+        this.demonSpawnText = view.findViewById(R.id.difficultyDemonSpawn);
 
         this.difficultySelector = view.findViewById(R.id.difficultySelection);
         difficultySelector.setAdapter(ArrayAdapter.createFromResource(view.getContext(), R.array.difficultyLevels, R.layout.research_item));
