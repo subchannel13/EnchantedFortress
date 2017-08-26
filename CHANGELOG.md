@@ -6,6 +6,7 @@ All notable changes to this project will be documented in this file.
 - Hell gate opening and closing report during banishment ritual
 
 ### Changed
+- Banishment ritual shows remaining hell gates instead of time estimation
 - Increased item size in research selection
 - German translation
 

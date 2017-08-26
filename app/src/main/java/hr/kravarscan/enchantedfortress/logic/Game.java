@@ -52,7 +52,7 @@ public class Game {
     public double population = 100;
     public double walls = 0;
     private int demons = 0;
-    private int demonGates = 0;
+    public int demonGates = 0;
     public int demonBanishCost = 10000;
     private Difficulty difficulty;
 
