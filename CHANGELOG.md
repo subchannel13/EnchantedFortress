@@ -2,6 +2,8 @@
 All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
+### Added
+- Round icon
 
 ## [v1.6] - 2017-08-26
 ### Added
