@@ -20,7 +20,7 @@ package hr.kravarscan.enchantedfortress.storage;
  */
 
 @SuppressWarnings("unused")
-public enum LatestSaveKeys {
+public enum SaveKeysV7 {
     VERSION,
 
     DIFFICULTY,
@@ -28,7 +28,6 @@ public enum LatestSaveKeys {
     POPULATION,
     WALLS,
     DEMONS,
-    DEMON_LEVEL,
     DEMON_GATES,
     DEMON_BANISH_COST,
 

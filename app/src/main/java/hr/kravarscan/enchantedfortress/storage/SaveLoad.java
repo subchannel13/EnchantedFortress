@@ -100,7 +100,10 @@ public final class SaveLoad {
 
     private void upgradeSave(List<Double> data) {
         if (data.get(LatestSaveKeys.VERSION.ordinal()) <= 3)
-            data.add(LatestSaveKeys.DIFFICULTY.ordinal(), (double)Difficulty.Medium.getIndex());
+            data.add(SaveKeysV7.DIFFICULTY.ordinal(), (double)Difficulty.Medium.getIndex());
+
+        if (data.get(LatestSaveKeys.VERSION.ordinal()) <= 7)
+            data.add(LatestSaveKeys.DEMON_LEVEL.ordinal(), Math.floor(0.5 * data.get(LatestSaveKeys.TURN.ordinal())));
     }
 
     public double[] serialize(Game game) {

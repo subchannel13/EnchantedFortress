@@ -52,6 +52,7 @@ public class Game {
     public double population = 100;
     public double walls = 0;
     private int demons = 0;
+    private int demonLevel = 0;
     public int demonGates = 0;
     public int demonBanishCost = 10000;
     private Difficulty difficulty;
@@ -263,8 +264,10 @@ public class Game {
     }
 
     private void doCombat() {
-        if (rand.nextDouble() * this.roundedPop() > this.demons)
+        if (rand.nextDouble() * this.roundedPop() > this.demons) {
+            this.demonLevel++;
             return;
+        }
 
         int attackers = rand.nextInt(this.demons + 1);
         double defenderStr = this.militaryStrength();
@@ -272,29 +275,29 @@ public class Game {
 
         this.demons -= attackers;
         this.reportAttackers = attackers;
-        attackers *= DemonStrength;
+        double demonStrBonus = Math.pow(this.difficulty.getDemonPowerBase(), this.demonLevel);
+        double attackerStr = attackers * DemonStrength * demonStrBonus;
 
-        for (int i = 0; attackers > 0 && defenderStr > 0 && i < CombatRounds; i++) {
+        for (int i = 0; attackerStr > 0 && defenderStr > 0 && i < CombatRounds; i++) {
             if (rand.nextDouble() > 0.5) {
-                defenderStr -= (int) (attackers * rand.nextDouble());
+                defenderStr -= attackerStr * rand.nextDouble();
                 if (defenderStr < 0)
-                    continue;
-                attackers -= (int) (defenderStr * rand.nextDouble());
+                    break;
+                attackerStr -= defenderStr * rand.nextDouble();
             } else {
-                attackers -= (int) (defenderStr * rand.nextDouble());
-                if (attackers < 0)
-                    continue;
-                defenderStr -= (int) (attackers * rand.nextDouble());
+                attackerStr -= defenderStr * rand.nextDouble();
+                if (attackerStr < 0)
+                    break;
+                defenderStr -= attackerStr * rand.nextDouble();
             }
         }
 
-        if (attackers < 0)
-            attackers = 0;
+        if (attackerStr < 0)
+            attackerStr = 0;
         if (defenderStr < 0)
             defenderStr = 0;
 
-        attackers /= DemonStrength;
-        this.demons += attackers / DemonStrength;
+        this.demons += (int)(attackerStr / DemonStrength / demonStrBonus);
         if (this.demons < 0)
             this.demons = 0;
 
@@ -362,6 +365,7 @@ public class Game {
                         this.population,
                         this.walls,
                         this.demons,
+                        this.demonLevel,
                         this.demonGates,
                         this.demonBanishCost,
 
@@ -391,6 +395,7 @@ public class Game {
         this.population = (int) data[LatestSaveKeys.POPULATION.ordinal()];
         this.walls = data[LatestSaveKeys.WALLS.ordinal()];
         this.demons = (int) data[LatestSaveKeys.DEMONS.ordinal()];
+        this.demonLevel = (int) data[LatestSaveKeys.DEMON_LEVEL.ordinal()];
         this.demonGates = (int) data[LatestSaveKeys.DEMON_GATES.ordinal()];
         this.demonBanishCost = (int) data[LatestSaveKeys.DEMON_BANISH_COST.ordinal()];
 

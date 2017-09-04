@@ -4,6 +4,7 @@ All notable changes to this project will be documented in this file.
 ## [Unreleased]
 ### Added
 - Round icon
+- Demon strength per unit grows exponentially over time
 
 ## [v1.6] - 2017-08-26
 ### Added
