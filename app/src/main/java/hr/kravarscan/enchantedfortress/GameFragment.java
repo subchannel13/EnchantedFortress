@@ -13,6 +13,7 @@ import android.widget.TextView;
 import hr.kravarscan.enchantedfortress.logic.Difficulty;
 import hr.kravarscan.enchantedfortress.logic.Game;
 import hr.kravarscan.enchantedfortress.logic.Technology;
+import hr.kravarscan.enchantedfortress.storage.HighScores;
 import hr.kravarscan.enchantedfortress.storage.SaveLoad;
 
 public class GameFragment extends AAttachableFragment {
@@ -184,6 +185,8 @@ public class GameFragment extends AAttachableFragment {
     private void endTurn() {
         if (this.game.isOver()) {
             this.listener.onGameOver();
+            if (this.game.population > 0)
+                HighScores.get().add(this.game, this.getActivity());
             return;
         }
 

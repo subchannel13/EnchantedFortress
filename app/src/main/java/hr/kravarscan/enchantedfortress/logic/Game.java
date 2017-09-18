@@ -80,6 +80,10 @@ public class Game {
         this.population = difficulty.getStartingPop();
     }
 
+    public Difficulty getDifficulty() {
+        return this.difficulty;
+    }
+
     /*
         Sliders
      */
@@ -390,7 +394,7 @@ public class Game {
     }
 
     public void load(double[] data) {
-        this.difficulty = Difficulty.Levels[(int)data[LatestSaveKeys.DIFFICULTY.ordinal()]];
+        this.difficulty = Difficulty.Levels[(int) data[LatestSaveKeys.DIFFICULTY.ordinal()]];
         this.turn = (int) data[LatestSaveKeys.TURN.ordinal()];
         this.population = (int) data[LatestSaveKeys.POPULATION.ordinal()];
         this.walls = data[LatestSaveKeys.WALLS.ordinal()];
