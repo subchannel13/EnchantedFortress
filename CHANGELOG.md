@@ -5,6 +5,10 @@ All notable changes to this project will be documented in this file.
 ### Added
 - Round icon
 - Demon strength per unit grows exponentially over time
+- Fastest win tracking
+
+### Fixed
+- Demon gate closing and opening info
 
 ## [v1.6] - 2017-08-26
 ### Added

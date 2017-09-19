@@ -259,10 +259,12 @@ public class Game {
                 if (this.demonBanishCost < 0)
                     this.demonBanishCost = 0;
 
-                this.reportHellgateClose = (int) (researchPoints / 100);
-                if (this.reportHellgateClose > this.demonGates)
-                    this.reportHellgateClose = this.demonGates;
-                this.demonGates -= this.reportHellgateClose;
+                int gateDelta = (int) (researchPoints / 100);
+                if (gateDelta > this.demonGates)
+                    gateDelta = this.demonGates;
+                this.reportHellgateClose = this.demonGates / 1000 - (this.demonGates - gateDelta) / 1000;
+                this.demonGates -= gateDelta;
+
                 break;
         }
     }
@@ -315,10 +317,11 @@ public class Game {
 
     private void spawnDemons() {
         if (this.demonBanishCost > 0) {
-            this.reportHellgateOpen += this.roundedPop() + this.demonBanishCost / 100;
+            double gatesDelta = this.roundedPop() + this.demonBanishCost / 100;
             if (this.demonGates + this.reportHellgateOpen > MaxDemonGates)
                 this.reportHellgateOpen = MaxDemonGates - this.demonGates;
-            this.demonGates += this.reportHellgateOpen;
+            this.demonGates += gatesDelta;
+            this.reportHellgateOpen = (int) (gatesDelta / 1000);
 
             int deltaCost = this.demonGates / 100;
             this.demonBanishCost += deltaCost < this.roundedPop() ? this.roundedPop() : deltaCost;
