@@ -166,7 +166,19 @@ public class GameFragment extends AAttachableFragment {
         this.techList[1] = getResources().getString(R.string.buildTech) + techDescription(this.game.building);
         this.techList[2] = getResources().getString(R.string.soldierTech) + techDescription(this.game.soldiering);
         this.techList[3] = getResources().getString(R.string.scholarTech) + techDescription(this.game.scholarship);
-        this.techList[4] = getResources().getString(R.string.banishTech) + " - " + getResources().getString(R.string.gatesLeft, this.game.demonGates / 1000);
+
+        double rp = this.game.deltaResearch();
+        double banishDelta = rp - this.game.banishCostGrowth;
+        String banishEta = "";
+
+        if (banishDelta <= 0)
+            banishEta = " - " + getResources().getString(R.string.banishNever);
+        else if (banishDelta < this.game.demonBanishCost / 1000)
+            banishEta = " - " + getResources().getString(R.string.banishSlow);
+        else if (this.game.demonBanishCost > 0)
+            banishEta = techEta(this.game.demonBanishCost);
+
+        this.techList[4] = getResources().getString(R.string.banishTech) + banishEta;
     }
 
     private String techDescription(Technology tech) {

@@ -47,4 +47,6 @@
     <string name="difficultyStartingPop">Starting population: %1s</string>
     <string name="difficultyDemonSpawn">Demon spawn rate: %1s</string>
     <string name="difficultyDemonGrowth">Demon power growth: %1s</string>
+    <string name="banishNever">hopless</string>
+    <string name="banishSlow">forever</string>
 </resources>

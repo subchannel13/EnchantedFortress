@@ -73,6 +73,7 @@ public class Game {
     public int reportHellgateOpen = 0;
     public int reportVictims = 0;
     public int reportScoutedDemons = 0;
+    public int banishCostGrowth = Integer.MAX_VALUE;
 
     public Game(Difficulty difficulty)
     {
@@ -323,8 +324,8 @@ public class Game {
             this.demonGates += gatesDelta;
             this.reportHellgateOpen = (int) (gatesDelta / 1000);
 
-            int deltaCost = this.demonGates / 100;
-            this.demonBanishCost += deltaCost < this.roundedPop() ? this.roundedPop() : deltaCost;
+            this.banishCostGrowth = Math.max(this.demonGates / 100, (int)this.roundedPop());
+            this.demonBanishCost += this.banishCostGrowth;
             if (this.demonBanishCost > MaxBanishCost)
                 this.demonBanishCost = MaxBanishCost;
         }

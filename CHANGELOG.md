@@ -7,8 +7,11 @@ All notable changes to this project will be documented in this file.
 - Demon strength per unit grows exponentially over time
 - Fastest win tracking
 
+### Changed
+- Banishment ritual time estimation again but more precisely then before v1.6
+
 ### Fixed
-- Demon gate closing and opening info
+- Demon gate closing and opening info numbers
 
 ## [v1.6] - 2017-08-26
 ### Added
