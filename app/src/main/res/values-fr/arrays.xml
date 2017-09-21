@@ -3,7 +3,7 @@
     <string-array name="difficultyLevels">
         <item>Facile</item>
         <item>Normal</item>
-        <item>Dificille</item>
+        <item>Difficile</item>
     </string-array>
     <string-array name="translators">
         <item>Allemand (de) - mueller-ma</item>
