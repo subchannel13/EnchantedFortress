@@ -6,9 +6,11 @@ All notable changes to this project will be documented in this file.
 - Round icon
 - Demon strength per unit grows exponentially over time
 - Fastest win tracking
+- Hall of Fame screen
 
 ### Changed
 - Banishment ritual time estimation again but more precisely then before v1.6
+- Few entries in French translation
 
 ### Fixed
 - Demon gate closing and opening info numbers

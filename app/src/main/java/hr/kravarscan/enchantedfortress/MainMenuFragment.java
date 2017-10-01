@@ -39,6 +39,15 @@ public class MainMenuFragment extends AAttachableFragment {
                 }
         );
 
+        layout.findViewById(R.id.scoresButton).setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        listener.onScores();
+                    }
+                }
+        );
+
         layout.findViewById(R.id.helpButton).setOnClickListener(
                 new View.OnClickListener() {
                     @Override
@@ -79,6 +88,7 @@ public class MainMenuFragment extends AAttachableFragment {
     interface OnFragmentInteractionListener {
         void onContinue();
         void onNewGame();
+        void onScores();
         void onHelp();
         void onAbout();
     }

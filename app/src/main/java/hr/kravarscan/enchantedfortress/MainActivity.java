@@ -73,6 +73,11 @@ public class MainActivity extends Activity implements MainMenuFragment.OnFragmen
     }
 
     @Override
+    public void onScores() {
+        this.switchMainView(new ScoresFragment());
+    }
+
+    @Override
     public void onHelp() {
         this.switchMainView(new HelpFragment());
     }

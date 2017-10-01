@@ -49,4 +49,8 @@
     <string name="difficultyDemonGrowth">Demon power growth: %1s</string>
     <string name="banishNever">hopless</string>
     <string name="banishSlow">forever</string>
+    <string name="scoresTitle">Hall of Fame</string>
+    <string name="scoresTurns">Turns</string>
+    <string name="scoredDifficulty">Difficulty</string>
+    <string name="scoresButton">Hall of Fame</string>
 </resources>
