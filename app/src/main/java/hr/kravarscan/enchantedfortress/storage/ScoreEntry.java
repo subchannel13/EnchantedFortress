@@ -1,5 +1,7 @@
 package hr.kravarscan.enchantedfortress.storage;
 
+import java.util.List;
+
 /**
  * Copyright 2017 Ivan Kravarščan
  *
@@ -20,6 +22,7 @@ package hr.kravarscan.enchantedfortress.storage;
  */
 
 public class ScoreEntry {
+    public static final int SaveLength = 2;
 
     private final int turn;
     private final int difficulty;
@@ -39,5 +42,17 @@ public class ScoreEntry {
                         this.turn,
                         this.difficulty
                 };
+    }
+
+    public int getTurn() {
+        return turn;
+    }
+
+    public int getDifficulty() {
+        return difficulty;
+    }
+
+    public static ScoreEntry Load(List<Double> data) {
+        return new ScoreEntry(data.get(0).intValue(), data.get(1).intValue());
     }
 }
