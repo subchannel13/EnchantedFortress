@@ -35,10 +35,11 @@
             android:layout_toRightOf="@id/turnsHeader"
             android:text="@string/scoredDifficulty"/>
 
-        <ListView
+        <LinearLayout
             android:id="@+id/scoreList"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:orientation="vertical"
             android:layout_below="@id/turnsHeader"/>
     </RelativeLayout>
 
