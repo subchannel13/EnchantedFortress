@@ -53,4 +53,5 @@
     <string name="scoresTurns">Turns</string>
     <string name="scoredDifficulty">Difficulty</string>
     <string name="scoresButton">Hall of Fame</string>
+    <string name="banishProgress">Scholars perform banishment ritual and demons try to increase they power. Demon power is now %1d.</string>
 </resources>

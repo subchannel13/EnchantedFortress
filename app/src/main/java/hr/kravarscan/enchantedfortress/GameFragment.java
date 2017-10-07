@@ -176,7 +176,7 @@ public class GameFragment extends AAttachableFragment {
         else if (banishDelta < this.game.demonBanishCost / 1000)
             banishEta = " - " + getResources().getString(R.string.banishSlow);
         else if (this.game.demonBanishCost > 0)
-            banishEta = techEta(this.game.demonBanishCost);
+            banishEta = " - " + (int) Math.ceil(this.game.demonBanishCost / banishDelta) + " " + getResources().getString(R.string.turns);
 
         this.techList[4] = getResources().getString(R.string.banishTech) + banishEta;
     }
@@ -189,7 +189,7 @@ public class GameFragment extends AAttachableFragment {
         double rp = this.game.deltaResearch();
 
         if (rp > cost / 1000)
-            return " - " + (int)Math.ceil(cost / rp) + " " + getResources().getString(R.string.turns);
+            return " - " + (int) Math.ceil(cost / rp) + " " + getResources().getString(R.string.turns);
 
         return "";
     }
@@ -228,8 +228,7 @@ public class GameFragment extends AAttachableFragment {
             );
     }
 
-    private String sliderText(int sliderTextId, int sliderValue, int descriptionTextId, int effectValue)
-    {
+    private String sliderText(int sliderTextId, int sliderValue, int descriptionTextId, int effectValue) {
         Integer percents = (int) (sliderValue * (100 / Game.SliderTicks));
         Integer effect = effectValue;
 
@@ -251,8 +250,6 @@ public class GameFragment extends AAttachableFragment {
         if (this.game.reportHellgateClose <= 0)
             return "";
 
-        String closed = getResources().getString(R.string.gatesClosed, this.game.reportHellgateClose);
-        String opened = getResources().getString(R.string.gatesOpened, this.game.reportHellgateOpen);
-        return "\n" + closed + (this.game.reportHellgateOpen > 0 ? opened : "");
+        return "\n" + getResources().getString(R.string.banishProgress, this.game.demonBanishCost / 100);
     }
 }

@@ -10,10 +10,8 @@ All notable changes to this project will be documented in this file.
 
 ### Changed
 - Banishment ritual time estimation again but more precisely then before v1.6
+- Banishment ritual progress now shows true goal progress instead of attempts to close demon gate
 - Few entries in French translation
-
-### Fixed
-- Demon gate closing and opening info numbers
 
 ## [v1.6] - 2017-08-26
 ### Added
