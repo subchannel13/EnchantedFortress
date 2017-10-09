@@ -13,11 +13,14 @@ import android.widget.TextView;
 import hr.kravarscan.enchantedfortress.logic.Difficulty;
 import hr.kravarscan.enchantedfortress.logic.Game;
 import hr.kravarscan.enchantedfortress.logic.Technology;
+import hr.kravarscan.enchantedfortress.storage.HighScores;
 import hr.kravarscan.enchantedfortress.storage.SaveLoad;
 
 public class GameFragment extends AAttachableFragment {
     private Game game = new Game(Difficulty.Medium);
     private final String[] techList = new String[5];
+    private int longBanishProgressTurn = Integer.MAX_VALUE;
+
     private ArrayAdapter<String> techListAdapter;
     private TextView popInfo;
     private TextView farmerInfo;
@@ -109,6 +112,7 @@ public class GameFragment extends AAttachableFragment {
         this.updateTechList();
         this.techListAdapter = new ArrayAdapter<>(view.getContext(), R.layout.research_item, this.techList);
         researchSelector.setAdapter(this.techListAdapter);
+        researchSelector.setSelection(this.game.getSelectedTech());
         researchSelector.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
@@ -125,6 +129,7 @@ public class GameFragment extends AAttachableFragment {
         this.popInfo = view.findViewById(R.id.popText);
         this.soldierInfo = view.findViewById(R.id.soliderText);
         this.researchInfo = view.findViewById(R.id.researchText);
+        this.longBanishProgressTurn = Integer.MAX_VALUE;
 
         this.updateInfo();
 
@@ -165,7 +170,19 @@ public class GameFragment extends AAttachableFragment {
         this.techList[1] = getResources().getString(R.string.buildTech) + techDescription(this.game.building);
         this.techList[2] = getResources().getString(R.string.soldierTech) + techDescription(this.game.soldiering);
         this.techList[3] = getResources().getString(R.string.scholarTech) + techDescription(this.game.scholarship);
-        this.techList[4] = getResources().getString(R.string.banishTech) + " - " + getResources().getString(R.string.gatesLeft, this.game.demonGates);
+
+        double rp = this.game.deltaResearch();
+        double banishDelta = rp - this.game.banishCostGrowth;
+        String banishEta = "";
+
+        if (banishDelta <= 0)
+            banishEta = " - " + getResources().getString(R.string.banishNever);
+        else if (banishDelta < this.game.demonBanishCost / 1000)
+            banishEta = " - " + getResources().getString(R.string.banishSlow);
+        else if (this.game.demonBanishCost > 0)
+            banishEta = " - " + (int) Math.ceil(this.game.demonBanishCost / banishDelta) + " " + getResources().getString(R.string.turns);
+
+        this.techList[4] = getResources().getString(R.string.banishTech) + banishEta;
     }
 
     private String techDescription(Technology tech) {
@@ -176,7 +193,7 @@ public class GameFragment extends AAttachableFragment {
         double rp = this.game.deltaResearch();
 
         if (rp > cost / 1000)
-            return " - " + (int)Math.ceil(cost / rp) + " " + getResources().getString(R.string.turns);
+            return " - " + (int) Math.ceil(cost / rp) + " " + getResources().getString(R.string.turns);
 
         return "";
     }
@@ -184,6 +201,8 @@ public class GameFragment extends AAttachableFragment {
     private void endTurn() {
         if (this.game.isOver()) {
             this.listener.onGameOver();
+            if (this.game.population > 0)
+                HighScores.get().add(this.game, this.getActivity());
             return;
         }
 
@@ -213,8 +232,7 @@ public class GameFragment extends AAttachableFragment {
             );
     }
 
-    private String sliderText(int sliderTextId, int sliderValue, int descriptionTextId, int effectValue)
-    {
+    private String sliderText(int sliderTextId, int sliderValue, int descriptionTextId, int effectValue) {
         Integer percents = (int) (sliderValue * (100 / Game.SliderTicks));
         Integer effect = effectValue;
 
@@ -236,8 +254,11 @@ public class GameFragment extends AAttachableFragment {
         if (this.game.reportHellgateClose <= 0)
             return "";
 
-        String closed = getResources().getString(R.string.gatesClosed, this.game.reportHellgateClose);
-        String opened = getResources().getString(R.string.gatesOpened, this.game.reportHellgateOpen);
-        return "\n" + closed + (this.game.reportHellgateOpen > 0 ? opened : "");
+        if (this.game.turn <= this.longBanishProgressTurn) {
+            this.longBanishProgressTurn = this.game.turn;
+            return "\n" + getResources().getString(R.string.banishProgress, this.game.demonBanishCost / 100);
+        }
+        else
+            return "\n" + getResources().getString(R.string.banishProgressShort, this.game.demonBanishCost / 100);
     }
 }

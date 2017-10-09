@@ -18,6 +18,7 @@ public class NewGameFragment extends AAttachableFragment {
 
     private TextView startPopText;
     private TextView demonSpawnText;
+    private TextView demonGrowthText;
 
     public NewGameFragment() {
         // Required empty public constructor
@@ -31,6 +32,13 @@ public class NewGameFragment extends AAttachableFragment {
 
         this.startPopText = view.findViewById(R.id.difficultyStartPop);
         this.demonSpawnText = view.findViewById(R.id.difficultyDemonSpawn);
+        this.demonGrowthText = view.findViewById(R.id.difficultyDemonGrowth);
+        final View[] infoTexts = new View[]
+                {
+                        this.demonGrowthText,
+                        this.demonSpawnText,
+                        this.startPopText
+                };
 
         this.difficultySelector = view.findViewById(R.id.difficultySelection);
         difficultySelector.setAdapter(ArrayAdapter.createFromResource(view.getContext(), R.array.difficultyLevels, R.layout.research_item));
@@ -40,12 +48,12 @@ public class NewGameFragment extends AAttachableFragment {
                 Difficulty data = Difficulty.Levels[i];
 
                 int visibility = (data == Difficulty.Medium) ? View.GONE : View.VISIBLE;
-                startPopText.setVisibility(visibility);
-                demonSpawnText.setVisibility(visibility);
+                for(View infoView : infoTexts)
+                    infoView.setVisibility(visibility);
 
-                double startPop = data.getStartingPop() / Difficulty.Medium.getStartingPop();
-                startPopText.setText(getResources().getString(R.string.difficultyStartingPop, bonusPercent(startPop)));
-                demonSpawnText.setText(getResources().getString(R.string.difficultyDemonSpawn, bonusPercent(data.getDemonSpawnFactor())));
+                startPopText.setText(getResources().getString(R.string.difficultyStartingPop, bonusPercent(data.getStartingPop(), Difficulty.Medium.getStartingPop())));
+                demonSpawnText.setText(getResources().getString(R.string.difficultyDemonSpawn, bonusPercent(data.getDemonSpawnFactor(), Difficulty.Medium.getDemonSpawnFactor())));
+                demonGrowthText.setText(getResources().getString(R.string.difficultyDemonGrowth, bonusPercent(data.getDemonPowerBase() - 1, Difficulty.Medium.getDemonPowerBase() - 1)));
             }
 
             @Override
@@ -81,10 +89,11 @@ public class NewGameFragment extends AAttachableFragment {
         }
     }
 
-    private static String bonusPercent(double factor)
+    private static String bonusPercent(double factor, double normalFactor)
     {
-        String sign = factor >= 1 ? "+" : "";
-        return sign + Integer.toString((int)(factor * 100 - 100)) + "%";
+        factor = (factor - normalFactor) / normalFactor;
+        String sign = factor >= 0 ? "+" : "";
+        return sign + Integer.toString((int)(factor * 100)) + "%";
     }
 
     interface OnFragmentInteractionListener {

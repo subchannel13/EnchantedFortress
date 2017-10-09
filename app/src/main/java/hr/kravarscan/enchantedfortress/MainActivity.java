@@ -8,6 +8,7 @@ import android.os.Bundle;
 
 import hr.kravarscan.enchantedfortress.logic.Difficulty;
 import hr.kravarscan.enchantedfortress.logic.Game;
+import hr.kravarscan.enchantedfortress.storage.HighScores;
 import hr.kravarscan.enchantedfortress.storage.SaveLoad;
 
 public class MainActivity extends Activity implements MainMenuFragment.OnFragmentInteractionListener, GameFragment.OnFragmentInteractionListener, NewGameFragment.OnFragmentInteractionListener {
@@ -20,6 +21,8 @@ public class MainActivity extends Activity implements MainMenuFragment.OnFragmen
         setContentView(R.layout.activity_main);
 
         if (savedInstanceState == null) {
+            HighScores.get().load(this);
+
             MainMenuFragment mainMenu = new MainMenuFragment();
             mainMenu.attach(this);
             getFragmentManager().beginTransaction().replace(R.id.fragment_container, mainMenu).commit();
@@ -70,6 +73,11 @@ public class MainActivity extends Activity implements MainMenuFragment.OnFragmen
         fragment.setGame(game);
 
         this.switchMainView(fragment);
+    }
+
+    @Override
+    public void onScores() {
+        this.switchMainView(new ScoresFragment());
     }
 
     @Override

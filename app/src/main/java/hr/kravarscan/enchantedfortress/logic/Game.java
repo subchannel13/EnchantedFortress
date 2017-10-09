@@ -52,6 +52,7 @@ public class Game {
     public double population = 100;
     public double walls = 0;
     private int demons = 0;
+    private int demonLevel = 0;
     public int demonGates = 0;
     public int demonBanishCost = 10000;
     private Difficulty difficulty;
@@ -72,11 +73,16 @@ public class Game {
     public int reportHellgateOpen = 0;
     public int reportVictims = 0;
     public int reportScoutedDemons = 0;
+    public int banishCostGrowth = Integer.MAX_VALUE;
 
     public Game(Difficulty difficulty)
     {
         this.difficulty = difficulty;
         this.population = difficulty.getStartingPop();
+    }
+
+    public Difficulty getDifficulty() {
+        return this.difficulty;
     }
 
     /*
@@ -134,6 +140,10 @@ public class Game {
 
     private double minFarmers() {
         return this.roundedPop() * (1 + Mortality / NatalityPerFood) / this.farmerEfficiency();
+    }
+
+    public int getSelectedTech() {
+        return this.selectedTech;
     }
 
     public void selectTech(int i) {
@@ -254,17 +264,21 @@ public class Game {
                 if (this.demonBanishCost < 0)
                     this.demonBanishCost = 0;
 
-                this.reportHellgateClose = (int) (researchPoints / 100);
-                if (this.reportHellgateClose > this.demonGates)
-                    this.reportHellgateClose = this.demonGates;
-                this.demonGates -= this.reportHellgateClose;
+                int gateDelta = (int) (researchPoints / 100);
+                if (gateDelta > this.demonGates)
+                    gateDelta = this.demonGates;
+                this.reportHellgateClose = this.demonGates / 1000 - (this.demonGates - gateDelta) / 1000;
+                this.demonGates -= gateDelta;
+
                 break;
         }
     }
 
     private void doCombat() {
-        if (rand.nextDouble() * this.roundedPop() > this.demons)
+        if (rand.nextDouble() * this.roundedPop() > this.demons) {
+            this.demonLevel++;
             return;
+        }
 
         int attackers = rand.nextInt(this.demons + 1);
         double defenderStr = this.militaryStrength();
@@ -272,29 +286,29 @@ public class Game {
 
         this.demons -= attackers;
         this.reportAttackers = attackers;
-        attackers *= DemonStrength;
+        double demonStrBonus = Math.pow(this.difficulty.getDemonPowerBase(), this.demonLevel);
+        double attackerStr = attackers * DemonStrength * demonStrBonus;
 
-        for (int i = 0; attackers > 0 && defenderStr > 0 && i < CombatRounds; i++) {
+        for (int i = 0; attackerStr > 0 && defenderStr > 0 && i < CombatRounds; i++) {
             if (rand.nextDouble() > 0.5) {
-                defenderStr -= (int) (attackers * rand.nextDouble());
+                defenderStr -= attackerStr * rand.nextDouble();
                 if (defenderStr < 0)
-                    continue;
-                attackers -= (int) (defenderStr * rand.nextDouble());
+                    break;
+                attackerStr -= defenderStr * rand.nextDouble();
             } else {
-                attackers -= (int) (defenderStr * rand.nextDouble());
-                if (attackers < 0)
-                    continue;
-                defenderStr -= (int) (attackers * rand.nextDouble());
+                attackerStr -= defenderStr * rand.nextDouble();
+                if (attackerStr < 0)
+                    break;
+                defenderStr -= attackerStr * rand.nextDouble();
             }
         }
 
-        if (attackers < 0)
-            attackers = 0;
+        if (attackerStr < 0)
+            attackerStr = 0;
         if (defenderStr < 0)
             defenderStr = 0;
 
-        attackers /= DemonStrength;
-        this.demons += attackers / DemonStrength;
+        this.demons += (int)(attackerStr / DemonStrength / demonStrBonus);
         if (this.demons < 0)
             this.demons = 0;
 
@@ -308,13 +322,14 @@ public class Game {
 
     private void spawnDemons() {
         if (this.demonBanishCost > 0) {
-            this.reportHellgateOpen += this.roundedPop() + this.demonBanishCost / 100;
+            double gatesDelta = this.roundedPop() + this.demonBanishCost / 100;
             if (this.demonGates + this.reportHellgateOpen > MaxDemonGates)
                 this.reportHellgateOpen = MaxDemonGates - this.demonGates;
-            this.demonGates += this.reportHellgateOpen;
+            this.demonGates += gatesDelta;
+            this.reportHellgateOpen = (int) (gatesDelta / 1000);
 
-            int deltaCost = this.demonGates / 100;
-            this.demonBanishCost += deltaCost < this.roundedPop() ? this.roundedPop() : deltaCost;
+            this.banishCostGrowth = Math.max(this.demonGates / 100, (int)this.roundedPop());
+            this.demonBanishCost += this.banishCostGrowth;
             if (this.demonBanishCost > MaxBanishCost)
                 this.demonBanishCost = MaxBanishCost;
         }
@@ -362,6 +377,7 @@ public class Game {
                         this.population,
                         this.walls,
                         this.demons,
+                        this.demonLevel,
                         this.demonGates,
                         this.demonBanishCost,
 
@@ -380,17 +396,21 @@ public class Game {
                         this.scholarship.points,
 
                         this.reportAttackers,
+                        this.reportHellgateClose,
+                        this.reportHellgateOpen,
                         this.reportVictims,
                         this.reportScoutedDemons,
+                        this.banishCostGrowth,
                 };
     }
 
     public void load(double[] data) {
-        this.difficulty = Difficulty.Levels[(int)data[LatestSaveKeys.DIFFICULTY.ordinal()]];
+        this.difficulty = Difficulty.Levels[(int) data[LatestSaveKeys.DIFFICULTY.ordinal()]];
         this.turn = (int) data[LatestSaveKeys.TURN.ordinal()];
         this.population = (int) data[LatestSaveKeys.POPULATION.ordinal()];
         this.walls = data[LatestSaveKeys.WALLS.ordinal()];
         this.demons = (int) data[LatestSaveKeys.DEMONS.ordinal()];
+        this.demonLevel = (int) data[LatestSaveKeys.DEMON_LEVEL.ordinal()];
         this.demonGates = (int) data[LatestSaveKeys.DEMON_GATES.ordinal()];
         this.demonBanishCost = (int) data[LatestSaveKeys.DEMON_BANISH_COST.ordinal()];
 
@@ -409,7 +429,10 @@ public class Game {
         this.scholarship.points = data[LatestSaveKeys.SCHOLARSHIP_POINTS.ordinal()];
 
         this.reportAttackers = (int) data[LatestSaveKeys.REPORT_ATTACKERS.ordinal()];
+        this.reportHellgateClose = (int) data[LatestSaveKeys.REPORT_HELLGATE_CLOSE.ordinal()];
+        this.reportHellgateOpen = (int) data[LatestSaveKeys.REPORT_HELLGATE_OPEN.ordinal()];
         this.reportVictims = (int) data[LatestSaveKeys.REPORT_VICTIMS.ordinal()];
         this.reportScoutedDemons = (int) data[LatestSaveKeys.REPORT_SCOUTED_DEMONS.ordinal()];
+        this.banishCostGrowth = (int) data[LatestSaveKeys.BANISH_COST_GROWTH.ordinal()];
     }
 }

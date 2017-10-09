@@ -22,20 +22,22 @@ import android.util.Log;
  */
 
 public class Difficulty {
-    public static final Difficulty Medium = new Difficulty(100, 1);
+    public static final Difficulty Medium = new Difficulty(100, 1, 1.02);
     public static final Difficulty[] Levels = new Difficulty[]
             {
-                    new Difficulty(120, 0.75),
+                    new Difficulty(120, 0.75, 1),
                     Medium,
-                    new Difficulty(80, 2),
+                    new Difficulty(80, 2, 1.05),
             };
 
     private final double startingPop;
     private final double demonSpawnFactor;
+    private final double demonPowerBase;
 
-    private Difficulty(double startingPop, double demonSpawnFactor) {
+    private Difficulty(double startingPop, double demonSpawnFactor, double demonPowerBase) {
         this.startingPop = startingPop;
         this.demonSpawnFactor = demonSpawnFactor;
+        this.demonPowerBase = demonPowerBase;
     }
 
     public double getStartingPop() {
@@ -44,6 +46,10 @@ public class Difficulty {
 
     public double getDemonSpawnFactor() {
         return demonSpawnFactor;
+    }
+
+    public double getDemonPowerBase() {
+        return demonPowerBase;
     }
 
     public int getIndex(){

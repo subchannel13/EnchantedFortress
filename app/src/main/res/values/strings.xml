@@ -46,4 +46,13 @@
     <string name="gatesLeft">%1d gates</string>
     <string name="difficultyStartingPop">Starting population: %1s</string>
     <string name="difficultyDemonSpawn">Demon spawn rate: %1s</string>
+    <string name="difficultyDemonGrowth">Demon power growth: %1s</string>
+    <string name="banishNever">hopless</string>
+    <string name="banishSlow">forever</string>
+    <string name="scoresTitle">Hall of Fame</string>
+    <string name="scoresTurns">Turns</string>
+    <string name="scoredDifficulty">Difficulty</string>
+    <string name="scoresButton">Hall of Fame</string>
+    <string name="banishProgress">Scholars perform banishment ritual and demons try to increase they power. Demon power is now %1d.</string>
+    <string name="banishProgressShort">Demon power is now at %1d.</string>
 </resources>
