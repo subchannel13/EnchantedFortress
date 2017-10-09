@@ -102,8 +102,12 @@ public final class SaveLoad {
         if (data.get(LatestSaveKeys.VERSION.ordinal()) <= 3)
             data.add(SaveKeysV7.DIFFICULTY.ordinal(), (double)Difficulty.Medium.getIndex());
 
-        if (data.get(LatestSaveKeys.VERSION.ordinal()) <= 7)
+        if (data.get(LatestSaveKeys.VERSION.ordinal()) <= 7) {
             data.add(LatestSaveKeys.DEMON_LEVEL.ordinal(), Math.floor(0.5 * data.get(LatestSaveKeys.TURN.ordinal())));
+            data.add(LatestSaveKeys.REPORT_HELLGATE_CLOSE.ordinal(), 0.0);
+            data.add(LatestSaveKeys.REPORT_HELLGATE_OPEN.ordinal(), 0.0);
+            data.add(LatestSaveKeys.BANISH_COST_GROWTH.ordinal(), 0.0);
+        }
     }
 
     public double[] serialize(Game game) {

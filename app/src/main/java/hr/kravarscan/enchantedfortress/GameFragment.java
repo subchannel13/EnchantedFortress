@@ -112,6 +112,7 @@ public class GameFragment extends AAttachableFragment {
         this.updateTechList();
         this.techListAdapter = new ArrayAdapter<>(view.getContext(), R.layout.research_item, this.techList);
         researchSelector.setAdapter(this.techListAdapter);
+        researchSelector.setSelection(this.game.getSelectedTech());
         researchSelector.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
@@ -250,7 +251,7 @@ public class GameFragment extends AAttachableFragment {
     }
 
     private String banishInfo() {
-        if (this.game.selectedTech != 4)
+        if (this.game.reportHellgateClose <= 0)
             return "";
 
         if (this.game.turn <= this.longBanishProgressTurn) {

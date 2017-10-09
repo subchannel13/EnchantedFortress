@@ -61,7 +61,7 @@ public class Game {
     public int farmerSlider = 10;
     public int builderSlider = 2;
     public int soldierSlider = 0;
-    public int selectedTech = 0;
+    private int selectedTech = 0;
 
     public final Technology farming = new Technology();
     public final Technology building = new Technology();
@@ -140,6 +140,10 @@ public class Game {
 
     private double minFarmers() {
         return this.roundedPop() * (1 + Mortality / NatalityPerFood) / this.farmerEfficiency();
+    }
+
+    public int getSelectedTech() {
+        return this.selectedTech;
     }
 
     public void selectTech(int i) {
@@ -392,8 +396,11 @@ public class Game {
                         this.scholarship.points,
 
                         this.reportAttackers,
+                        this.reportHellgateClose,
+                        this.reportHellgateOpen,
                         this.reportVictims,
                         this.reportScoutedDemons,
+                        this.banishCostGrowth,
                 };
     }
 
@@ -422,7 +429,10 @@ public class Game {
         this.scholarship.points = data[LatestSaveKeys.SCHOLARSHIP_POINTS.ordinal()];
 
         this.reportAttackers = (int) data[LatestSaveKeys.REPORT_ATTACKERS.ordinal()];
+        this.reportHellgateClose = (int) data[LatestSaveKeys.REPORT_HELLGATE_CLOSE.ordinal()];
+        this.reportHellgateOpen = (int) data[LatestSaveKeys.REPORT_HELLGATE_OPEN.ordinal()];
         this.reportVictims = (int) data[LatestSaveKeys.REPORT_VICTIMS.ordinal()];
         this.reportScoutedDemons = (int) data[LatestSaveKeys.REPORT_SCOUTED_DEMONS.ordinal()];
+        this.banishCostGrowth = (int) data[LatestSaveKeys.BANISH_COST_GROWTH.ordinal()];
     }
 }
