@@ -61,7 +61,7 @@ public class Game {
     public int farmerSlider = 10;
     public int builderSlider = 2;
     public int soldierSlider = 0;
-    private int selectedTech = 0;
+    public int selectedTech = 0;
 
     public final Technology farming = new Technology();
     public final Technology building = new Technology();

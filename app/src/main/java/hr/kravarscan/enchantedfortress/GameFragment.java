@@ -19,6 +19,8 @@ import hr.kravarscan.enchantedfortress.storage.SaveLoad;
 public class GameFragment extends AAttachableFragment {
     private Game game = new Game(Difficulty.Medium);
     private final String[] techList = new String[5];
+    private int longBanishProgressTurn = Integer.MAX_VALUE;
+
     private ArrayAdapter<String> techListAdapter;
     private TextView popInfo;
     private TextView farmerInfo;
@@ -126,6 +128,7 @@ public class GameFragment extends AAttachableFragment {
         this.popInfo = view.findViewById(R.id.popText);
         this.soldierInfo = view.findViewById(R.id.soliderText);
         this.researchInfo = view.findViewById(R.id.researchText);
+        this.longBanishProgressTurn = Integer.MAX_VALUE;
 
         this.updateInfo();
 
@@ -247,9 +250,14 @@ public class GameFragment extends AAttachableFragment {
     }
 
     private String banishInfo() {
-        if (this.game.reportHellgateClose <= 0)
+        if (this.game.selectedTech != 4)
             return "";
 
-        return "\n" + getResources().getString(R.string.banishProgress, this.game.demonBanishCost / 100);
+        if (this.game.turn <= this.longBanishProgressTurn) {
+            this.longBanishProgressTurn = this.game.turn;
+            return "\n" + getResources().getString(R.string.banishProgress, this.game.demonBanishCost / 100);
+        }
+        else
+            return "\n" + getResources().getString(R.string.banishProgressShort, this.game.demonBanishCost / 100);
     }
 }
