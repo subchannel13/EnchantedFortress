@@ -2,6 +2,10 @@
 All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
+### Changed
+- Hall of Fame entries from v1.7 are deleted
+### Fixed
+- Hall of Fame was logging defeats
 
 ## [v1.7] - 2017-10-10
 ### Added

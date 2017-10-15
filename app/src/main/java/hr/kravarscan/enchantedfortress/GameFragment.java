@@ -201,8 +201,7 @@ public class GameFragment extends AAttachableFragment {
     private void endTurn() {
         if (this.game.isOver()) {
             this.listener.onGameOver();
-            if (this.game.population > 0)
-                HighScores.get().add(this.game, this.getActivity());
+            HighScores.get().add(this.game, this.getActivity());
             return;
         }
 
@@ -220,7 +219,7 @@ public class GameFragment extends AAttachableFragment {
         this.techListAdapter.notifyDataSetChanged();
 
         if (this.game.isOver()) {
-            this.popInfo.setText(this.game.population < 1 ? R.string.defeat : R.string.victory);
+            this.popInfo.setText(this.game.isPlayerAlive() ? R.string.victory : R.string.defeat);
             this.endTurnButton.setText(R.string.gameOver);
         } else
             this.popInfo.setText(getResources().getString(R.string.turn) + ": " + Integer.toString(this.game.turn) + "\n" +

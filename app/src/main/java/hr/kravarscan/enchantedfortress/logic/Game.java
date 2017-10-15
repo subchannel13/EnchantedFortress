@@ -216,6 +216,10 @@ public class Game {
         return this.population < 1 || this.demonBanishCost <= 0;
     }
 
+    public boolean isPlayerAlive() {
+        return this.population >= 1;
+    }
+
     private double deltaPop() {
         return (this.farmers() * farmerEfficiency() - this.roundedPop()) * NatalityPerFood - this.roundedPop() * Mortality;
     }
