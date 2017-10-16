@@ -49,7 +49,7 @@ public class Game {
     private static final Random rand = new Random();
 
     public int turn = 1;
-    public double population = 100;
+    private double population = 100;
     public double walls = 0;
     private int demons = 0;
     private int demonLevel = 0;
@@ -156,10 +156,11 @@ public class Game {
     /*
         Derivative values
      */
-    private double roundedPop()
+    public double roundedPop()
     {
         return Math.floor(this.population);
     }
+
     private int farmers() {
         return (int) (this.roundedPop() * this.farmerSlider / SliderTicks);
     }

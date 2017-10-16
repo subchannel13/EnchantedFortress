@@ -22,7 +22,7 @@ public class GameFragment extends AAttachableFragment {
     private int longBanishProgressTurn = Integer.MAX_VALUE;
 
     private ArrayAdapter<String> techListAdapter;
-    private TextView popInfo;
+    private TextView gameInfo;
     private TextView farmerInfo;
     private TextView builderInfo;
     private TextView soldierInfo;
@@ -126,7 +126,7 @@ public class GameFragment extends AAttachableFragment {
         });
         this.farmerInfo = view.findViewById(R.id.farmText);
         this.builderInfo = view.findViewById(R.id.builderText);
-        this.popInfo = view.findViewById(R.id.popText);
+        this.gameInfo = view.findViewById(R.id.gameStatusText);
         this.soldierInfo = view.findViewById(R.id.soliderText);
         this.researchInfo = view.findViewById(R.id.researchText);
         this.longBanishProgressTurn = Integer.MAX_VALUE;
@@ -218,13 +218,17 @@ public class GameFragment extends AAttachableFragment {
         this.updateTechList();
         this.techListAdapter.notifyDataSetChanged();
 
+        String status = getResources().getString(R.string.turn) + ": " + Integer.toString(this.game.turn) + "\n" +
+                getResources().getString(R.string.population) + ": " + Integer.toString((int) this.game.roundedPop()) + "\n" +
+                getResources().getString(R.string.walls) + ": " + Integer.toString((int) this.game.walls) + "\n";
+
         if (this.game.isOver()) {
-            this.popInfo.setText(this.game.isPlayerAlive() ? R.string.victory : R.string.defeat);
+            this.gameInfo.setText(status + "\n" +
+                    getResources().getString(this.game.isPlayerAlive() ? R.string.victory : R.string.defeat)
+            );
             this.endTurnButton.setText(R.string.gameOver);
         } else
-            this.popInfo.setText(getResources().getString(R.string.turn) + ": " + Integer.toString(this.game.turn) + "\n" +
-                    getResources().getString(R.string.population) + ": " + Integer.toString((int) this.game.population) + "\n" +
-                    getResources().getString(R.string.walls) + ": " + Integer.toString((int) this.game.walls) + "\n" +
+            this.gameInfo.setText(status +
                     getResources().getString(R.string.scouted) + ": " + Integer.toString(this.game.reportScoutedDemons) + " " + getResources().getString(R.string.demons) +
                     this.battleInfo() +
                     this.banishInfo()
