@@ -5,6 +5,7 @@ All notable changes to this project will be documented in this file.
 ### Changed
 - Hall of Fame entries from v1.7 are deleted
 - Turn, population and wall status remains displayed when the is game over
+- Population distribution buttons removed when the is game over
 
 ### Fixed
 - Hall of Fame was logging defeats

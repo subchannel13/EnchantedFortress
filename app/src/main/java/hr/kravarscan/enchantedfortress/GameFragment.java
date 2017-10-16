@@ -27,6 +27,10 @@ public class GameFragment extends AAttachableFragment {
     private TextView builderInfo;
     private TextView soldierInfo;
     private TextView researchInfo;
+    private Spinner researchSelector;
+    private View farmerControls;
+    private View builderControls;
+    private View soldierControls;
     private Button endTurnButton;
 
     private OnFragmentInteractionListener listener;
@@ -100,6 +104,10 @@ public class GameFragment extends AAttachableFragment {
             }
         });
 
+        this.farmerControls = view.findViewById(R.id.farmControls);
+        this.builderControls = view.findViewById(R.id.builderControls);
+        this.soldierControls = view.findViewById(R.id.soldierControls);
+
         this.endTurnButton = view.findViewById(R.id.endTurnButton);
         this.endTurnButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -108,12 +116,12 @@ public class GameFragment extends AAttachableFragment {
             }
         });
 
-        Spinner researchSelector = view.findViewById(R.id.researchSelection);
+        this.researchSelector = view.findViewById(R.id.researchSelection);
         this.updateTechList();
         this.techListAdapter = new ArrayAdapter<>(view.getContext(), R.layout.research_item, this.techList);
-        researchSelector.setAdapter(this.techListAdapter);
-        researchSelector.setSelection(this.game.getSelectedTech());
-        researchSelector.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        this.researchSelector.setAdapter(this.techListAdapter);
+        this.researchSelector.setSelection(this.game.getSelectedTech());
+        this.researchSelector.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 game.selectTech(i);
@@ -224,8 +232,16 @@ public class GameFragment extends AAttachableFragment {
 
         if (this.game.isOver()) {
             this.gameInfo.setText(status + "\n" +
-                    getResources().getString(this.game.isPlayerAlive() ? R.string.victory : R.string.defeat)
+                    getResources().getString(this.game.isPlayerAlive() ? R.string.victory : R.string.defeat) +
+                    "\n"
             );
+
+            this.farmerControls.setVisibility(View.GONE);
+            this.builderControls.setVisibility(View.GONE);
+            this.soldierControls.setVisibility(View.GONE);
+            this.researchInfo.setVisibility(View.GONE);
+            this.researchSelector.setVisibility(View.GONE);
+
             this.endTurnButton.setText(R.string.gameOver);
         } else
             this.gameInfo.setText(status +
