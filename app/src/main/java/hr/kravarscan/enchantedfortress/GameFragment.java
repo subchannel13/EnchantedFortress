@@ -22,11 +22,15 @@ public class GameFragment extends AAttachableFragment {
     private int longBanishProgressTurn = Integer.MAX_VALUE;
 
     private ArrayAdapter<String> techListAdapter;
-    private TextView popInfo;
+    private TextView gameInfo;
     private TextView farmerInfo;
     private TextView builderInfo;
     private TextView soldierInfo;
     private TextView researchInfo;
+    private Spinner researchSelector;
+    private View farmerControls;
+    private View builderControls;
+    private View soldierControls;
     private Button endTurnButton;
 
     private OnFragmentInteractionListener listener;
@@ -100,6 +104,10 @@ public class GameFragment extends AAttachableFragment {
             }
         });
 
+        this.farmerControls = view.findViewById(R.id.farmControls);
+        this.builderControls = view.findViewById(R.id.builderControls);
+        this.soldierControls = view.findViewById(R.id.soldierControls);
+
         this.endTurnButton = view.findViewById(R.id.endTurnButton);
         this.endTurnButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -108,12 +116,12 @@ public class GameFragment extends AAttachableFragment {
             }
         });
 
-        Spinner researchSelector = view.findViewById(R.id.researchSelection);
+        this.researchSelector = view.findViewById(R.id.researchSelection);
         this.updateTechList();
         this.techListAdapter = new ArrayAdapter<>(view.getContext(), R.layout.research_item, this.techList);
-        researchSelector.setAdapter(this.techListAdapter);
-        researchSelector.setSelection(this.game.getSelectedTech());
-        researchSelector.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        this.researchSelector.setAdapter(this.techListAdapter);
+        this.researchSelector.setSelection(this.game.getSelectedTech());
+        this.researchSelector.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 game.selectTech(i);
@@ -126,7 +134,7 @@ public class GameFragment extends AAttachableFragment {
         });
         this.farmerInfo = view.findViewById(R.id.farmText);
         this.builderInfo = view.findViewById(R.id.builderText);
-        this.popInfo = view.findViewById(R.id.popText);
+        this.gameInfo = view.findViewById(R.id.gameStatusText);
         this.soldierInfo = view.findViewById(R.id.soliderText);
         this.researchInfo = view.findViewById(R.id.researchText);
         this.longBanishProgressTurn = Integer.MAX_VALUE;
@@ -201,8 +209,7 @@ public class GameFragment extends AAttachableFragment {
     private void endTurn() {
         if (this.game.isOver()) {
             this.listener.onGameOver();
-            if (this.game.population > 0)
-                HighScores.get().add(this.game, this.getActivity());
+            HighScores.get().add(this.game, this.getActivity());
             return;
         }
 
@@ -219,13 +226,25 @@ public class GameFragment extends AAttachableFragment {
         this.updateTechList();
         this.techListAdapter.notifyDataSetChanged();
 
+        String status = getResources().getString(R.string.turn) + ": " + Integer.toString(this.game.turn) + "\n" +
+                getResources().getString(R.string.population) + ": " + Integer.toString((int) this.game.roundedPop()) + "\n" +
+                getResources().getString(R.string.walls) + ": " + Integer.toString((int) this.game.walls) + "\n";
+
         if (this.game.isOver()) {
-            this.popInfo.setText(this.game.population < 1 ? R.string.defeat : R.string.victory);
+            this.gameInfo.setText(status + "\n" +
+                    getResources().getString(this.game.isPlayerAlive() ? R.string.victory : R.string.defeat) +
+                    "\n"
+            );
+
+            this.farmerControls.setVisibility(View.GONE);
+            this.builderControls.setVisibility(View.GONE);
+            this.soldierControls.setVisibility(View.GONE);
+            this.researchInfo.setVisibility(View.GONE);
+            this.researchSelector.setVisibility(View.GONE);
+
             this.endTurnButton.setText(R.string.gameOver);
         } else
-            this.popInfo.setText(getResources().getString(R.string.turn) + ": " + Integer.toString(this.game.turn) + "\n" +
-                    getResources().getString(R.string.population) + ": " + Integer.toString((int) this.game.population) + "\n" +
-                    getResources().getString(R.string.walls) + ": " + Integer.toString((int) this.game.walls) + "\n" +
+            this.gameInfo.setText(status +
                     getResources().getString(R.string.scouted) + ": " + Integer.toString(this.game.reportScoutedDemons) + " " + getResources().getString(R.string.demons) +
                     this.battleInfo() +
                     this.banishInfo()

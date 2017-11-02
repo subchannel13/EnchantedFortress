@@ -33,7 +33,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/scoresTitle"
             android:layout_toRightOf="@id/turnsHeader"
-            android:text="@string/scoredDifficulty"/>
+            android:text="@string/scoresDifficulty"/>
 
         <LinearLayout
             android:id="@+id/scoreList"

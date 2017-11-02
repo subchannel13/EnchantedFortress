@@ -13,12 +13,13 @@
 
 
         <TextView
-            android:id="@+id/popText"
+            android:id="@+id/gameStatusText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/population" />
 
         <LinearLayout
+            android:id="@+id/farmControls"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="fill"
@@ -45,6 +46,7 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/builderControls"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="fill"
@@ -71,6 +73,7 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/soldierControls"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="fill"

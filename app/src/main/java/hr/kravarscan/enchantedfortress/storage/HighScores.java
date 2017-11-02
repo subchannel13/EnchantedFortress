@@ -54,6 +54,9 @@ public class HighScores {
     private final Map<Integer, List<ScoreEntry>> scores = new HashMap<>();
 
     public void add(Game game, Context context) {
+        if (!game.isPlayerAlive())
+            return;
+
         Integer diffIndex = new Integer(game.getDifficulty().getIndex());
 
         if (!this.scores.containsKey(diffIndex))
@@ -92,7 +95,14 @@ public class HighScores {
         try {
             FileInputStream stream = context.openFileInput(ScoresFileName);
 
-            stream.read(byteBuffer); //save version
+            stream.read(byteBuffer);
+            int version = (int)ByteBuffer.wrap(byteBuffer).getDouble();
+
+            if (version < BuildConfig.VERSION_CODE) {
+                stream.close();
+                Log.i("HighScores", "rejected, was faulty in v1.7");
+                return;
+            }
 
             while (stream.available() > 0) {
                 int mode = stream.read();

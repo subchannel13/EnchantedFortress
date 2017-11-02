@@ -41,4 +41,18 @@
     <string name="aboutVersion">Version: %1$s</string>
     <string name="aboutSupportAt">Unterstütze die Entwicklung:\n%1$s</string>
     <string name="startGame">Spiel starten</string>
+    <string name="gatesClosed">Closed %1d hell gates</string>
+    <string name="gatesOpened">, demons reopened %1d gates</string>
+    <string name="gatesLeft">%1d gates</string>
+    <string name="difficultyStartingPop">Starting population: %1s</string>
+    <string name="difficultyDemonSpawn">Demon spawn rate: %1s</string>
+    <string name="difficultyDemonGrowth">Demon power growth: %1s</string>
+    <string name="banishNever">hopeless</string>
+    <string name="banishSlow">forever</string>
+    <string name="scoresTitle">Hall of Fame</string>
+    <string name="scoresTurns">Turns</string>
+    <string name="scoresDifficulty">Difficulty</string>
+    <string name="scoresButton">Hall of Fame</string>
+    <string name="banishProgress">Scholars perform banishment ritual and demons try to increase they power. Demon power is now %1d.</string>
+    <string name="banishProgressShort">Demon power is now at %1d.</string>
 </resources>

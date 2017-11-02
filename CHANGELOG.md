@@ -2,6 +2,21 @@
 All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
+
+## [v1.8] - 2017-11-02
+### Added
+- More German translation
+
+### Changed
+- Hall of Fame entries from v1.7 are deleted
+- Turn, population and wall status remains displayed when the is game over
+- Population distribution buttons removed when the is game over
+
+### Fixed
+- Hall of Fame was logging defeats
+
+
+## [v1.7] - 2017-10-10
 ### Added
 - Round icon
 - Demon strength per unit grows exponentially over time
@@ -13,6 +28,7 @@ All notable changes to this project will be documented in this file.
 - Banishment ritual progress now shows true goal progress instead of attempts to close demon gate
 - Few entries in French translation
 
+
 ## [v1.6] - 2017-08-26
 ### Added
 - Difficulty level info when starting new game
@@ -23,6 +39,7 @@ All notable changes to this project will be documented in this file.
 - Increased item size in research selection
 - German translation
 
+
 ## [v1.5] - 2017-07-29
 ### Changed
 - Launcher icon
@@ -30,9 +47,11 @@ All notable changes to this project will be documented in this file.
 ### Fixed
 - Main menu duplication after phone rotation
 
+
 ## [v1.4] - 2017-07-15
 ### Fixed
 - Lint error stopping build in F-Droid
+
 
 ## [v1.3] - 2017-07-12
 ### Added
@@ -42,6 +61,7 @@ All notable changes to this project will be documented in this file.
 
 ### Fixed
 - Back button always navigates from other views to main menu
+
 
 ## [v1.2] - 2017-06-21
 ### Added
@@ -57,6 +77,7 @@ All notable changes to this project will be documented in this file.
 - Fixed licence statement, GLP text included too
 - Fixed defeat condition to work with decimal population count
 
+
 ## [v1.1] - 2017-06-04
 ### Added
 - Current game turn is now visible
@@ -69,6 +90,7 @@ All notable changes to this project will be documented in this file.
 - Fixed loss of game state on rotation or multitasking
 - Fixed UI duplication after pressing back button
 - Fixed negative scout report
+
 
 ## [v1.0] - 2017-05-27
 Initial release
