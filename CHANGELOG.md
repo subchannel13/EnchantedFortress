@@ -2,6 +2,11 @@
 All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
+
+## [v1.8] - 2017-11-02
+### Added
+- More German translation
+
 ### Changed
 - Hall of Fame entries from v1.7 are deleted
 - Turn, population and wall status remains displayed when the is game over

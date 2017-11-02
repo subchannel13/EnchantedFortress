@@ -51,7 +51,7 @@
     <string name="banishSlow">forever</string>
     <string name="scoresTitle">Hall of Fame</string>
     <string name="scoresTurns">Turns</string>
-    <string name="scoredDifficulty">Difficulty</string>
+    <string name="scoresDifficulty">Difficulty</string>
     <string name="scoresButton">Hall of Fame</string>
     <string name="banishProgress">Scholars perform banishment ritual and demons try to increase they power. Demon power is now %1d.</string>
     <string name="banishProgressShort">Demon power is now at %1d.</string>
