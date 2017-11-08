@@ -51,7 +51,7 @@
     <string name="banishSlow">für immer</string>
     <string name="scoresTitle">Bestenliste</string>
     <string name="scoresTurns">Runden</string>
-    <string name="scoredDifficulty">Schwierigkeitsgrad</string>
+    <string name="scoresDifficulty">Schwierigkeitsgrad</string>
     <string name="scoresButton">Bestenliste</string>
     <string name="banishProgress">Wissenschaftler vollziehen Verbannungsrituale und Dämonen versuchen ihre Stärke zu erhöhen. Dämonenstärke ist jetzt bei %1d.</string>
     <string name="banishProgressShort">Dämonenstärke ist jetzt bei %1d.</string>
