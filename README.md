@@ -2,7 +2,7 @@
 
 A simple game inspired by Age of Castles. Distribute your population to farming, construction, guard duty and scholarship, survive demon invasion and find the way to banish them forever.
 
-<a href="https://f-droid.org/packages/hr.kravarscan.enchantedfortress/" target="_blank">
+<a href="https://f-droid.org/packages/hr.kravarscan.enchantedfortress/">
 <img src="https://f-droid.org/badge/get-it-on.png" alt="Get it on F-Droid" height="80"/></a>
 
 ## Story
