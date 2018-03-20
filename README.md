@@ -2,6 +2,9 @@
 
 A simple game inspired by Age of Castles. Distribute your population to farming, construction, guard duty and scholarship, survive demon invasion and find the way to banish them forever.
 
+<a href="https://f-droid.org/packages/hr.kravarscan.enchantedfortress/">
+<img src="https://f-droid.org/badge/get-it-on.png" alt="Get it on F-Droid" height="80"/></a>
+
 ## Story
 
 Dark days are upon your land, twisted people have made a pact with demons, hell gates have been opened and demon kind has started to roam this world. As the time passes more hell gates open and demon army grows stronger and bolder. If they are not stopped the realm will be overrun.
