@@ -5,8 +5,8 @@
     <string name="end_turn">Fin du tour</string>
     <string name="population">Population</string>
     <string name="farmers">Fermiers</string>
-    <string name="buttonPlus">+</string>
-    <string name="buttonMinus">-</string>
+    <!-- <string name="buttonPlus"></string> don't translate -->
+    <!-- <string name="buttonMinus"></string> don't translate -->
     <string name="scholars">Savants</string>
     <string name="builders">Constructeurs</string>
     <string name="soldiers">Soldats</string>
@@ -40,5 +40,23 @@
     <string name="aboutTrackerAt">Rapportez les bogues sur :\n%1$s</string>
     <string name="aboutCodeAt">Code :\n%1$s</string>
     <string name="aboutVersion">Version : %1$s</string>
-    <string name="aboutSupportAt">Soutenez le développement :\n%1$s</string>
+    <!--
+          Untranslated:
+    -->
+    <!-- <string name="aboutSupportAt"></string> -->
+    <!-- <string name="startGame"></string> -->
+    <!-- <string name="gatesClosed"></string> -->
+    <!-- <string name="gatesOpened"></string> -->
+    <!-- <string name="gatesLeft"></string> -->
+    <!-- <string name="difficultyStartingPop"></string> -->
+    <!-- <string name="difficultyDemonSpawn"></string> -->
+    <!-- <string name="difficultyDemonGrowth"></string> -->
+    <!-- <string name="banishNever"></string> -->
+    <!-- <string name="banishSlow"></string> -->
+    <!-- <string name="scoresTitle"></string> -->
+    <!-- <string name="scoresTurns"></string> -->
+    <!-- <string name="scoresDifficulty"></string> -->
+    <!-- <string name="scoresButton"></string> -->
+    <!-- <string name="banishProgress"></string> -->
+    <!-- <string name="banishProgressShort"></string> -->
 </resources>

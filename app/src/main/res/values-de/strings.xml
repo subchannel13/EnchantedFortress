@@ -4,8 +4,8 @@
     <string name="end_turn">Runde beenden</string>
     <string name="population">Bevölkerung</string>
     <string name="farmers">Bauern</string>
-    <string name="buttonPlus">+</string>
-    <string name="buttonMinus">-</string>
+    <!-- <string name="buttonPlus"></string> don't translate -->
+    <!-- <string name="buttonMinus"></string> don't translate -->
     <string name="scholars">Wissenschaftler</string>
     <string name="builders">Handwerker</string>
     <string name="soldiers">Soldaten</string>
