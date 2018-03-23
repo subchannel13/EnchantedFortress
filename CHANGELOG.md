@@ -2,6 +2,11 @@
 All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
+### Added
+- Debug logging
+
+### Changed
+- Untranslated entries added as comments to make it more visible what is missing
 
 ## [v1.8] - 2017-11-02
 ### Added
