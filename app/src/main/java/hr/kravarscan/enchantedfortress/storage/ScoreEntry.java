@@ -3,7 +3,7 @@ package hr.kravarscan.enchantedfortress.storage;
 import java.util.List;
 
 /**
- * Copyright 2017 Ivan Kravarščan
+ * Copyright 2018 Ivan Kravarščan
  *
  * This file is part of Enchanted Fortress.
  *

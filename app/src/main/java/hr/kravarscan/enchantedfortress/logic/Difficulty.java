@@ -57,7 +57,7 @@ public class Difficulty {
             if (Levels[i] == this)
                 return i;
 
-        Log.e("Difficulty", "Failed to find index of a difficulty level");
+        Log.e("Difficulty", "Failed to find index of a difficulty level, population" + this.startingPop + ", spawnFactor: " + this.demonSpawnFactor + ", powerBase: " + this.demonPowerBase);
         return 1;
     }
 }
