@@ -17,7 +17,7 @@ import hr.kravarscan.enchantedfortress.logic.Difficulty;
 import hr.kravarscan.enchantedfortress.logic.Game;
 
 /**
- * Copyright 2017 Ivan Kravarščan
+ * Copyright 2018 Ivan Kravarščan
  *
  * This file is part of Enchanted Fortress.
  *
@@ -36,6 +36,7 @@ import hr.kravarscan.enchantedfortress.logic.Game;
  */
 
 public class HighScores {
+    private static final String LOG_TAG = "HighScores";
     private static final int MaxScores = 5;
 
     private static final String ScoresFileName = "highscores.dat";
@@ -54,13 +55,18 @@ public class HighScores {
     private final Map<Integer, List<ScoreEntry>> scores = new HashMap<>();
 
     public void add(Game game, Context context) {
-        if (!game.isPlayerAlive())
+        if (!game.isPlayerAlive()) {
+            Log.d(LOG_TAG, "add, player dead, no new high score");
             return;
+        }
 
         Integer diffIndex = new Integer(game.getDifficulty().getIndex());
+        Log.d(LOG_TAG, "add, difficulty index: " + diffIndex);
 
-        if (!this.scores.containsKey(diffIndex))
+        if (!this.scores.containsKey(diffIndex)) {
+            Log.d(LOG_TAG, "add, entry for difficulty level");
             this.scores.put(diffIndex, new ArrayList<ScoreEntry>());
+        }
         List<ScoreEntry> modeScores = this.scores.get(diffIndex);
 
         ScoreEntry score = new ScoreEntry(game.turn, diffIndex);
@@ -70,6 +76,7 @@ public class HighScores {
             if (score.isBetter(modeScores.get(putIndex)))
                 break;
         modeScores.add(putIndex, score);
+        Log.d(LOG_TAG, "add, inserted at " + putIndex + ", list size: " + modeScores.size());
 
         while (modeScores.size() > MaxScores)
             modeScores.remove(MaxScores);
@@ -91,17 +98,21 @@ public class HighScores {
         this.scores.clear();
         byte[] byteBuffer = new byte[Double.SIZE / Byte.SIZE];
 
-        Log.i("HighScores", "Loading");
+        Log.d(LOG_TAG, "Loading");
         try {
             FileInputStream stream = context.openFileInput(ScoresFileName);
 
             stream.read(byteBuffer);
             int version = (int)ByteBuffer.wrap(byteBuffer).getDouble();
 
-            if (version < BuildConfig.VERSION_CODE) {
+            if (version < 8) {
                 stream.close();
-                Log.i("HighScores", "rejected, was faulty in v1.7");
+                Log.i(LOG_TAG, "load rejected, was faulty in v1.7");
                 return;
+            }
+            else if (version < BuildConfig.VERSION_CODE)
+            {
+                //no operation, placeholder
             }
 
             while (stream.available() > 0) {
@@ -109,6 +120,7 @@ public class HighScores {
                 int count = stream.read();
                 List<ScoreEntry> modeScores = new ArrayList<>();
 
+                Log.d(LOG_TAG, "load mode: " + mode + ", entry count: " + count);
                 for (int i = 0; i < count; i++) {
                     List<Double> scoreData = new ArrayList<>();
                     for (int j = 0; j < ScoreEntry.SaveLength; j++) {
@@ -123,15 +135,16 @@ public class HighScores {
             }
 
             stream.close();
-            Log.i("HighScores", "loaded");
+            Log.i(LOG_TAG, "loaded");
         } catch (Exception e) {
-            Log.e("HighScores", "Loading autosave failed", e);
+            Log.e(LOG_TAG, "Loading autosave failed", e);
         }
     }
 
     private void save(Context context) {
         byte[] byteBuffer = new byte[Double.SIZE / Byte.SIZE];
 
+        Log.d(LOG_TAG, "Saving");
         try {
             FileOutputStream stream = context.openFileOutput(ScoresFileName, Context.MODE_PRIVATE);
 
@@ -153,9 +166,9 @@ public class HighScores {
             }
 
             stream.close();
-            Log.i("HighScores", "Saved");
+            Log.d(LOG_TAG, "Saved");
         } catch (Exception e) {
-            Log.e("HighScores", "Autosave failed", e);
+            Log.e(LOG_TAG, "Autosave failed", e);
         }
     }
 }

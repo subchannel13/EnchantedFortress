@@ -14,7 +14,7 @@ import hr.kravarscan.enchantedfortress.logic.Difficulty;
 import hr.kravarscan.enchantedfortress.logic.Game;
 
 /**
- * Copyright 2017 Ivan Kravarščan
+ * Copyright 2018 Ivan Kravarščan
  *
  * This file is part of Enchanted Fortress.
  *
@@ -33,6 +33,8 @@ import hr.kravarscan.enchantedfortress.logic.Game;
  */
 
 public final class SaveLoad {
+    private static final String LOG_TAG = "SaveLoad";
+
     public static final String SaveKey = "GameState";
     private static final String SaveFileName = "autosave.dat";
     private static final int MaxSaveLength = LatestSaveKeys.KEY_COUNT.ordinal();
@@ -56,7 +58,7 @@ public final class SaveLoad {
         byte[] byteBuffer = new byte[Double.SIZE / Byte.SIZE];
         double[] data = this.serialize(game);
 
-        Log.i("SaveLoad", "Saving");
+        Log.d(LOG_TAG, "Saving");
         try {
             FileOutputStream stream = context.openFileOutput(SaveFileName, Context.MODE_PRIVATE);
 
@@ -66,9 +68,9 @@ public final class SaveLoad {
             }
 
             stream.close();
-            Log.i("SaveLoad", "Saved");
+            Log.d(LOG_TAG, "Saved");
         } catch (Exception e) {
-            Log.e("SaveLoad", "Autosave failed", e);
+            Log.e(LOG_TAG, "Autosave failed", e);
         }
     }
 
@@ -76,7 +78,7 @@ public final class SaveLoad {
         byte[] byteBuffer = new byte[Double.SIZE / Byte.SIZE];
         List<Double> data = new ArrayList<>();
 
-        Log.i("SaveLoad", "Loading");
+        Log.d(LOG_TAG, "Loading");
         try {
             FileInputStream stream = context.openFileInput(SaveFileName);
 
@@ -84,10 +86,10 @@ public final class SaveLoad {
                 data.add(ByteBuffer.wrap(byteBuffer).getDouble());
 
             stream.close();
-            Log.i("SaveLoad", "loaded");
+            Log.d(LOG_TAG, "loaded");
             upgradeSave(data);
         } catch (Exception e) {
-            Log.e("SaveLoad", "Loading autosave failed", e);
+            Log.e(LOG_TAG, "Loading autosave failed", e);
             return null;
         }
 
@@ -99,10 +101,16 @@ public final class SaveLoad {
     }
 
     private void upgradeSave(List<Double> data) {
-        if (data.get(LatestSaveKeys.VERSION.ordinal()) <= 3)
-            data.add(SaveKeysV7.DIFFICULTY.ordinal(), (double)Difficulty.Medium.getIndex());
+        Log.d(LOG_TAG, "upgradeSave from " + data.get(LatestSaveKeys.VERSION.ordinal()));
+
+        if (data.get(LatestSaveKeys.VERSION.ordinal()) <= 3) {
+            Log.d(LOG_TAG, "upgradeSave to version 3");
+            data.add(SaveKeysV7.DIFFICULTY.ordinal(), (double) Difficulty.Medium.getIndex());
+        }
 
         if (data.get(LatestSaveKeys.VERSION.ordinal()) <= 7) {
+            Log.d(LOG_TAG, "upgradeSave to version 7");
+
             data.add(LatestSaveKeys.DEMON_LEVEL.ordinal(), Math.floor(0.5 * data.get(LatestSaveKeys.TURN.ordinal())));
             data.add(LatestSaveKeys.REPORT_HELLGATE_CLOSE.ordinal(), 0.0);
             data.add(LatestSaveKeys.REPORT_HELLGATE_OPEN.ordinal(), 0.0);
@@ -120,8 +128,10 @@ public final class SaveLoad {
     }
 
     public void deserialize(Game game, double[] rawData) {
-        if (rawData == null || rawData.length == 0)
+        if (rawData == null || rawData.length == 0) {
+            Log.d(LOG_TAG, "deserialize");
             return;
+        }
 
         int version = (int) rawData[0];
         if (rawData.length != LatestSaveKeys.KEY_COUNT.ordinal() || version > BuildConfig.VERSION_CODE)

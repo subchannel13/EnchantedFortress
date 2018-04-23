@@ -24,3 +24,4 @@ gradle-app.setting
 .idea/dictionaries/*.xml
 .idea/codeStyleSettings.xml
 .idea/misc.xml
+gradle.properties

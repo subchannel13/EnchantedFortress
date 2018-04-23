@@ -1,7 +1,9 @@
 package hr.kravarscan.enchantedfortress.logic;
 
+import android.util.Log;
+
 /**
- * Copyright 2017 Ivan Kravarščan
+ * Copyright 2018 Ivan Kravarščan
  *
  * This file is part of Enchanted Fortress.
  *
@@ -27,6 +29,7 @@ public class Technology {
     public double points = 0;
 
     public void Invest(double researchPoints) {
+        Log.d("Technology", "Invest, points" + this.points + ", investment: " + researchPoints);
         this.points += researchPoints;
         double levelCost = this.cost();
 

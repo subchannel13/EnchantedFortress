@@ -5,6 +5,8 @@ A simple game inspired by Age of Castles. Distribute your population to farming,
 <a href="https://f-droid.org/packages/hr.kravarscan.enchantedfortress/">
 <img src="https://f-droid.org/badge/get-it-on.png" alt="Get it on F-Droid" height="80"/></a>
 
+[![Donate](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://www.paypal.me/IvanKravarscan/5)
+
 ## Story
 
 Dark days are upon your land, twisted people have made a pact with demons, hell gates have been opened and demon kind has started to roam this world. As the time passes more hell gates open and demon army grows stronger and bolder. If they are not stopped the realm will be overrun.
@@ -29,5 +31,3 @@ Staying barricaded behind the wall will not make you unconquerable, eventually d
 ## Support
 
 If you find a bug, please report it on the [issue tracker](https://github.com/subchannel13/EnchantedFortress/issues)
-
-[Donate via PayPal](https://www.paypal.me/IvanKravarscan/5)

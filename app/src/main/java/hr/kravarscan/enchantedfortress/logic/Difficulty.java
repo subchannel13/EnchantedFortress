@@ -3,7 +3,7 @@ package hr.kravarscan.enchantedfortress.logic;
 import android.util.Log;
 
 /**
- * Copyright 2017 Ivan Kravarščan
+ * Copyright 2018 Ivan Kravarščan
  *
  * This file is part of Enchanted Fortress.
  *
@@ -57,7 +57,7 @@ public class Difficulty {
             if (Levels[i] == this)
                 return i;
 
-        Log.e("Difficulty", "Failed to find index of a difficulty level");
+        Log.e("Difficulty", "Failed to find index of a difficulty level, population" + this.startingPop + ", spawnFactor: " + this.demonSpawnFactor + ", powerBase: " + this.demonPowerBase);
         return 1;
     }
 }

@@ -3,6 +3,15 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+## [v1.9] - 2018-04-23
+### Added
+- Debug logging
+- Adaptive icon
+
+### Changed
+- Updated german translation
+- Untranslated entries added as comments to make it more visible what is missing
+
 ## [v1.8] - 2017-11-02
 ### Added
 - More German translation

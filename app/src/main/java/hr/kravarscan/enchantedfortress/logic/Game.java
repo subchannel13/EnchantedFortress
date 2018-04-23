@@ -1,5 +1,7 @@
 package hr.kravarscan.enchantedfortress.logic;
 
+import android.util.Log;
+
 import java.util.Random;
 
 import hr.kravarscan.enchantedfortress.storage.LatestSaveKeys;
@@ -24,6 +26,8 @@ import hr.kravarscan.enchantedfortress.storage.LatestSaveKeys;
  */
 
 public class Game {
+    private static final String LOG_TAG = "Game";
+
     private static final double WallCost = 100;
     private static final int DemonStrength = 5;
     private static final int CombatRounds = 10;
@@ -118,11 +122,16 @@ public class Game {
 
     private int moveSlider(int sliderValue, int delta, double minimumPop) {
         int sum = this.builderSlider + this.farmerSlider + this.soldierSlider + delta;
-        if (sum < 0 || sum > SliderTicks)
+        Log.d(LOG_TAG, "moveSlider, sum: " + sum + ", delta: " + delta + ", slider value: " + sliderValue + ", minimum population: " + minimumPop);
+
+        if (sum < 0 || sum > SliderTicks) {
+            Log.d(LOG_TAG, "moveSlider, sum out of bounds, no change");
             return sliderValue;
+        }
 
         sliderValue += delta;
         int minSlider = (int) Math.ceil(SliderTicks * minimumPop / this.roundedPop());
+        Log.d(LOG_TAG, "moveSlider, minimum slider value: " + minSlider + ", desired value: " + sliderValue);
 
         if (sliderValue < minSlider) {
             sliderValue = minSlider;
@@ -228,18 +237,24 @@ public class Game {
         Turn processing
      */
     public void endTurn() {
+        Log.d(LOG_TAG, "endTurn, turn: " + this.turn);
+
         this.reportAttackers = 0;
         this.reportHellgateClose = 0;
         this.reportHellgateOpen = 0;
         this.reportVictims = 0;
         this.turn++;
 
+        Log.d(LOG_TAG, "endTurn, population: " + this.population + ", delta: " + this.deltaPop());
         this.population += this.deltaPop();
         this.population = Utils.clamp(this.population, 0, MaxPopulation);
+        Log.d(LOG_TAG, "endTurn, postgrowth population: " + this.population);
 
+        Log.d(LOG_TAG, "endTurn, walls: " + this.walls + ", delta: " + this.deltaWalls());
         this.walls += this.deltaWalls();
         if (this.walls > MaxPopulation)
             this.walls = MaxPopulation;
+        Log.d(LOG_TAG, "endTurn, postbuild walls: " + this.walls);
 
         this.doResearch();
         this.doCombat();
@@ -250,30 +265,39 @@ public class Game {
 
     private void doResearch() {
         double researchPoints = this.deltaResearch();
+        Log.d(LOG_TAG, "doResearch, delta: " + researchPoints);
 
         switch (this.selectedTech) {
             case 0:
+                Log.d(LOG_TAG, "doResearch invest in farming");
                 this.farming.Invest(researchPoints);
                 break;
             case 1:
+                Log.d(LOG_TAG, "doResearch invest in building");
                 this.building.Invest(researchPoints);
                 break;
             case 2:
+                Log.d(LOG_TAG, "doResearch invest in soldiering");
                 this.soldiering.Invest(researchPoints);
                 break;
             case 3:
+                Log.d(LOG_TAG, "doResearch invest in scholarship");
                 this.scholarship.Invest(researchPoints);
                 break;
             case 4:
+                Log.d(LOG_TAG, "doResearch invest in banishment, demonBanishCost: " + this.demonBanishCost);
                 this.demonBanishCost -= (int) researchPoints;
                 if (this.demonBanishCost < 0)
                     this.demonBanishCost = 0;
+                Log.d(LOG_TAG, "doResearch postinvest demonBanishCost: " + this.demonBanishCost);
 
                 int gateDelta = (int) (researchPoints / 100);
+                Log.d(LOG_TAG, "doResearch gates: " + this.demonGates + ", delta: " + gateDelta);
                 if (gateDelta > this.demonGates)
                     gateDelta = this.demonGates;
                 this.reportHellgateClose = this.demonGates / 1000 - (this.demonGates - gateDelta) / 1000;
                 this.demonGates -= gateDelta;
+                Log.d(LOG_TAG, "doResearch final gates: " + this.demonGates + ", report: " + this.reportHellgateClose);
 
                 break;
         }
@@ -282,29 +306,37 @@ public class Game {
     private void doCombat() {
         if (rand.nextDouble() * this.roundedPop() > this.demons) {
             this.demonLevel++;
+
+            Log.d(LOG_TAG, "doCombat no attack, demonLevel: " + this.demonLevel);
             return;
         }
 
         int attackers = rand.nextInt(this.demons + 1);
         double defenderStr = this.militaryStrength();
         double peopleStr = defenderStr / this.roundedPop();
+        Log.d(LOG_TAG, "doCombat attack!, attackers: " + attackers + " out of " + this.demons + ", defenderStr: " + defenderStr + ", peopleStr: " + peopleStr);
 
         this.demons -= attackers;
         this.reportAttackers = attackers;
         double demonStrBonus = Math.pow(this.difficulty.getDemonPowerBase(), this.demonLevel);
         double attackerStr = attackers * DemonStrength * demonStrBonus;
+        Log.d(LOG_TAG, "doCombat demonLevel: " + this.demonLevel + ", demonStrBonus: " + demonStrBonus + ", attackerStr: " + attackerStr);
 
         for (int i = 0; attackerStr > 0 && defenderStr > 0 && i < CombatRounds; i++) {
             if (rand.nextDouble() > 0.5) {
                 defenderStr -= attackerStr * rand.nextDouble();
+                Log.d(LOG_TAG, "doCombat round: " + i + ", demons first, defenderStr down to " + defenderStr);
                 if (defenderStr < 0)
                     break;
                 attackerStr -= defenderStr * rand.nextDouble();
+                Log.d(LOG_TAG, "doCombat humans retaliate, attackerStr down to " + attackerStr);
             } else {
                 attackerStr -= defenderStr * rand.nextDouble();
+                Log.d(LOG_TAG, "doCombat round: " + i + ", humans first, attackerStr down to " + attackerStr);
                 if (attackerStr < 0)
                     break;
                 defenderStr -= attackerStr * rand.nextDouble();
+                Log.d(LOG_TAG, "doCombat demons retaliate, defenderStr down to " + defenderStr);
             }
         }
 
@@ -323,13 +355,17 @@ public class Game {
         this.reportScoutedDemons -= this.reportAttackers;
         if (this.reportScoutedDemons < 0)
             this.reportScoutedDemons = 0;
+
+        Log.d(LOG_TAG, "doCombat combat ended, attackerStr: " + attackerStr + ", defenderStr: " + defenderStr + ", demons left: " + this.demons + ", victims: " + this.reportVictims + ", population left: " + this.population);
     }
 
     private void spawnDemons() {
         if (this.demonBanishCost > 0) {
             double gatesDelta = this.roundedPop() + this.demonBanishCost / 100;
-            if (this.demonGates + this.reportHellgateOpen > MaxDemonGates)
-                this.reportHellgateOpen = MaxDemonGates - this.demonGates;
+            Log.d(LOG_TAG, "spawnDemons, gatesDelta: " + gatesDelta + ", previous gates: " + this.demonGates + ", old banish cost: " + this.demonBanishCost);
+
+            if (this.demonGates + gatesDelta > MaxDemonGates)
+                gatesDelta = MaxDemonGates - this.demonGates;
             this.demonGates += gatesDelta;
             this.reportHellgateOpen = (int) (gatesDelta / 1000);
 
@@ -337,33 +373,53 @@ public class Game {
             this.demonBanishCost += this.banishCostGrowth;
             if (this.demonBanishCost > MaxBanishCost)
                 this.demonBanishCost = MaxBanishCost;
+
+            Log.d(LOG_TAG, "spawnDemons, gates: " + this.demonGates + ", banish cost delta: " + this.banishCostGrowth + ", new banish cost: " + this.demonBanishCost);
         }
+        else
+            Log.d(LOG_TAG, "spawnDemons, banished, no new gates");
 
         if (this.demonGates > 0) {
+            Log.d(LOG_TAG, "spawnDemons, gates: " + this.demonGates + ", spawn factor: " + this.difficulty.getDemonSpawnFactor() + ", old demon count: " + this.demons);
+
             this.demons += this.demonGates * this.difficulty.getDemonSpawnFactor() / 1000;
-            if (this.demons > MaxPopulation) this.demons = MaxPopulation;
+            if (this.demons > MaxPopulation)
+                this.demons = MaxPopulation;
+
+            Log.d(LOG_TAG, "spawnDemons, new demon count: " + this.demons);
         }
+        else
+            Log.d(LOG_TAG, "spawnDemons, no gates, no new demons");
     }
 
     private void doScouting() {
-        if (this.demons > this.reportScoutedDemons)
+        if (this.demons > this.reportScoutedDemons) {
+            Log.d(LOG_TAG, "doScouting, scouting up to " + (this.demons - this.reportScoutedDemons));
             this.reportScoutedDemons += rand.nextInt(this.demons - this.reportScoutedDemons);
+        }
         else {
+            Log.d(LOG_TAG, "doScouting, scouts spotted all demons");
             this.reportScoutedDemons = this.demons;
         }
     }
 
     private void correctSliders() {
-        this.farmerSlider = moveSlider(this.farmerSlider, 0, minFarmers());
-        this.builderSlider = moveSlider(this.builderSlider, 0, minBuilders());
+        Log.d(LOG_TAG, "correctSliders, adjusting minimum farmers");
+        this.farmerSlider = moveSlider(this.farmerSlider, 0, this.minFarmers());
 
-        while (sliderOverflow() > 0 && moveSlider(this.farmerSlider, -1, minFarmers()) != this.farmerSlider)
+        Log.d(LOG_TAG, "correctSliders, adjusting minimum builders");
+        this.builderSlider = moveSlider(this.builderSlider, 0, this.minBuilders());
+
+        Log.d(LOG_TAG, "correctSliders, adjusting overflow on farmers, overflow: " + this.sliderOverflow());
+        while (this.sliderOverflow() > 0 && this.moveSlider(this.farmerSlider, -1, this.minFarmers()) != this.farmerSlider)
             this.farmerSlider--;
 
-        while (sliderOverflow() > 0 && this.soldierSlider > 0)
+        Log.d(LOG_TAG, "correctSliders, adjusting overflow on soldiers, overflow: " + this.sliderOverflow());
+        while (this.sliderOverflow() > 0 && this.soldierSlider > 0)
             this.soldierSlider--;
 
-        while (sliderOverflow() > 0 && moveSlider(this.builderSlider, -1, minBuilders()) != this.builderSlider)
+        Log.d(LOG_TAG, "correctSliders, adjusting overflow on builders, overflow: " + this.sliderOverflow());
+        while (this.sliderOverflow() > 0 && this.moveSlider(this.builderSlider, -1, minBuilders()) != this.builderSlider)
             this.builderSlider--;
     }
 
