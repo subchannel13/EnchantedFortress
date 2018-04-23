@@ -2,6 +2,8 @@
 All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
+
+## [v1.9] - 2018-04-23
 ### Added
 - Debug logging
 - Adaptive icon
