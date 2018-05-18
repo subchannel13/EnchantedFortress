@@ -4,8 +4,6 @@
     <string name="end_turn">End turn</string>
     <string name="population">Population</string>
     <string name="farmers">Farmers</string>
-    <string name="buttonPlus">+</string>
-    <string name="buttonMinus">-</string>
     <string name="scholars">Scholars</string>
     <string name="builders">Builders</string>
     <string name="soldiers">Soldiers</string>
@@ -55,4 +53,7 @@
     <string name="scoresButton">Hall of Fame</string>
     <string name="banishProgress">Scholars perform banishment ritual and demons try to increase their power. Demon power is now %1d.</string>
     <string name="banishProgressShort">Demon power is now at %1d.</string>
+    <!-- Accessibility -->
+    <string name="minusButton">Minus button</string>
+    <string name="plusButton">Plus button</string>
 </resources>

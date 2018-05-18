@@ -25,3 +25,4 @@ gradle-app.setting
 .idea/codeStyleSettings.xml
 .idea/misc.xml
 gradle.properties
+.idea/vcs.xml

@@ -25,17 +25,19 @@
             android:gravity="fill"
             android:orientation="horizontal">
 
-            <Button
+            <ImageButton
                 android:id="@+id/farmMinusButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/buttonMinus" />
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:src="@drawable/minus"
+                android:contentDescription="@string/minusButton" />
 
-            <Button
+            <ImageButton
                 android:id="@+id/farmPlusButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/buttonPlus" />
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:src="@drawable/plus"
+                android:contentDescription="@string/plusButton" />
 
             <TextView
                 android:id="@+id/farmText"
@@ -52,17 +54,19 @@
             android:gravity="fill"
             android:orientation="horizontal">
 
-            <Button
+            <ImageButton
                 android:id="@+id/builderMinusButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/buttonMinus" />
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:src="@drawable/minus"
+                android:contentDescription="@string/minusButton" />
 
-            <Button
+            <ImageButton
                 android:id="@+id/builderPlusButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/buttonPlus" />
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:src="@drawable/plus"
+                android:contentDescription="@string/plusButton" />
 
             <TextView
                 android:id="@+id/builderText"
@@ -79,17 +83,19 @@
             android:gravity="fill"
             android:orientation="horizontal">
 
-            <Button
+            <ImageButton
                 android:id="@+id/soldierMinusButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/buttonMinus" />
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:src="@drawable/minus"
+                android:contentDescription="@string/minusButton" />
 
-            <Button
+            <ImageButton
                 android:id="@+id/soldierPlusButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/buttonPlus" />
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:src="@drawable/plus"
+                android:contentDescription="@string/plusButton" />
 
             <TextView
                 android:id="@+id/soliderText"

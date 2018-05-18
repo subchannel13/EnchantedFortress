@@ -4,8 +4,6 @@
     <string name="end_turn">Runde beenden</string>
     <string name="population">Bevölkerung</string>
     <string name="farmers">Bauern</string>
-    <!-- <string name="buttonPlus"></string> don't translate -->
-    <!-- <string name="buttonMinus"></string> don't translate -->
     <string name="scholars">Wissenschaftler</string>
     <string name="builders">Handwerker</string>
     <string name="soldiers">Soldaten</string>
@@ -55,4 +53,10 @@
     <string name="scoresButton">Bestenliste</string>
     <string name="banishProgress">Wissenschaftler vollziehen Verbannungsrituale und Dämonen versuchen ihre Stärke zu erhöhen. Dämonenstärke ist jetzt bei %1d.</string>
     <string name="banishProgressShort">Dämonenstärke ist jetzt bei %1d.</string>
+    <!-- Untranslated -->
+    <!-- Accessibility -->
+    <!--
+    <string name="minusButton">Minus button</string>
+    <string name="plusButton">Plus button</string>
+    -->
 </resources>
