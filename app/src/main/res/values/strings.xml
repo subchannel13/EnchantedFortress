@@ -53,6 +53,7 @@
     <string name="scoresButton">Hall of Fame</string>
     <string name="banishProgress">Scholars perform banishment ritual and demons try to increase their power. Demon power is now %1d.</string>
     <string name="banishProgressShort">Demon power is now at %1d.</string>
+    <string name="newsButton">News list button</string>
     <!-- Accessibility -->
     <string name="minusButton">Minus button</string>
     <string name="plusButton">Plus button</string>

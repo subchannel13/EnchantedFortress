@@ -2,6 +2,11 @@
 All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
+### Added
+- News list button
+
+### Changed
+- Button images for "+" and "-"
 
 ## [v1.9] - 2018-04-23
 ### Added

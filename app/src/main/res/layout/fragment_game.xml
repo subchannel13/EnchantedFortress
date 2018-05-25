@@ -19,6 +19,30 @@
             android:text="@string/population" />
 
         <LinearLayout
+            android:id="@+id/newsControls"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="fill"
+            android:orientation="horizontal"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp">
+
+            <ImageButton
+                android:id="@+id/newsButton"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:src="@drawable/scroll"
+                android:contentDescription="@string/newsButton" />
+
+            <TextView
+                android:id="@+id/newsHeadlineText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="" />
+
+        </LinearLayout>
+
+        <LinearLayout
             android:id="@+id/farmControls"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

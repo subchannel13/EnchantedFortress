@@ -46,6 +46,7 @@ public class GameFragment extends AAttachableFragment {
 
     private ArrayAdapter<String> techListAdapter;
     private TextView gameInfo;
+    private TextView headlinesInfo;
     private TextView farmerInfo;
     private TextView builderInfo;
     private TextView soldierInfo;
@@ -167,6 +168,7 @@ public class GameFragment extends AAttachableFragment {
         this.farmerInfo = view.findViewById(R.id.farmText);
         this.builderInfo = view.findViewById(R.id.builderText);
         this.gameInfo = view.findViewById(R.id.gameStatusText);
+        this.headlinesInfo = view.findViewById(R.id.newsHeadlineText);
         this.soldierInfo = view.findViewById(R.id.soliderText);
         this.researchInfo = view.findViewById(R.id.researchText);
         this.longBanishProgressTurn = Integer.MAX_VALUE;
@@ -270,14 +272,14 @@ public class GameFragment extends AAttachableFragment {
         this.updateTechList();
         this.techListAdapter.notifyDataSetChanged();
 
-        String status = getResources().getString(R.string.turn) + ": " + Integer.toString(this.game.turn) + "\n" +
+        this.gameInfo.setText(getResources().getString(R.string.turn) + ": " + Integer.toString(this.game.turn) + "\n" +
                 getResources().getString(R.string.population) + ": " + Integer.toString((int) this.game.roundedPop()) + "\n" +
-                getResources().getString(R.string.walls) + ": " + Integer.toString((int) this.game.walls) + "\n";
+                getResources().getString(R.string.walls) + ": " + Integer.toString((int) this.game.walls)
+        );
 
         if (this.game.isOver()) {
-            this.gameInfo.setText(status + "\n" +
-                    getResources().getString(this.game.isPlayerAlive() ? R.string.victory : R.string.defeat) +
-                    "\n"
+            this.headlinesInfo.setText(
+                    getResources().getString(this.game.isPlayerAlive() ? R.string.victory : R.string.defeat)
             );
 
             this.farmerControls.setVisibility(View.GONE);
@@ -288,7 +290,7 @@ public class GameFragment extends AAttachableFragment {
 
             this.endTurnButton.setText(R.string.gameOver);
         } else
-            this.gameInfo.setText(status +
+            this.headlinesInfo.setText(
                     getResources().getString(R.string.scouted) + ": " + Integer.toString(this.game.reportScoutedDemons) + " " + getResources().getString(R.string.demons) +
                     this.battleInfo() +
                     this.banishInfo()

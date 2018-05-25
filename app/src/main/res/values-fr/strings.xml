@@ -55,9 +55,13 @@
     <string name="banishProgress">Les savants pratiquent le rituel de bannissement et les démons tentent d\'augmenter leur puissance. La puissance des démons est maintenant de %1d.</string>
     <string name="banishProgressShort">La puissance des démons est maintenant de %1d.</string>
     <!-- Untranslated -->
+    <!-- Untranslated -->
+    <!--
+    <string name="newsButton"></string>
+    -->
     <!-- Accessibility -->
     <!--
-    <string name="minusButton">Minus button</string>
-    <string name="plusButton">Plus button</string>
+    <string name="minusButton"></string>
+    <string name="plusButton"></string>
     -->
 </resources>

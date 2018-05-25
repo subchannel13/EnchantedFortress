@@ -26,3 +26,4 @@ gradle-app.setting
 .idea/misc.xml
 gradle.properties
 .idea/vcs.xml
+.idea/assetWizardSettings.xml

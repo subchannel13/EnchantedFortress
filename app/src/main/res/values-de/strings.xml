@@ -54,9 +54,12 @@
     <string name="banishProgress">Wissenschaftler vollziehen Verbannungsrituale und Dämonen versuchen ihre Stärke zu erhöhen. Dämonenstärke ist jetzt bei %1d.</string>
     <string name="banishProgressShort">Dämonenstärke ist jetzt bei %1d.</string>
     <!-- Untranslated -->
+    <!--
+    <string name="newsButton"></string>
+    -->
     <!-- Accessibility -->
     <!--
-    <string name="minusButton">Minus button</string>
-    <string name="plusButton">Plus button</string>
+    <string name="minusButton"></string>
+    <string name="plusButton"></string>
     -->
 </resources>
