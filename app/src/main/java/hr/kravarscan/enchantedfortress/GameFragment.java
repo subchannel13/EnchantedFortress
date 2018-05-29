@@ -60,6 +60,7 @@ public class GameFragment extends AAttachableFragment {
     private OnFragmentInteractionListener listener;
 
     interface OnFragmentInteractionListener {
+        void onNews(Game game);
         void onGameOver();
     }
 
@@ -80,6 +81,14 @@ public class GameFragment extends AAttachableFragment {
         if (savedInstanceState != null) {
             SaveLoad.get().deserialize(this.game, savedInstanceState.getDoubleArray(SaveLoad.SaveKey));
         }
+
+        view.findViewById(R.id.newsButton).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.d(LOG_TAG, "newsButton click");
+                listener.onNews(game);
+            }
+        });
 
         view.findViewById(R.id.farmPlusButton).setOnClickListener(new View.OnClickListener() {
             @Override

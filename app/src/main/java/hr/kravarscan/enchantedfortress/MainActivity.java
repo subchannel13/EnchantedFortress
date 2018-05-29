@@ -85,6 +85,13 @@ public class MainActivity extends Activity implements MainMenuFragment.OnFragmen
 
         if (this.lastMainFragment != null && this.lastMainFragment instanceof MainMenuFragment)
             super.onBackPressed();
+        else if (this.lastMainFragment != null && this.lastMainFragment instanceof NewsFragment) {
+            NewsFragment newsFragment = (NewsFragment)this.lastMainFragment;
+            GameFragment gameFragment = new GameFragment();
+            gameFragment.setGame(newsFragment.getGame());
+
+            this.switchMainView(gameFragment);
+        }
         else
             this.switchMainView(new MainMenuFragment());
     }
@@ -126,6 +133,16 @@ public class MainActivity extends Activity implements MainMenuFragment.OnFragmen
         Log.d(LOG_TAG, "onAbout");
 
         this.switchMainView(new AboutFragment());
+    }
+
+    @Override
+    public void onNews(Game game) {
+        Log.d(LOG_TAG, "onNews");
+
+        NewsFragment fragment = new NewsFragment();
+        fragment.setGame(game);
+
+        this.switchMainView(fragment);
     }
 
     @Override
