@@ -8,6 +8,9 @@ All notable changes to this project will be documented in this file.
 ### Changed
 - Button images for "+" and "-"
 
+### Fixed
+- Crash in main menu after orientation change
+
 ## [v1.9] - 2018-04-23
 ### Added
 - Debug logging
