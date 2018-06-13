@@ -77,6 +77,7 @@ public class Game {
     public int reportHellgateOpen = 0;
     public int reportVictims = 0;
     public int reportScoutedDemons = 0;
+    public boolean reportFirstBanish = true;
     public int banishCostGrowth = Integer.MAX_VALUE;
 
     public Game(Difficulty difficulty)
@@ -239,6 +240,7 @@ public class Game {
     public void endTurn() {
         Log.d(LOG_TAG, "endTurn, turn: " + this.turn);
 
+        this.reportFirstBanish &= this.reportHellgateClose <= 0;
         this.reportAttackers = 0;
         this.reportHellgateClose = 0;
         this.reportHellgateOpen = 0;

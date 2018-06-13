@@ -4,10 +4,38 @@
     android:layout_height="match_parent"
     tools:context="hr.kravarscan.enchantedfortress.NewsFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="hello_blank_fragment" />
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/goalReport"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="Banishment report"
+            android:layout_marginBottom="8dp" />
+
+        <TextView
+            android:id="@+id/battleReport"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="Battle report"
+            android:layout_marginBottom="8dp" />
+
+        <TextView
+            android:id="@+id/scoutReport"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="Scout report"
+            android:layout_marginBottom="8dp" />
+
+        <TextView
+            android:id="@+id/populationReport"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="Population change report" />
+
+    </LinearLayout>
 
 </FrameLayout>
