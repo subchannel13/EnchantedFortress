@@ -13,10 +13,8 @@
     <string name="militaryStrength">Force</string>
     <string name="researchDelta">Recherche</string>
     <string name="walls">Murs de la ville</string>
-    <string name="scouted">Rapport d\'éclaireurs</string>
-    <string name="demons">démons</string>
-    <string name="attacked">Attaque ! Force des démons :</string>
-    <string name="victims">, victimes :</string>
+    <string name="scouted">Rapport d\'éclaireurs: %1$s démons</string>
+    <string name="attacked">Attaque !\n%1$s force des démons\n%2$s victimes</string>
     <string name="noVictims">Attaque des démons repoussée sans victime</string>
     <string name="farmingTech">Agriculture</string>
     <string name="buildTech">Maçonnerie</string>
@@ -58,6 +56,7 @@
     <!-- Untranslated -->
     <!--
     <string name="newsButton"></string>
+    <string name="scoutedLong"></string>
     -->
     <!-- Accessibility -->
     <!--

@@ -42,7 +42,6 @@ public class GameFragment extends AAttachableFragment {
 
     private Game game = new Game(Difficulty.Medium);
     private final String[] techList = new String[5];
-    private int longBanishProgressTurn = Integer.MAX_VALUE;
 
     private ArrayAdapter<String> techListAdapter;
     private TextView gameInfo;
@@ -180,7 +179,6 @@ public class GameFragment extends AAttachableFragment {
         this.headlinesInfo = view.findViewById(R.id.newsHeadlineText);
         this.soldierInfo = view.findViewById(R.id.soliderText);
         this.researchInfo = view.findViewById(R.id.researchText);
-        this.longBanishProgressTurn = Integer.MAX_VALUE;
 
         this.updateInfo();
 
@@ -298,12 +296,18 @@ public class GameFragment extends AAttachableFragment {
             this.researchSelector.setVisibility(View.GONE);
 
             this.endTurnButton.setText(R.string.gameOver);
-        } else
+        } else {
+            boolean battleEvent = this.game.reportAttackers > 0;
+            boolean goalEvent = this.game.reportHellgateClose > 0;
+
             this.headlinesInfo.setText(
-                    getResources().getString(R.string.scouted) + ": " + Integer.toString(this.game.reportScoutedDemons) + " " + getResources().getString(R.string.demons) +
-                    this.battleInfo() +
-                    this.banishInfo()
+                    getResources().getString(R.string.scouted, Integer.toString(this.game.reportScoutedDemons)) + "\n" +
+                            (battleEvent || goalEvent ? getResources().getString(R.string.moreNews) + ": " : "") +
+                            (battleEvent ? getResources().getString(R.string.battleNotification) : "") +
+                            (battleEvent && goalEvent ? ", " : "") +
+                            (goalEvent ? getResources().getString(R.string.banishNotification) : "")
             );
+        }
     }
 
     private String sliderText(int sliderTextId, int sliderValue, int descriptionTextId, int effectValue) {
@@ -312,29 +316,5 @@ public class GameFragment extends AAttachableFragment {
 
         return getResources().getString(sliderTextId) + ": " + percents.toString() + "%\n" +
                 getResources().getString(descriptionTextId) + ": " + effect.toString();
-    }
-
-    private String battleInfo() {
-        Log.d(LOG_TAG, "battleInfo, attackers: " + this.game.reportAttackers + ", victims: " + this.game.reportVictims);
-        if (this.game.reportAttackers <= 0)
-            return "";
-
-        if (this.game.reportVictims > 0)
-            return "\n" + getResources().getString(R.string.attacked) + Integer.toString(this.game.reportAttackers) + getResources().getString(R.string.victims) + Integer.toString(this.game.reportVictims);
-        else
-            return "\n" + getResources().getString(R.string.noVictims);
-    }
-
-    private String banishInfo() {
-        Log.d(LOG_TAG, "banishInfo, hellgateClose: " + this.game.reportHellgateClose + ", turn: " + this.game.turn);
-        if (this.game.reportHellgateClose <= 0)
-            return "";
-
-        if (this.game.turn <= this.longBanishProgressTurn) {
-            this.longBanishProgressTurn = this.game.turn;
-            return "\n" + getResources().getString(R.string.banishProgress, this.game.demonBanishCost / 100);
-        }
-        else
-            return "\n" + getResources().getString(R.string.banishProgressShort, this.game.demonBanishCost / 100);
     }
 }

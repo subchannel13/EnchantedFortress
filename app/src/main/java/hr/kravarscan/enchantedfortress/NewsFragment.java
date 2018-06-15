@@ -64,15 +64,16 @@ public class NewsFragment extends AAttachableFragment {
         if (this.game.reportAttackers <= 0)
             battleReport.setVisibility(View.GONE);
         if (this.game.reportVictims > 0)
-            battleReport.setText(getResources().getString(R.string.attacked) + Integer.toString(this.game.reportAttackers) + getResources().getString(R.string.victims) + Integer.toString(this.game.reportVictims));
+            battleReport.setText(getResources().getString(R.string.attacked, Integer.toString(this.game.reportAttackers), Integer.toString(this.game.reportVictims)));
         else
             battleReport.setText(getResources().getString(R.string.noVictims));
 
         TextView scoutReport = view.findViewById(R.id.scoutReport);
-        scoutReport.setText(getResources().getString(R.string.scouted) + ": " + Integer.toString(this.game.reportScoutedDemons) + " " + getResources().getString(R.string.demons));
-
-        TextView popReport = view.findViewById(R.id.populationReport);
-        popReport.setVisibility(View.GONE);
+        scoutReport.setText(
+                getResources().getString(R.string.scoutedLong,
+                        Integer.toString(this.game.reportScoutedDemons),
+                        Integer.toString((int)this.game.demonIndividualStrength()),
+                        Integer.toString((int)(this.game.demonIndividualStrength() * this.game.reportScoutedDemons))));
 
         return view;
     }

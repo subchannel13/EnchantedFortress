@@ -12,10 +12,8 @@
     <string name="militaryStrength">Stärke</string>
     <string name="researchDelta">Forschung</string>
     <string name="walls">Stadtmauern</string>
-    <string name="scouted">Aufklärerbericht</string>
-    <string name="demons">Dämonen</string>
-    <string name="attacked">Angegriffen! Dämonenstärke:</string>
-    <string name="victims">, Verluste:</string>
+    <string name="scouted">Aufklärerbericht: %1$s Dämonen</string>
+    <string name="attacked">Angegriffen!\n%1$s Dämonenstärke\n%2$s Verluste</string>
     <string name="noVictims">Dämonenangriff ohne Verluste zurückgeschlagen</string>
     <string name="farmingTech">Landwirtschaft</string>
     <string name="buildTech">Handwerk</string>
@@ -56,6 +54,7 @@
     <!-- Untranslated -->
     <!--
     <string name="newsButton"></string>
+    <string name="scoutedLong"></string>
     -->
     <!-- Accessibility -->
     <!--

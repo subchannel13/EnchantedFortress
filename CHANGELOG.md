@@ -4,9 +4,11 @@ All notable changes to this project will be documented in this file.
 ## [Unreleased]
 ### Added
 - News list button
+- News list screen
 
 ### Changed
 - Button images for "+" and "-"
+- Report text format on game screen
 
 ### Fixed
 - Crash in main menu after orientation change

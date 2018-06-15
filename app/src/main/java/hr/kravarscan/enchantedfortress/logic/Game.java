@@ -53,7 +53,7 @@ public class Game {
     private static final Random rand = new Random();
 
     public int turn = 1;
-    private double population = 100;
+    private double population;
     public double walls = 0;
     private int demons = 0;
     private int demonLevel = 0;
@@ -217,6 +217,11 @@ public class Game {
                 wallCivils * WallCivilStrength +
                 (groundSoldiers * SoldierStrength +
                 wallSoldiers * WallSoldierStrength) * (1 + this.soldiering.level * SoldieringTechBonus);
+    }
+
+    public double demonIndividualStrength()
+    {
+        return DemonStrength * Math.pow(this.difficulty.getDemonPowerBase(), this.demonLevel);
     }
 
     public double deltaResearch() {

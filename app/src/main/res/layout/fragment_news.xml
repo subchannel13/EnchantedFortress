@@ -1,7 +1,8 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_margin="8dp"
     tools:context="hr.kravarscan.enchantedfortress.NewsFragment">
 
     <LinearLayout
@@ -13,29 +14,20 @@
             android:id="@+id/goalReport"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="Banishment report"
             android:layout_marginBottom="8dp" />
 
         <TextView
             android:id="@+id/battleReport"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="Battle report"
             android:layout_marginBottom="8dp" />
 
         <TextView
             android:id="@+id/scoutReport"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="Scout report"
             android:layout_marginBottom="8dp" />
-
-        <TextView
-            android:id="@+id/populationReport"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="Population change report" />
 
     </LinearLayout>
 
-</FrameLayout>
+</ScrollView>
