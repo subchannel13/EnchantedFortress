@@ -54,8 +54,9 @@
     <string name="banishProgressShort">Demon power is now at %1d.</string>
     <string name="newsButton">News list button</string>
     <string name="moreNews">Other reports</string>
-    <string name="battleNotification">battle</string>
+    <string name="battleNotification">We were attacked!</string>
     <string name="banishNotification">banishmnet</string>
+    <string name="scoutNotification">scout report</string>
     <!-- Accessibility -->
     <string name="minusButton">Minus button</string>
     <string name="plusButton">Plus button</string>

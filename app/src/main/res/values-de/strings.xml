@@ -55,6 +55,10 @@
     <!--
     <string name="newsButton"></string>
     <string name="scoutedLong"></string>
+    <string name="moreNews"></string>
+    <string name="battleNotification"></string>
+    <string name="banishNotification"></string>
+    <string name="scoutNotification"></string>
     -->
     <!-- Accessibility -->
     <!--

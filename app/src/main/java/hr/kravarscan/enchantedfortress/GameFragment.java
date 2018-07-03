@@ -1,5 +1,6 @@
 package hr.kravarscan.enchantedfortress;
 
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -45,7 +46,8 @@ public class GameFragment extends AAttachableFragment {
 
     private ArrayAdapter<String> techListAdapter;
     private TextView gameInfo;
-    private TextView headlinesInfo;
+    private TextView headlineText;
+    private TextView otherNewsText;
     private TextView farmerInfo;
     private TextView builderInfo;
     private TextView soldierInfo;
@@ -176,7 +178,8 @@ public class GameFragment extends AAttachableFragment {
         this.farmerInfo = view.findViewById(R.id.farmText);
         this.builderInfo = view.findViewById(R.id.builderText);
         this.gameInfo = view.findViewById(R.id.gameStatusText);
-        this.headlinesInfo = view.findViewById(R.id.newsHeadlineText);
+        this.headlineText = view.findViewById(R.id.newsHeadlineText);
+        this.otherNewsText = view.findViewById(R.id.otherNewsText);
         this.soldierInfo = view.findViewById(R.id.soliderText);
         this.researchInfo = view.findViewById(R.id.researchText);
 
@@ -285,10 +288,11 @@ public class GameFragment extends AAttachableFragment {
         );
 
         if (this.game.isOver()) {
-            this.headlinesInfo.setText(
+            this.headlineText.setText(
                     getResources().getString(this.game.isPlayerAlive() ? R.string.victory : R.string.defeat)
             );
 
+            this.otherNewsText.setVisibility(View.GONE);
             this.farmerControls.setVisibility(View.GONE);
             this.builderControls.setVisibility(View.GONE);
             this.soldierControls.setVisibility(View.GONE);
@@ -300,10 +304,15 @@ public class GameFragment extends AAttachableFragment {
             boolean battleEvent = this.game.reportAttackers > 0;
             boolean goalEvent = this.game.reportHellgateClose > 0;
 
-            this.headlinesInfo.setText(
-                    getResources().getString(R.string.scouted, Integer.toString(this.game.reportScoutedDemons)) + "\n" +
+            this.headlineText.setText(battleEvent ?
+                    getResources().getString(R.string.battleNotification) :
+                    getResources().getString(R.string.scouted, Integer.toString(this.game.reportScoutedDemons))
+            );
+            this.headlineText.setTypeface(null, battleEvent ? Typeface.BOLD : Typeface.NORMAL);
+
+            this.otherNewsText.setText(
                             (battleEvent || goalEvent ? getResources().getString(R.string.moreNews) + ": " : "") +
-                            (battleEvent ? getResources().getString(R.string.battleNotification) : "") +
+                            (battleEvent ? getResources().getString(R.string.scoutNotification) : "") +
                             (battleEvent && goalEvent ? ", " : "") +
                             (goalEvent ? getResources().getString(R.string.banishNotification) : "")
             );

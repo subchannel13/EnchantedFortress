@@ -9,6 +9,7 @@ All notable changes to this project will be documented in this file.
 ### Changed
 - Button images for "+" and "-"
 - Report text format on game screen
+- Demon attack event notification more prominent
 
 ### Fixed
 - Crash in main menu after orientation change

@@ -22,23 +22,35 @@
             android:id="@+id/newsControls"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="fill"
-            android:orientation="horizontal"
+            android:layout_marginBottom="8dp"
             android:layout_marginTop="8dp"
-            android:layout_marginBottom="8dp">
+            android:gravity="fill"
+            android:orientation="horizontal">
 
             <ImageButton
                 android:id="@+id/newsButton"
                 android:layout_width="48dp"
                 android:layout_height="48dp"
-                android:src="@drawable/scroll"
-                android:contentDescription="@string/newsButton" />
+                android:contentDescription="@string/newsButton"
+                android:src="@drawable/scroll" />
 
-            <TextView
-                android:id="@+id/newsHeadlineText"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="" />
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/newsHeadlineText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="" />
+
+                <TextView
+                    android:id="@+id/otherNewsText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="" />
+            </LinearLayout>
 
         </LinearLayout>
 
@@ -53,15 +65,15 @@
                 android:id="@+id/farmMinusButton"
                 android:layout_width="48dp"
                 android:layout_height="48dp"
-                android:src="@drawable/minus"
-                android:contentDescription="@string/minusButton" />
+                android:contentDescription="@string/minusButton"
+                android:src="@drawable/minus" />
 
             <ImageButton
                 android:id="@+id/farmPlusButton"
                 android:layout_width="48dp"
                 android:layout_height="48dp"
-                android:src="@drawable/plus"
-                android:contentDescription="@string/plusButton" />
+                android:contentDescription="@string/plusButton"
+                android:src="@drawable/plus" />
 
             <TextView
                 android:id="@+id/farmText"
@@ -82,15 +94,15 @@
                 android:id="@+id/builderMinusButton"
                 android:layout_width="48dp"
                 android:layout_height="48dp"
-                android:src="@drawable/minus"
-                android:contentDescription="@string/minusButton" />
+                android:contentDescription="@string/minusButton"
+                android:src="@drawable/minus" />
 
             <ImageButton
                 android:id="@+id/builderPlusButton"
                 android:layout_width="48dp"
                 android:layout_height="48dp"
-                android:src="@drawable/plus"
-                android:contentDescription="@string/plusButton" />
+                android:contentDescription="@string/plusButton"
+                android:src="@drawable/plus" />
 
             <TextView
                 android:id="@+id/builderText"
@@ -111,15 +123,15 @@
                 android:id="@+id/soldierMinusButton"
                 android:layout_width="48dp"
                 android:layout_height="48dp"
-                android:src="@drawable/minus"
-                android:contentDescription="@string/minusButton" />
+                android:contentDescription="@string/minusButton"
+                android:src="@drawable/minus" />
 
             <ImageButton
                 android:id="@+id/soldierPlusButton"
                 android:layout_width="48dp"
                 android:layout_height="48dp"
-                android:src="@drawable/plus"
-                android:contentDescription="@string/plusButton" />
+                android:contentDescription="@string/plusButton"
+                android:src="@drawable/plus" />
 
             <TextView
                 android:id="@+id/soliderText"
