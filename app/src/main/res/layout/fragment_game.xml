@@ -19,23 +19,61 @@
             android:text="@string/population" />
 
         <LinearLayout
+            android:id="@+id/newsControls"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:layout_marginTop="8dp"
+            android:gravity="fill"
+            android:orientation="horizontal">
+
+            <ImageButton
+                android:id="@+id/newsButton"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:contentDescription="@string/newsButton"
+                android:src="@drawable/scroll" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/newsHeadlineText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="" />
+
+                <TextView
+                    android:id="@+id/otherNewsText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
             android:id="@+id/farmControls"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="fill"
             android:orientation="horizontal">
 
-            <Button
+            <ImageButton
                 android:id="@+id/farmMinusButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/buttonMinus" />
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:contentDescription="@string/minusButton"
+                android:src="@drawable/minus" />
 
-            <Button
+            <ImageButton
                 android:id="@+id/farmPlusButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/buttonPlus" />
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:contentDescription="@string/plusButton"
+                android:src="@drawable/plus" />
 
             <TextView
                 android:id="@+id/farmText"
@@ -52,17 +90,19 @@
             android:gravity="fill"
             android:orientation="horizontal">
 
-            <Button
+            <ImageButton
                 android:id="@+id/builderMinusButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/buttonMinus" />
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:contentDescription="@string/minusButton"
+                android:src="@drawable/minus" />
 
-            <Button
+            <ImageButton
                 android:id="@+id/builderPlusButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/buttonPlus" />
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:contentDescription="@string/plusButton"
+                android:src="@drawable/plus" />
 
             <TextView
                 android:id="@+id/builderText"
@@ -79,17 +119,19 @@
             android:gravity="fill"
             android:orientation="horizontal">
 
-            <Button
+            <ImageButton
                 android:id="@+id/soldierMinusButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/buttonMinus" />
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:contentDescription="@string/minusButton"
+                android:src="@drawable/minus" />
 
-            <Button
+            <ImageButton
                 android:id="@+id/soldierPlusButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/buttonPlus" />
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:contentDescription="@string/plusButton"
+                android:src="@drawable/plus" />
 
             <TextView
                 android:id="@+id/soliderText"

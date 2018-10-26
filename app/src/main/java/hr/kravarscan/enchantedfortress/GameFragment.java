@@ -1,5 +1,6 @@
 package hr.kravarscan.enchantedfortress;
 
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -42,10 +43,11 @@ public class GameFragment extends AAttachableFragment {
 
     private Game game = new Game(Difficulty.Medium);
     private final String[] techList = new String[5];
-    private int longBanishProgressTurn = Integer.MAX_VALUE;
 
     private ArrayAdapter<String> techListAdapter;
     private TextView gameInfo;
+    private TextView headlineText;
+    private TextView otherNewsText;
     private TextView farmerInfo;
     private TextView builderInfo;
     private TextView soldierInfo;
@@ -59,6 +61,7 @@ public class GameFragment extends AAttachableFragment {
     private OnFragmentInteractionListener listener;
 
     interface OnFragmentInteractionListener {
+        void onNews(Game game);
         void onGameOver();
     }
 
@@ -79,6 +82,14 @@ public class GameFragment extends AAttachableFragment {
         if (savedInstanceState != null) {
             SaveLoad.get().deserialize(this.game, savedInstanceState.getDoubleArray(SaveLoad.SaveKey));
         }
+
+        view.findViewById(R.id.newsButton).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.d(LOG_TAG, "newsButton click");
+                listener.onNews(game);
+            }
+        });
 
         view.findViewById(R.id.farmPlusButton).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -167,9 +178,10 @@ public class GameFragment extends AAttachableFragment {
         this.farmerInfo = view.findViewById(R.id.farmText);
         this.builderInfo = view.findViewById(R.id.builderText);
         this.gameInfo = view.findViewById(R.id.gameStatusText);
+        this.headlineText = view.findViewById(R.id.newsHeadlineText);
+        this.otherNewsText = view.findViewById(R.id.otherNewsText);
         this.soldierInfo = view.findViewById(R.id.soliderText);
         this.researchInfo = view.findViewById(R.id.researchText);
-        this.longBanishProgressTurn = Integer.MAX_VALUE;
 
         this.updateInfo();
 
@@ -270,16 +282,17 @@ public class GameFragment extends AAttachableFragment {
         this.updateTechList();
         this.techListAdapter.notifyDataSetChanged();
 
-        String status = getResources().getString(R.string.turn) + ": " + Integer.toString(this.game.turn) + "\n" +
+        this.gameInfo.setText(getResources().getString(R.string.turn) + ": " + Integer.toString(this.game.turn) + "\n" +
                 getResources().getString(R.string.population) + ": " + Integer.toString((int) this.game.roundedPop()) + "\n" +
-                getResources().getString(R.string.walls) + ": " + Integer.toString((int) this.game.walls) + "\n";
+                getResources().getString(R.string.walls) + ": " + Integer.toString((int) this.game.walls)
+        );
 
         if (this.game.isOver()) {
-            this.gameInfo.setText(status + "\n" +
-                    getResources().getString(this.game.isPlayerAlive() ? R.string.victory : R.string.defeat) +
-                    "\n"
+            this.headlineText.setText(
+                    getResources().getString(this.game.isPlayerAlive() ? R.string.victory : R.string.defeat)
             );
 
+            this.otherNewsText.setVisibility(View.GONE);
             this.farmerControls.setVisibility(View.GONE);
             this.builderControls.setVisibility(View.GONE);
             this.soldierControls.setVisibility(View.GONE);
@@ -287,12 +300,23 @@ public class GameFragment extends AAttachableFragment {
             this.researchSelector.setVisibility(View.GONE);
 
             this.endTurnButton.setText(R.string.gameOver);
-        } else
-            this.gameInfo.setText(status +
-                    getResources().getString(R.string.scouted) + ": " + Integer.toString(this.game.reportScoutedDemons) + " " + getResources().getString(R.string.demons) +
-                    this.battleInfo() +
-                    this.banishInfo()
+        } else {
+            boolean battleEvent = this.game.reportAttackers > 0;
+            boolean goalEvent = this.game.reportHellgateClose > 0;
+
+            this.headlineText.setText(battleEvent ?
+                    getResources().getString(R.string.battleNotification) :
+                    getResources().getString(R.string.scouted, Integer.toString(this.game.reportScoutedDemons))
             );
+            this.headlineText.setTypeface(null, battleEvent ? Typeface.BOLD : Typeface.NORMAL);
+
+            this.otherNewsText.setText(
+                            (battleEvent || goalEvent ? getResources().getString(R.string.moreNews) + ": " : "") +
+                            (battleEvent ? getResources().getString(R.string.scoutNotification) : "") +
+                            (battleEvent && goalEvent ? ", " : "") +
+                            (goalEvent ? getResources().getString(R.string.banishNotification) : "")
+            );
+        }
     }
 
     private String sliderText(int sliderTextId, int sliderValue, int descriptionTextId, int effectValue) {
@@ -301,29 +325,5 @@ public class GameFragment extends AAttachableFragment {
 
         return getResources().getString(sliderTextId) + ": " + percents.toString() + "%\n" +
                 getResources().getString(descriptionTextId) + ": " + effect.toString();
-    }
-
-    private String battleInfo() {
-        Log.d(LOG_TAG, "battleInfo, attackers: " + this.game.reportAttackers + ", victims: " + this.game.reportVictims);
-        if (this.game.reportAttackers <= 0)
-            return "";
-
-        if (this.game.reportVictims > 0)
-            return "\n" + getResources().getString(R.string.attacked) + Integer.toString(this.game.reportAttackers) + getResources().getString(R.string.victims) + Integer.toString(this.game.reportVictims);
-        else
-            return "\n" + getResources().getString(R.string.noVictims);
-    }
-
-    private String banishInfo() {
-        Log.d(LOG_TAG, "banishInfo, hellgateClose: " + this.game.reportHellgateClose + ", turn: " + this.game.turn);
-        if (this.game.reportHellgateClose <= 0)
-            return "";
-
-        if (this.game.turn <= this.longBanishProgressTurn) {
-            this.longBanishProgressTurn = this.game.turn;
-            return "\n" + getResources().getString(R.string.banishProgress, this.game.demonBanishCost / 100);
-        }
-        else
-            return "\n" + getResources().getString(R.string.banishProgressShort, this.game.demonBanishCost / 100);
     }
 }

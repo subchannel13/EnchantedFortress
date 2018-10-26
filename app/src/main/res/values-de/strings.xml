@@ -4,8 +4,6 @@
     <string name="end_turn">Runde beenden</string>
     <string name="population">Bevölkerung</string>
     <string name="farmers">Bauern</string>
-    <!-- <string name="buttonPlus"></string> don't translate -->
-    <!-- <string name="buttonMinus"></string> don't translate -->
     <string name="scholars">Wissenschaftler</string>
     <string name="builders">Handwerker</string>
     <string name="soldiers">Soldaten</string>
@@ -14,10 +12,8 @@
     <string name="militaryStrength">Stärke</string>
     <string name="researchDelta">Forschung</string>
     <string name="walls">Stadtmauern</string>
-    <string name="scouted">Aufklärerbericht</string>
-    <string name="demons">Dämonen</string>
-    <string name="attacked">Angegriffen! Dämonenstärke:</string>
-    <string name="victims">, Verluste:</string>
+    <string name="scouted">Aufklärerbericht: %1$s Dämonen</string>
+    <string name="attacked">Angegriffen!\n%1$s Dämonenstärke\n%2$s Verluste</string>
     <string name="noVictims">Dämonenangriff ohne Verluste zurückgeschlagen</string>
     <string name="farmingTech">Landwirtschaft</string>
     <string name="buildTech">Handwerk</string>
@@ -55,4 +51,18 @@
     <string name="scoresButton">Bestenliste</string>
     <string name="banishProgress">Wissenschaftler vollziehen Verbannungsrituale und Dämonen versuchen ihre Stärke zu erhöhen. Dämonenstärke ist jetzt bei %1d.</string>
     <string name="banishProgressShort">Dämonenstärke ist jetzt bei %1d.</string>
+    <!-- Untranslated -->
+    <!--
+    <string name="newsButton"></string>
+    <string name="scoutedLong"></string>
+    <string name="moreNews"></string>
+    <string name="battleNotification"></string>
+    <string name="banishNotification"></string>
+    <string name="scoutNotification"></string>
+    -->
+    <!-- Accessibility -->
+    <!--
+    <string name="minusButton"></string>
+    <string name="plusButton"></string>
+    -->
 </resources>

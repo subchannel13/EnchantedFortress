@@ -4,8 +4,6 @@
     <string name="end_turn">End turn</string>
     <string name="population">Population</string>
     <string name="farmers">Farmers</string>
-    <string name="buttonPlus">+</string>
-    <string name="buttonMinus">-</string>
     <string name="scholars">Scholars</string>
     <string name="builders">Builders</string>
     <string name="soldiers">Soldiers</string>
@@ -14,10 +12,9 @@
     <string name="militaryStrength">Strength</string>
     <string name="researchDelta">Research</string>
     <string name="walls">City walls</string>
-    <string name="scouted">Scout report</string>
-    <string name="demons">demons</string>
-    <string name="attacked">Attacked! Demon strength:</string>
-    <string name="victims">, victims:</string>
+    <string name="scouted">Scout report: %1$s demons</string>
+    <string name="scoutedLong">Scout report:\n%1$s demons\n%2$s strength\n%3$s total military power</string>
+    <string name="attacked">Attacked!\n%1$s demon attackers\n%2$s victims</string>
     <string name="noVictims">Demon attack repelled without casualties</string>
     <string name="farmingTech">Farming</string>
     <string name="buildTech">Masonry</string>
@@ -55,4 +52,12 @@
     <string name="scoresButton">Hall of Fame</string>
     <string name="banishProgress">Scholars perform banishment ritual and demons try to increase their power. Demon power is now %1d.</string>
     <string name="banishProgressShort">Demon power is now at %1d.</string>
+    <string name="newsButton">News list button</string>
+    <string name="moreNews">Other reports</string>
+    <string name="battleNotification">We were attacked!</string>
+    <string name="banishNotification">banishmnet</string>
+    <string name="scoutNotification">scout report</string>
+    <!-- Accessibility -->
+    <string name="minusButton">Minus button</string>
+    <string name="plusButton">Plus button</string>
 </resources>
