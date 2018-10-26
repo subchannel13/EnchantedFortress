@@ -43,13 +43,20 @@ public class MainActivity extends Activity implements MainMenuFragment.OnFragmen
         Log.d(LOG_TAG, "onCreate");
         setContentView(R.layout.activity_main);
 
-        Log.d(LOG_TAG, "Has saved instance? " + (savedInstanceState == null));
+        this.lastMainFragment = getFragmentManager().findFragmentById(R.id.fragment_container);
+
+        Log.d(LOG_TAG, "Has saved instance? " + (savedInstanceState != null));
+        Log.d(LOG_TAG, "Has saved fragment? " + (this.lastMainFragment != null));
         if (savedInstanceState == null) {
             HighScores.get().load(this);
 
             MainMenuFragment mainMenu = new MainMenuFragment();
             mainMenu.attach(this);
             getFragmentManager().beginTransaction().replace(R.id.fragment_container, mainMenu).commit();
+        }
+        else if (this.lastMainFragment != null)
+        {
+            ((AAttachableFragment)this.lastMainFragment).attach(this);
         }
     }
 
@@ -68,6 +75,23 @@ public class MainActivity extends Activity implements MainMenuFragment.OnFragmen
     }
 
     @Override
+    public void onBackPressed() {
+        Log.d(LOG_TAG, "onBackPressed, last fragment: " + this.lastMainFragment);
+
+        if (this.lastMainFragment != null && this.lastMainFragment instanceof MainMenuFragment)
+            super.onBackPressed();
+        else if (this.lastMainFragment != null && this.lastMainFragment instanceof NewsFragment) {
+            NewsFragment newsFragment = (NewsFragment)this.lastMainFragment;
+            GameFragment gameFragment = new GameFragment();
+            gameFragment.setGame(newsFragment.getGame());
+
+            this.switchMainView(gameFragment);
+        }
+        else
+            this.switchMainView(new MainMenuFragment());
+    }
+
+    @Override
     public void onContinue() {
         Log.d(LOG_TAG, "onContinue");
 
@@ -77,16 +101,6 @@ public class MainActivity extends Activity implements MainMenuFragment.OnFragmen
         gameFragment.setGame(game);
 
         this.switchMainView(gameFragment);
-    }
-
-    @Override
-    public void onBackPressed() {
-        Log.d(LOG_TAG, "onBackPressed, last fragment: " + this.lastMainFragment);
-
-        if (this.lastMainFragment != null && this.lastMainFragment instanceof MainMenuFragment)
-            super.onBackPressed();
-        else
-            this.switchMainView(new MainMenuFragment());
     }
 
     @Override
@@ -126,6 +140,16 @@ public class MainActivity extends Activity implements MainMenuFragment.OnFragmen
         Log.d(LOG_TAG, "onAbout");
 
         this.switchMainView(new AboutFragment());
+    }
+
+    @Override
+    public void onNews(Game game) {
+        Log.d(LOG_TAG, "onNews");
+
+        NewsFragment fragment = new NewsFragment();
+        fragment.setGame(game);
+
+        this.switchMainView(fragment);
     }
 
     @Override

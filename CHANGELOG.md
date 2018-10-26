@@ -3,6 +3,20 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+
+## [v1.10] - 2018-10-26
+### Added
+- News list button
+- News list screen
+
+### Changed
+- Button images for "+" and "-"
+- Report text format on game screen
+- Demon attack event notification more prominent
+
+### Fixed
+- Crash in main menu after orientation change
+
 ## [v1.9] - 2018-04-23
 ### Added
 - Debug logging
