@@ -2,6 +2,9 @@
 All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
+
+
+## [v1.10] - 2018-10-26
 ### Added
 - News list button
 - News list screen
