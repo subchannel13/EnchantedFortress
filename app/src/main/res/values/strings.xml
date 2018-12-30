@@ -55,7 +55,7 @@
     <string name="newsButton">News list button</string>
     <string name="moreNews">Other reports</string>
     <string name="battleNotification">We were attacked!</string>
-    <string name="banishNotification">banishmnet</string>
+    <string name="banishNotification">banishment</string>
     <string name="scoutNotification">scout report</string>
     <!-- Accessibility -->
     <string name="minusButton">Minus button</string>
