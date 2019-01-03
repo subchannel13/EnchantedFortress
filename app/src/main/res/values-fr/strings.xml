@@ -13,7 +13,8 @@
     <string name="militaryStrength">Force</string>
     <string name="researchDelta">Recherche</string>
     <string name="walls">Murs de la ville</string>
-    <string name="scouted">Rapport d\'éclaireurs: %1$s démons</string>
+    <string name="scouted">Rapport d\'éclaireurs : %1$s démons</string>
+    <string name="scoutedLong">Rapport d\'éclaireurs :\n%1$s démons\n%2$s force\n%3$s puissance militaire totale</string>
     <string name="attacked">Attaque !\n%1$s force des démons\n%2$s victimes</string>
     <string name="noVictims">Attaque des démons repoussée sans victime</string>
     <string name="farmingTech">Agriculture</string>
@@ -52,19 +53,12 @@
     <string name="scoresButton">Temple de la renommée</string>
     <string name="banishProgress">Les savants pratiquent le rituel de bannissement et les démons tentent d\'augmenter leur puissance. La puissance des démons est maintenant de %1d.</string>
     <string name="banishProgressShort">La puissance des démons est maintenant de %1d.</string>
-    <!-- Untranslated -->
-    <!-- Untranslated -->
-    <!--
-    <string name="newsButton"></string>
-    <string name="scoutedLong"></string>
-    <string name="moreNews"></string>
-    <string name="battleNotification"></string>
-    <string name="banishNotification"></string>
-    <string name="scoutNotification"></string>
-    -->
+    <string name="newsButton">Bouton liste des rapports</string>
+    <string name="moreNews">Autres rapports</string>
+    <string name="battleNotification">Nous avons été attaqués !</string>
+    <string name="banishNotification">bannissement</string>
+    <string name="scoutNotification">rapport d\'éclaireurs</string>
     <!-- Accessibility -->
-    <!--
-    <string name="minusButton"></string>
-    <string name="plusButton"></string>
-    -->
+    <string name="minusButton">Bouton moins</string>
+    <string name="plusButton">Bouton plus</string>
 </resources>
