@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Forteresse Enchantée</string>
     <string name="newGame">Nouvelle partie</string>
@@ -14,7 +13,13 @@
     <string name="researchDelta">Recherche</string>
     <string name="walls">Murs de la ville</string>
     <string name="scouted">Rapport d\'éclaireurs: %1$s démons</string>
-    <string name="attacked">Attaque !\n%1$s force des démons\n%2$s victimes</string>
+    <string name="scoutedLong">Rapport d\'éclaireurs :\n
+ %1$s démons\n
+ %2$s de force\n
+ %3$s le puissance militaire totale</string>
+    <string name="attacked">Attaque !\n
+  %1$s force des démons\n
+  %2$s victimes</string>
     <string name="noVictims">Attaque des démons repoussée sans victime</string>
     <string name="farmingTech">Agriculture</string>
     <string name="buildTech">Maçonnerie</string>
@@ -22,21 +27,45 @@
     <string name="scholarTech">Éducation</string>
     <string name="banishTech">Bannir les démons</string>
     <string name="gameOver">Retour au menu principal</string>
-    <string name="defeat">Les démons vous ont vaincus !\nPersonne dans votre forteresse n\'a survécu et le royaume est en grand péril.</string>
-    <string name="victory">Victoire !\nVous avez banni tous les démons et le royaume est maintenant en sécurité.</string>
+    <string name="defeat">Les démons vous ont vaincus !\n
+  Personne dans votre forteresse n\'a survécu et le royaume est en grand péril.</string>
+    <string name="victory">Victoire !\n
+  Vous avez banni tous les démons et le royaume est maintenant en sécurité.</string>
     <string name="help">Histoire &amp; Aide</string>
-    <string name="helpText"><b>Histoire</b>\n\nVotre terre est dans une période sombre, des personnes tordues ont pactisé avec les démons, les portes des enfers se sont ouvertes et les démons commencent à errer dans ce monde. Si on ne les arrête pas, le royaume sera submergé.\n\nVos chercheurs supposent que s\'il y a un rituel pour invoquer les démons, alors il doit y en avoir un pour les bannir. Aidez-les à effectuer le rituel et défendez-les des démons qui tenteront de les arrêter.\n\n<b>Comment jouer</b>\n\nLa majorité du jeu consiste à répartir la population entre les métiers suivants :\n— Fermiers — accélèrent la hausse de la population\n— Constructeurs — construisent les murs de la ville\n— Soldats — augmentent la force militaire\n— Savants — recherchent des améliorations et bannissent les démons\n\nAu fil du temps (des tours) les forces de l\'armée des démons grandiront et lorsqu\'ils se sentiront suffisamment confiants ils passeront à l\'offensive. Les attaques ne vous prendront pas par surprise, votre peuple rapportera combien de démons il a vu. Ce n\'est pas un nombre précis, mais attendez-vous à ce qu\'ils aient au moins autant de troupes. Lorsque l\'attaque arrive, toute votre population participe à la défense, aussi bien les soldats que les travailleurs. Les soldats sont des défenseurs plus forts mais si vous n\'êtes pas prêt, les civils feront de leur mieux pour survivre. Pour ne pas être attaqué sans préparation, il vaut mieux construire de grands murs pour la ville.\n\nEn définitive, votre succès dépend de l\'équilibre entre la force militaire et l\'économie. Il est tentant d\'employer autant de monde que possible dans l\'armée mais si l\'attaque n\'arrive pas à ce tour-ci, votre économie ne grandira pas assez vite pour gérer les futures attaques des démons. En début de jeu, l\'agriculture est ce qui améliore le mieux l\'économie : plus vous avez de monde, plus vous pouvez employer de monde pour construire des murs et devenir des soldats. La recherche est un autre moyen d\'améliorer votre force militaire et économique sur le long terme. Toute la population participe aux recherches, mais comme pour la force militaire, tout le monde ne contribue pas équitablement. Les savants (les personnes qui ne sont pas assignées à l\'agriculture, la construction ou la garde) génèrent plus de points que recherche que les autres.\n\nRester barricadé derrière les murs de la ville ne vous rendra pas invulnérable, les démons finiront par être assez puissants pour surpasser toutes vos défenses. Le rituel de bannissement est la seule manière de se débarrasser des démons pour de bon. L\'effectuer fermera graduellement les portes des enfers, diminuant l\'augmentation des forces des démons et lorsqu\'il sera fini, il arrêtera de manière permanente l\'invasion des démons.</string>
+    <string name="helpText"><b >Histoire</b>\n
+  \n
+  Votre terre est dans une période sombre, des personnes tordues ont pactisé avec les démons, les portes des enfers se sont ouvertes et les démons commencent à errer dans ce monde. Si on ne les arrête pas, le royaume sera submergé.\n
+  \n
+  Vos chercheurs supposent que s\'il y a un rituel pour invoquer les démons, alors il doit y en avoir un pour les bannir. Aidez-les à effectuer le rituel et défendez-les des démons qui tenteront de les arrêter.\n
+  \n
+  <b >Comment jouer</b>\n
+  \n
+  La majorité du jeu consiste à répartir la population entre les métiers suivants :\n
+  — Fermiers — accélèrent la hausse de la population\n
+  — Constructeurs — construisent les murs de la ville\n
+  — Soldats — augmentent la force militaire\n
+  — Savants — recherchent des améliorations et bannissent les démons\n
+  \n
+  Au fil du temps (des tours) les forces de l\'armée des démons grandiront et lorsqu\'ils se sentiront suffisamment confiants ils passeront à l\'offensive. Les attaques ne vous prendront pas par surprise, votre peuple rapportera combien de démons il a vu. Ce n\'est pas un nombre précis, mais attendez-vous à ce qu\'ils aient au moins autant de troupes. Lorsque l\'attaque arrive, toute votre population participe à la défense, aussi bien les soldats que les travailleurs. Les soldats sont des défenseurs plus forts mais si vous n\'êtes pas prêt, les civils feront de leur mieux pour survivre. Pour ne pas être attaqué sans préparation, il vaut mieux construire de grands murs pour la ville.\n
+  \n
+  En définitive, votre succès dépend de l\'équilibre entre la force militaire et l\'économie. Il est tentant d\'employer autant de monde que possible dans l\'armée mais si l\'attaque n\'arrive pas à ce tour-ci, votre économie ne grandira pas assez vite pour gérer les futures attaques des démons. En début de jeu, l\'agriculture est ce qui améliore le mieux l\'économie : plus vous avez de monde, plus vous pouvez employer de monde pour construire des murs et devenir des soldats. La recherche est un autre moyen d\'améliorer votre force militaire et économique sur le long terme. Toute la population participe aux recherches, mais comme pour la force militaire, tout le monde ne contribue pas équitablement. Les savants (les personnes qui ne sont pas assignées à l\'agriculture, la construction ou la garde) génèrent plus de points que recherche que les autres.\n
+  \n
+  Rester barricadé derrière les murs de la ville ne vous rendra pas invulnérable, les démons finiront par être assez puissants pour surpasser toutes vos défenses. Le rituel de bannissement est la seule manière de se débarrasser des démons pour de bon. L\'effectuer fermera graduellement les portes des enfers, diminuant l\'augmentation des forces des démons et lorsqu\'il sera fini, il arrêtera de manière permanente l\'invasion des démons.</string>
     <string name="aboutMe">À propos</string>
     <string name="turns">tours</string>
     <string name="turn">Tour</string>
     <string name="continueText">Continuer</string>
     <string name="difficultySelect">Choisir la difficulté :</string>
     <string name="aboutDevelopBy">Développé par %1$s</string>
-    <string name="aboutTranslateBy">Traduit par\n%1$s</string>
-    <string name="aboutTrackerAt">Rapportez les bogues sur :\n%1$s</string>
-    <string name="aboutCodeAt">Code :\n%1$s</string>
+    <string name="aboutTranslateBy">Traduit par\n
+  %1$s</string>
+    <string name="aboutTrackerAt">Rapportez les bogues sur :\n
+  %1$s</string>
+    <string name="aboutCodeAt">Code :\n
+  %1$s</string>
     <string name="aboutVersion">Version : %1$s</string>
-    <string name="aboutSupportAt">Soutenez le développement :\n%1$s</string>
+    <string name="aboutSupportAt">Soutenez le développement :\n
+  %1$s</string>
     <string name="startGame">Commencer la partie</string>
     <string name="gatesClosed">%1d portes des enfers fermées</string>
     <string name="gatesOpened">, les démons réouvrent %1d portes</string>
@@ -52,19 +81,12 @@
     <string name="scoresButton">Temple de la renommée</string>
     <string name="banishProgress">Les savants pratiquent le rituel de bannissement et les démons tentent d\'augmenter leur puissance. La puissance des démons est maintenant de %1d.</string>
     <string name="banishProgressShort">La puissance des démons est maintenant de %1d.</string>
-    <!-- Untranslated -->
-    <!-- Untranslated -->
-    <!--
-    <string name="newsButton"></string>
-    <string name="scoutedLong"></string>
-    <string name="moreNews"></string>
-    <string name="battleNotification"></string>
-    <string name="banishNotification"></string>
-    <string name="scoutNotification"></string>
-    -->
+    <string name="newsButton">Bouton des nouvelles</string>
+    <string name="moreNews">Autres rapports</string>
+    <string name="battleNotification">Nous avons été attaqués !</string>
+    <string name="banishNotification">bannissement</string>
+    <string name="scoutNotification">rapport d\'éclaireurs</string>
     <!-- Accessibility -->
-    <!--
-    <string name="minusButton"></string>
-    <string name="plusButton"></string>
-    -->
+    <string name="minusButton">Bouton moins</string>
+    <string name="plusButton">Bouton plus</string>
 </resources>
