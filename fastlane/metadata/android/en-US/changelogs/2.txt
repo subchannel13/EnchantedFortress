@@ -1,0 +1,9 @@
+Added
+* Current game turn is now visible
+Changed
+* "Help" screen is now more detailed "Story & Help"
+Fixed
+* Fixed UI scaling and duplication on rotation
+* Fixed loss of game state on rotation or multitasking
+* Fixed UI duplication after pressing back button
+* Fixed negative scout report
