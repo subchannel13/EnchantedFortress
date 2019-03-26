@@ -3,6 +3,15 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+## [v1.11] 2019-03-26
+### Added
+- Fastlane metadata
+
+### Changed
+- Updated French translation
+
+### Fixed
+- Typos in English and French translations
 
 ## [v1.10] - 2018-10-26
 ### Added
