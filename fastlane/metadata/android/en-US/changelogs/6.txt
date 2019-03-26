@@ -1,0 +1,4 @@
+Changed
+* Launcher icon
+Fixed
+* Main menu duplication after phone rotation

@@ -1,0 +1,6 @@
+Added
+* Change log file
+* French translation
+* Difficulty levels
+Fixed
+* Back button always navigates from other views to main menu

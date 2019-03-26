@@ -1,0 +1,7 @@
+Added
+* Difficulty level info when starting new game
+* Hell gate opening and closing report during banishment ritual
+Changed
+* Banishment ritual shows remaining hell gates instead of time estimation
+* Increased item size in research selection
+* German translation

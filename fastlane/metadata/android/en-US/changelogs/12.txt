@@ -1,0 +1,6 @@
+Added
+* Fastlane metadata
+Changed
+* Updated French translation
+Fixed
+* Typos in English and French translations

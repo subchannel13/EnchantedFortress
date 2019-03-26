@@ -1,0 +1,10 @@
+Added
+* Autosave and continue game session
+* German translation
+Changed
+* Moderate code cleanup
+* Reduced APK size
+* About screen lists translators
+Fixed
+* Fixed licence statement, GLP text included too
+* Fixed defeat condition to work with decimal population count

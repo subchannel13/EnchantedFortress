@@ -1,0 +1,1 @@
+A simple game inspired by the Age of Castles. Distribute your population between farming, construction, guard duty, and scholarship. Survive the demon invasion and find the way to banish them forever.

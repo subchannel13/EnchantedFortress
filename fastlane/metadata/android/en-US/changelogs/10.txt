@@ -1,0 +1,6 @@
+Added
+* Debug logging
+* Adaptive icon
+Changed
+* Updated german translation
+* Untranslated entries added as comments to make it more visible what is missing
