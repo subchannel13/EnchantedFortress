@@ -6,8 +6,8 @@ android {
         applicationId "hr.kravarscan.enchantedfortress"
         minSdkVersion 15
         targetSdkVersion 26
-        versionCode 12
-        versionName "1.11"
+        versionCode 13
+        versionName "1.12"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
