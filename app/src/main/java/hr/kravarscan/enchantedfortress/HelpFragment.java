@@ -1,13 +1,5 @@
-package hr.kravarscan.enchantedfortress;
-
-import android.os.Bundle;
-import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-
-/**
- * Copyright 2018 Ivan Kravarščan
+/*
+ * Copyright 2019 Ivan Kravarščan
  *
  * This file is part of Enchanted Fortress.
  *
@@ -24,6 +16,14 @@ import android.view.ViewGroup;
  * You should have received a copy of the GNU General Public License
  * along with Enchanted Fortress.  If not, see <http://www.gnu.org/licenses/>.
  */
+
+package hr.kravarscan.enchantedfortress;
+
+import android.os.Bundle;
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
 public class HelpFragment extends AAttachableFragment {
 

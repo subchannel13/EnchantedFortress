@@ -1,9 +1,5 @@
-package hr.kravarscan.enchantedfortress.storage;
-
-import java.util.List;
-
-/**
- * Copyright 2018 Ivan Kravarščan
+/*
+ * Copyright 2019 Ivan Kravarščan
  *
  * This file is part of Enchanted Fortress.
  *
@@ -20,6 +16,10 @@ import java.util.List;
  * You should have received a copy of the GNU General Public License
  * along with Enchanted Fortress.  If not, see <http://www.gnu.org/licenses/>.
  */
+
+package hr.kravarscan.enchantedfortress.storage;
+
+import java.util.List;
 
 public class ScoreEntry {
     public static final int SaveLength = 2;

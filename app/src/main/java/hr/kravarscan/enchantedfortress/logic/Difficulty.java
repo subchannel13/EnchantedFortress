@@ -1,9 +1,5 @@
-package hr.kravarscan.enchantedfortress.logic;
-
-import android.util.Log;
-
-/**
- * Copyright 2018 Ivan Kravarščan
+/*
+ * Copyright 2019 Ivan Kravarščan
  *
  * This file is part of Enchanted Fortress.
  *
@@ -20,6 +16,10 @@ import android.util.Log;
  * You should have received a copy of the GNU General Public License
  * along with Enchanted Fortress.  If not, see <http://www.gnu.org/licenses/>.
  */
+
+package hr.kravarscan.enchantedfortress.logic;
+
+import android.util.Log;
 
 public class Difficulty {
     public static final Difficulty Medium = new Difficulty(100, 1, 1.02);

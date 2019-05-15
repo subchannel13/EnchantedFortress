@@ -1,20 +1,5 @@
-package hr.kravarscan.enchantedfortress.storage;
-
-import android.content.Context;
-import android.util.Log;
-
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.nio.ByteBuffer;
-import java.util.ArrayList;
-import java.util.List;
-
-import hr.kravarscan.enchantedfortress.BuildConfig;
-import hr.kravarscan.enchantedfortress.logic.Difficulty;
-import hr.kravarscan.enchantedfortress.logic.Game;
-
-/**
- * Copyright 2018 Ivan Kravarščan
+/*
+ * Copyright 2019 Ivan Kravarščan
  *
  * This file is part of Enchanted Fortress.
  *
@@ -31,6 +16,21 @@ import hr.kravarscan.enchantedfortress.logic.Game;
  * You should have received a copy of the GNU General Public License
  * along with Enchanted Fortress.  If not, see <http://www.gnu.org/licenses/>.
  */
+
+package hr.kravarscan.enchantedfortress.storage;
+
+import android.content.Context;
+import android.util.Log;
+
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.nio.ByteBuffer;
+import java.util.ArrayList;
+import java.util.List;
+
+import hr.kravarscan.enchantedfortress.BuildConfig;
+import hr.kravarscan.enchantedfortress.logic.Difficulty;
+import hr.kravarscan.enchantedfortress.logic.Game;
 
 public final class SaveLoad {
     private static final String LOG_TAG = "SaveLoad";

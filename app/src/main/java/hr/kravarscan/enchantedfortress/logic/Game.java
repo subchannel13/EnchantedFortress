@@ -1,13 +1,5 @@
-package hr.kravarscan.enchantedfortress.logic;
-
-import android.util.Log;
-
-import java.util.Random;
-
-import hr.kravarscan.enchantedfortress.storage.LatestSaveKeys;
-
-/**
- * Copyright 2017 Ivan Kravarščan
+/*
+ * Copyright 2019 Ivan Kravarščan
  *
  * This file is part of Enchanted Fortress.
  *
@@ -24,6 +16,14 @@ import hr.kravarscan.enchantedfortress.storage.LatestSaveKeys;
  * You should have received a copy of the GNU General Public License
  * along with Enchanted Fortress.  If not, see <http://www.gnu.org/licenses/>.
  */
+
+package hr.kravarscan.enchantedfortress.logic;
+
+import android.util.Log;
+
+import java.util.Random;
+
+import hr.kravarscan.enchantedfortress.storage.LatestSaveKeys;
 
 public class Game {
     private static final String LOG_TAG = "Game";

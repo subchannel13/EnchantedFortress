@@ -1,9 +1,5 @@
-package hr.kravarscan.enchantedfortress;
-
-import android.app.Fragment;
-
-/**
- * Copyright 2017 Ivan Kravarščan
+/*
+ * Copyright 2019 Ivan Kravarščan
  *
  * This file is part of Enchanted Fortress.
  *
@@ -20,6 +16,10 @@ import android.app.Fragment;
  * You should have received a copy of the GNU General Public License
  * along with Enchanted Fortress.  If not, see <http://www.gnu.org/licenses/>.
  */
+
+package hr.kravarscan.enchantedfortress;
+
+import android.app.Fragment;
 
 abstract class AAttachableFragment extends Fragment {
     public abstract void attach(Object listener);

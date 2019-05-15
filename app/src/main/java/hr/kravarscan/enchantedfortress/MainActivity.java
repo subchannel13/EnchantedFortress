@@ -1,19 +1,5 @@
-package hr.kravarscan.enchantedfortress;
-
-import android.app.Activity;
-import android.app.Fragment;
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
-import android.os.Bundle;
-import android.util.Log;
-
-import hr.kravarscan.enchantedfortress.logic.Difficulty;
-import hr.kravarscan.enchantedfortress.logic.Game;
-import hr.kravarscan.enchantedfortress.storage.HighScores;
-import hr.kravarscan.enchantedfortress.storage.SaveLoad;
-
-/**
- * Copyright 2018 Ivan Kravarščan
+/*
+ * Copyright 2019 Ivan Kravarščan
  *
  * This file is part of Enchanted Fortress.
  *
@@ -30,6 +16,20 @@ import hr.kravarscan.enchantedfortress.storage.SaveLoad;
  * You should have received a copy of the GNU General Public License
  * along with Enchanted Fortress.  If not, see <http://www.gnu.org/licenses/>.
  */
+
+package hr.kravarscan.enchantedfortress;
+
+import android.app.Activity;
+import android.app.Fragment;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
+import android.os.Bundle;
+import android.util.Log;
+
+import hr.kravarscan.enchantedfortress.logic.Difficulty;
+import hr.kravarscan.enchantedfortress.logic.Game;
+import hr.kravarscan.enchantedfortress.storage.HighScores;
+import hr.kravarscan.enchantedfortress.storage.SaveLoad;
 
 public class MainActivity extends Activity implements MainMenuFragment.OnFragmentInteractionListener, GameFragment.OnFragmentInteractionListener, NewGameFragment.OnFragmentInteractionListener {
 

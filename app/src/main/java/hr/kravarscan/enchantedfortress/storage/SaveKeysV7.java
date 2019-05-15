@@ -1,7 +1,5 @@
-package hr.kravarscan.enchantedfortress.storage;
-
-/**
- * Copyright 2018 Ivan Kravarščan
+/*
+ * Copyright 2019 Ivan Kravarščan
  *
  * This file is part of Enchanted Fortress.
  *
@@ -18,6 +16,8 @@ package hr.kravarscan.enchantedfortress.storage;
  * You should have received a copy of the GNU General Public License
  * along with Enchanted Fortress.  If not, see <http://www.gnu.org/licenses/>.
  */
+
+package hr.kravarscan.enchantedfortress.storage;
 
 @SuppressWarnings("unused")
 public enum SaveKeysV7 {
