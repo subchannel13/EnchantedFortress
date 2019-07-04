@@ -20,9 +20,11 @@
 package hr.kravarscan.enchantedfortress;
 
 import android.app.Activity;
+import android.app.ActivityOptions;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 
@@ -80,15 +82,14 @@ public class MainActivity extends Activity implements MainMenuFragment.OnFragmen
 
         if (this.lastMainFragment != null && this.lastMainFragment instanceof MainMenuFragment)
             super.onBackPressed();
-        else if (this.lastMainFragment != null && this.lastMainFragment instanceof NewsFragment) {
-            NewsFragment newsFragment = (NewsFragment)this.lastMainFragment;
-            GameFragment gameFragment = new GameFragment();
-            gameFragment.setGame(newsFragment.getGame());
-
-            this.switchMainView(gameFragment);
-        }
         else
             this.switchMainView(new MainMenuFragment());
+    }
+
+    @Override
+    public void finish() {
+        super.finish();
+        overridePendingTransition(0,0);
     }
 
     @Override
@@ -146,10 +147,14 @@ public class MainActivity extends Activity implements MainMenuFragment.OnFragmen
     public void onNews(Game game) {
         Log.d(LOG_TAG, "onNews");
 
-        NewsFragment fragment = new NewsFragment();
-        fragment.setGame(game);
-
-        this.switchMainView(fragment);
+        Intent intent = new Intent(this, NewsActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+        intent.putExtra(NewsActivity.BanishCost, game.demonBanishCost);
+        intent.putExtra(NewsActivity.DemonIndividualStrength, game.demonIndividualStrength());
+        intent.putExtra(NewsActivity.FirstBanish, game.reportFirstBanish);
+        intent.putExtra(NewsActivity.HellgatesClosed, game.reportHellgateClose);
+        intent.putExtra(NewsActivity.ScoutedDemons, game.reportScoutedDemons);
+        startActivity(intent);
     }
 
     @Override
