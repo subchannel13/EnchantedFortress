@@ -133,7 +133,9 @@ public class MainActivity extends Activity implements MainMenuFragment.OnFragmen
     public void onHelp() {
         Log.d(LOG_TAG, "onHelp");
 
-        this.switchMainView(new HelpFragment());
+        Intent intent = new Intent(this, HelpActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+        startActivity(intent);
     }
 
     @Override

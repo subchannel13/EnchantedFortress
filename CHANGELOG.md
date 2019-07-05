@@ -2,6 +2,12 @@
 All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
+### Added
+- Actionbar "up" button navigation
+### Changed
+- Converted "screens" from fragments to activities
+### Fixed
+- Crash after rotating while news report is open
 
 ## [v1.11] 2019-03-26
 ### Added

@@ -27,8 +27,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
-import hr.kravarscan.enchantedfortress.logic.Game;
-
 public class NewsActivity extends Activity {
 
     private static final String LOG_TAG = "NewsActivity";
