@@ -10,8 +10,17 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".AboutActivity"
+            android:name=".GameActivity"
             android:parentActivityName=".MainActivity"></activity>
+        <activity
+            android:name=".ScoresActivity"
+            android:parentActivityName=".MainActivity" />
+        <activity
+            android:name=".NewGameActivity"
+            android:parentActivityName=".MainActivity" />
+        <activity
+            android:name=".AboutActivity"
+            android:parentActivityName=".MainActivity" />
         <activity
             android:name=".HelpActivity"
             android:parentActivityName=".MainActivity" />

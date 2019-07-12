@@ -33,7 +33,7 @@ import hr.kravarscan.enchantedfortress.logic.Game;
 import hr.kravarscan.enchantedfortress.storage.HighScores;
 import hr.kravarscan.enchantedfortress.storage.SaveLoad;
 
-public class MainActivity extends Activity implements MainMenuFragment.OnFragmentInteractionListener, GameFragment.OnFragmentInteractionListener, NewGameFragment.OnFragmentInteractionListener {
+public class MainActivity extends Activity implements MainMenuFragment.OnFragmentInteractionListener {
 
     private static final String LOG_TAG = "MainActivity";
 
@@ -96,37 +96,28 @@ public class MainActivity extends Activity implements MainMenuFragment.OnFragmen
     public void onContinue() {
         Log.d(LOG_TAG, "onContinue");
 
-        GameFragment gameFragment = new GameFragment();
-        Game game = new Game(Difficulty.Medium);
-        SaveLoad.get().deserialize(game, SaveLoad.get().load(this));
-        gameFragment.setGame(game);
-
-        this.switchMainView(gameFragment);
+        Intent intent = new Intent(this, GameActivity.class);
+        intent.putExtra(GameActivity.ContinueGame, true);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+        startActivity(intent);
     }
 
     @Override
     public void onNewGame() {
         Log.d(LOG_TAG, "onNewGame");
 
-        this.switchMainView(new NewGameFragment());
-    }
-
-    @Override
-    public void onNewGameStart(int difficulty) {
-        Log.d(LOG_TAG, "onNewGameStart, difficulty: " + difficulty);
-
-        GameFragment fragment = new GameFragment();
-        Game game = new Game(Difficulty.Levels[difficulty]);
-        fragment.setGame(game);
-
-        this.switchMainView(fragment);
+        Intent intent = new Intent(this, NewGameActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+        startActivity(intent);
     }
 
     @Override
     public void onScores() {
         Log.d(LOG_TAG, "onScores");
 
-        this.switchMainView(new ScoresFragment());
+        Intent intent = new Intent(this, ScoresActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+        startActivity(intent);
     }
 
     @Override
@@ -145,26 +136,5 @@ public class MainActivity extends Activity implements MainMenuFragment.OnFragmen
         Intent intent = new Intent(this, AboutActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
         startActivity(intent);
-    }
-
-    @Override
-    public void onNews(Game game) {
-        Log.d(LOG_TAG, "onNews");
-
-        Intent intent = new Intent(this, NewsActivity.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
-        intent.putExtra(NewsActivity.BanishCost, game.demonBanishCost);
-        intent.putExtra(NewsActivity.DemonIndividualStrength, game.demonIndividualStrength());
-        intent.putExtra(NewsActivity.FirstBanish, game.reportFirstBanish);
-        intent.putExtra(NewsActivity.HellgatesClosed, game.reportHellgateClose);
-        intent.putExtra(NewsActivity.ScoutedDemons, game.reportScoutedDemons);
-        startActivity(intent);
-    }
-
-    @Override
-    public void onGameOver() {
-        Log.d(LOG_TAG, "onGameOver");
-
-        this.switchMainView(new MainMenuFragment());
     }
 }
