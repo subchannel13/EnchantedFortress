@@ -20,24 +20,16 @@
 package hr.kravarscan.enchantedfortress;
 
 import android.app.Activity;
-import android.app.ActivityOptions;
-import android.app.Fragment;
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 
-import hr.kravarscan.enchantedfortress.logic.Difficulty;
-import hr.kravarscan.enchantedfortress.logic.Game;
-import hr.kravarscan.enchantedfortress.storage.HighScores;
 import hr.kravarscan.enchantedfortress.storage.SaveLoad;
 
-public class MainActivity extends Activity implements MainMenuFragment.OnFragmentInteractionListener {
+public class MainActivity extends Activity {
 
     private static final String LOG_TAG = "MainActivity";
-
-    private Fragment lastMainFragment = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,45 +37,53 @@ public class MainActivity extends Activity implements MainMenuFragment.OnFragmen
         Log.d(LOG_TAG, "onCreate");
         setContentView(R.layout.activity_main);
 
-        this.lastMainFragment = getFragmentManager().findFragmentById(R.id.fragment_container);
+        View continueButton = this.findViewById(R.id.continueButton);
+        continueButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onContinue();
+            }
+        });
 
         Log.d(LOG_TAG, "Has saved instance? " + (savedInstanceState != null));
-        Log.d(LOG_TAG, "Has saved fragment? " + (this.lastMainFragment != null));
-        if (savedInstanceState == null) {
-            HighScores.get().load(this);
+        if (!SaveLoad.get().hasAutosave(this))
+            continueButton.setVisibility(View.GONE);
 
-            MainMenuFragment mainMenu = new MainMenuFragment();
-            mainMenu.attach(this);
-            getFragmentManager().beginTransaction().replace(R.id.fragment_container, mainMenu).commit();
-        }
-        else if (this.lastMainFragment != null)
-        {
-            ((AAttachableFragment)this.lastMainFragment).attach(this);
-        }
-    }
+        this.findViewById(R.id.newGameButton).setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        onNewGame();
+                    }
+                }
+        );
 
-    private void switchMainView(AAttachableFragment fragment)
-    {
-        Log.d(LOG_TAG, "switchMainView, fragment: " + fragment);
+        this.findViewById(R.id.scoresButton).setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        onScores();
+                    }
+                }
+        );
 
-        FragmentManager manager = getFragmentManager();
-        FragmentTransaction transaction = manager.beginTransaction();
+        this.findViewById(R.id.helpButton).setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        onHelp();
+                    }
+                }
+        );
 
-        transaction.replace(R.id.fragment_container, fragment);
-        transaction.commit();
-
-        fragment.attach(this);
-        this.lastMainFragment = fragment;
-    }
-
-    @Override
-    public void onBackPressed() {
-        Log.d(LOG_TAG, "onBackPressed, last fragment: " + this.lastMainFragment);
-
-        if (this.lastMainFragment != null && this.lastMainFragment instanceof MainMenuFragment)
-            super.onBackPressed();
-        else
-            this.switchMainView(new MainMenuFragment());
+        this.findViewById(R.id.aboutButton).setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        onAbout();
+                    }
+                }
+        );
     }
 
     @Override
@@ -92,7 +92,6 @@ public class MainActivity extends Activity implements MainMenuFragment.OnFragmen
         overridePendingTransition(0,0);
     }
 
-    @Override
     public void onContinue() {
         Log.d(LOG_TAG, "onContinue");
 
@@ -102,7 +101,6 @@ public class MainActivity extends Activity implements MainMenuFragment.OnFragmen
         startActivity(intent);
     }
 
-    @Override
     public void onNewGame() {
         Log.d(LOG_TAG, "onNewGame");
 
@@ -111,7 +109,6 @@ public class MainActivity extends Activity implements MainMenuFragment.OnFragmen
         startActivity(intent);
     }
 
-    @Override
     public void onScores() {
         Log.d(LOG_TAG, "onScores");
 
@@ -120,7 +117,6 @@ public class MainActivity extends Activity implements MainMenuFragment.OnFragmen
         startActivity(intent);
     }
 
-    @Override
     public void onHelp() {
         Log.d(LOG_TAG, "onHelp");
 
@@ -129,7 +125,6 @@ public class MainActivity extends Activity implements MainMenuFragment.OnFragmen
         startActivity(intent);
     }
 
-    @Override
     public void onAbout() {
         Log.d(LOG_TAG, "onAbout");
 
