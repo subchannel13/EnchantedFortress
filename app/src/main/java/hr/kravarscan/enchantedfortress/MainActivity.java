@@ -142,7 +142,9 @@ public class MainActivity extends Activity implements MainMenuFragment.OnFragmen
     public void onAbout() {
         Log.d(LOG_TAG, "onAbout");
 
-        this.switchMainView(new AboutFragment());
+        Intent intent = new Intent(this, AboutActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+        startActivity(intent);
     }
 
     @Override

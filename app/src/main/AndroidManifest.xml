@@ -9,7 +9,12 @@
         android:roundIcon="@mipmap/round_launcher"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".HelpActivity" android:parentActivityName=".MainActivity"></activity>
+        <activity
+            android:name=".AboutActivity"
+            android:parentActivityName=".MainActivity"></activity>
+        <activity
+            android:name=".HelpActivity"
+            android:parentActivityName=".MainActivity" />
         <activity
             android:name=".NewsActivity"
             android:parentActivityName=".MainActivity" />

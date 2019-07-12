@@ -4,10 +4,12 @@ All notable changes to this project will be documented in this file.
 ## [Unreleased]
 ### Added
 - Actionbar "up" button navigation
+
 ### Changed
 - Converted "screens" from fragments to activities
+
 ### Fixed
-- Crash after rotating while news report is open
+- Crash after rotating while news report is open (issue #62)
 
 ## [v1.11] 2019-03-26
 ### Added
@@ -30,7 +32,7 @@ All notable changes to this project will be documented in this file.
 - Demon attack event notification more prominent
 
 ### Fixed
-- Crash in main menu after orientation change
+- Crash in main menu after orientation change (issue #50)
 
 ## [v1.9] - 2018-04-23
 ### Added
