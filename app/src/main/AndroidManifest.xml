@@ -26,7 +26,7 @@
             android:parentActivityName=".MainActivity" />
         <activity
             android:name=".NewsActivity"
-            android:parentActivityName=".MainActivity" />
+            android:parentActivityName=".GameActivity" />
         <activity
             android:name=".MainActivity"
             android:launchMode="singleTop">

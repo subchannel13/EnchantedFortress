@@ -1,0 +1,6 @@
+Added
+* Actionbar "up" button navigation
+Changed
+* Converted "screens" from fragments to activities
+Fixed
+* Crash after rotating while news report is open (issue #62)
