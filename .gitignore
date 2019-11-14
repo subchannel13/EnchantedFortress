@@ -28,3 +28,5 @@ gradle.properties
 .idea/vcs.xml
 .idea/assetWizardSettings.xml
 .idea/caches/*
+
+/.idea/codeStyles/Project.xml
