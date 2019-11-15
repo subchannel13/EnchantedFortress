@@ -10,8 +10,11 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.DayNight">
         <activity
+            android:name=".SettingsActivity"
+            android:parentActivityName=".MainActivity" />
+        <activity
             android:name=".GameActivity"
-            android:parentActivityName=".MainActivity"></activity>
+            android:parentActivityName=".MainActivity" />
         <activity
             android:name=".ScoresActivity"
             android:parentActivityName=".MainActivity" />

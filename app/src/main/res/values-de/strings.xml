@@ -78,6 +78,9 @@
     <string name="battleNotification"></string>
     <string name="banishNotification"></string>
     <string name="scoutNotification"></string>
+    <string name="settings"></string>
+    <string name="nightMode"></string>
+    <string name="resetHofButton"></string>
     -->
     <!-- Accessibility -->
     <!--

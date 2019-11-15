@@ -76,6 +76,9 @@
     <string name="battleNotification">We were attacked!</string>
     <string name="banishNotification">banishment</string>
     <string name="scoutNotification">scout report</string>
+    <string name="settings">Settings</string>
+    <string name="nightMode">Day/night mode</string>
+    <string name="resetHofButton">Reset hall of fame</string>
     <!-- Accessibility -->
     <string name="minusButton">Minus button</string>
     <string name="plusButton">Plus button</string>

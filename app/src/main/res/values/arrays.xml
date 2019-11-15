@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
   ~ Copyright 2019 Ivan Kravarščan
   ~
   ~ This file is part of Enchanted Fortress.
@@ -27,5 +26,17 @@
     <string-array name="translators">
         <item>German (de) - mueller-ma</item>
         <item>French (fr) - Julien Lepiller</item>
+    </string-array>
+
+    <string-array name="night_mode_entries">
+        <item>Default</item>
+        <item>Day</item>
+        <item>Night</item>
+    </string-array>
+
+    <string-array name="night_mode_values">
+        <item>default</item>
+        <item>day</item>
+        <item>night</item>
     </string-array>
 </resources>

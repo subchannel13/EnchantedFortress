@@ -76,6 +76,15 @@ public class MainActivity extends Activity {
                 }
         );
 
+        this.findViewById(R.id.settingsButton).setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        onSettings();
+                    }
+                }
+        );
+
         this.findViewById(R.id.aboutButton).setOnClickListener(
                 new View.OnClickListener() {
                     @Override
@@ -121,6 +130,14 @@ public class MainActivity extends Activity {
         Log.d(LOG_TAG, "onHelp");
 
         Intent intent = new Intent(this, HelpActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+        startActivity(intent);
+    }
+
+    private void onSettings() {
+        Log.d(LOG_TAG, "onSettings");
+
+        Intent intent = new Intent(this, SettingsActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
         startActivity(intent);
     }

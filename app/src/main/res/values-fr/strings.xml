@@ -80,4 +80,10 @@
     <!-- Accessibility -->
     <string name="minusButton">Bouton moins</string>
     <string name="plusButton">Bouton plus</string>
+    <!-- Untranslated -->
+    <!--
+    <string name="settings"></string>
+    <string name="nightMode"></string>
+    <string name="resetHofButton"></string>
+    -->
 </resources>

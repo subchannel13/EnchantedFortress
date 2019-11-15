@@ -28,4 +28,13 @@
         <item>Deutsch (de) - mueller-ma</item>
         <item>Französisch (fr) - Julien Lepiller</item>
     </string-array>
+
+    <!-- Untranslated -->
+    <!--
+    <string-array name="night_mode_entries">
+        <item></item>
+        <item></item>
+        <item></item>
+    </string-array>
+    -->
 </resources>
