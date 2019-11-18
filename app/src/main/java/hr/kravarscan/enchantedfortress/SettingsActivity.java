@@ -19,12 +19,19 @@
 
 package hr.kravarscan.enchantedfortress;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
 
-import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
+import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
+import androidx.preference.PreferenceManager;
+
+import hr.kravarscan.enchantedfortress.storage.HighScores;
 
 public class SettingsActivity extends AppCompatActivity {
 
@@ -41,16 +48,80 @@ public class SettingsActivity extends AppCompatActivity {
                 .replace(R.id.settings, new SettingsFragment())
                 .commit();
 
-        ActionBar actionBar = getSupportActionBar();
-        if (actionBar != null) {
-            actionBar.hide();
+        setNightMode(this);
+    }
+
+    @Override
+    public void finish() {
+        super.finish();
+        overridePendingTransition(0,0);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                finish();
+                return true;
         }
+
+        return super.onOptionsItemSelected(item);
     }
 
     public static class SettingsFragment extends PreferenceFragmentCompat {
         @Override
         public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
             setPreferencesFromResource(R.xml.root_preferences, rootKey);
+
+            this.findPreference("night_mode").setOnPreferenceChangeListener(
+                new Preference.OnPreferenceChangeListener() {
+                    @Override
+                    public boolean onPreferenceChange(Preference preference, Object newValue) {
+                        Log.d(LOG_TAG, "onPreferenceChange nightModePref");
+
+                        setNightMode((String)newValue);
+                        return true;
+                    }
+                });
+
+            this.findPreference("resetHof").setOnPreferenceClickListener(
+                new Preference.OnPreferenceClickListener() {
+                    @Override
+                    public boolean onPreferenceClick(Preference preference) {
+                        Log.d(LOG_TAG, "setOnPreferenceClickListener resetHof");
+
+                        HighScores.get().clear(getContext());
+                        return true;
+                    }
+                });
+        }
+    }
+
+    public static void setNightMode(Context context)
+    {
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
+        setNightMode(preferences.getString(
+                "night_mode",
+                context.getResources().getStringArray(R.array.night_mode_values)[0])
+        );
+    }
+
+    private static void setNightMode(String mode)
+    {
+        switch (mode) {
+            case "default":
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM);
+                break;
+            case "day":
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+                break;
+            case "night":
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+                break;
+            default:
+                Log.d(LOG_TAG, "setNightMode unknown mode");
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM);
+                break;
         }
     }
 }

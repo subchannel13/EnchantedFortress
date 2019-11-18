@@ -19,7 +19,6 @@
 
 package hr.kravarscan.enchantedfortress;
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -28,10 +27,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import hr.kravarscan.enchantedfortress.storage.HighScores;
 import hr.kravarscan.enchantedfortress.storage.ScoreEntry;
 
-public class ScoresActivity extends Activity {
+public class ScoresActivity extends AppCompatActivity {
 
     private static final String LOG_TAG = "ScoresActivity";
 

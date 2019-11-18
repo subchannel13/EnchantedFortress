@@ -19,15 +19,16 @@
 
 package hr.kravarscan.enchantedfortress;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import hr.kravarscan.enchantedfortress.storage.SaveLoad;
 
-public class MainActivity extends Activity {
+public class MainActivity extends AppCompatActivity {
 
     private static final String LOG_TAG = "MainActivity";
 
@@ -36,6 +37,7 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         Log.d(LOG_TAG, "onCreate");
         setContentView(R.layout.activity_main);
+        SettingsActivity.setNightMode(this);
 
         View continueButton = this.findViewById(R.id.continueButton);
         continueButton.setOnClickListener(new View.OnClickListener() {

@@ -19,7 +19,6 @@
 
 package hr.kravarscan.enchantedfortress;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -27,7 +26,9 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
-public class NewsActivity extends Activity {
+import androidx.appcompat.app.AppCompatActivity;
+
+public class NewsActivity extends AppCompatActivity {
 
     private static final String LOG_TAG = "NewsActivity";
 

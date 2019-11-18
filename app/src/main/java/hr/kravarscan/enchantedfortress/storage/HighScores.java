@@ -136,7 +136,7 @@ public class HighScores {
             stream.close();
             Log.i(LOG_TAG, "loaded");
         } catch (Exception e) {
-            Log.e(LOG_TAG, "Loading autosave failed", e);
+            Log.e(LOG_TAG, "Loading high scores failed", e);
         }
     }
 
@@ -167,7 +167,16 @@ public class HighScores {
             stream.close();
             Log.d(LOG_TAG, "Saved");
         } catch (Exception e) {
-            Log.e(LOG_TAG, "Autosave failed", e);
+            Log.e(LOG_TAG, "Saving high scores failed", e);
+        }
+    }
+
+    public void clear(Context context) {
+        try
+        {
+            context.deleteFile(ScoresFileName);
+        } catch (Exception e) {
+            Log.e(LOG_TAG, "Clearing high scores failed", e);
         }
     }
 }

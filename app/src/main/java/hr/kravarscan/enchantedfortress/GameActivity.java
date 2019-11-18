@@ -19,7 +19,6 @@
 
 package hr.kravarscan.enchantedfortress;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
@@ -32,13 +31,15 @@ import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import hr.kravarscan.enchantedfortress.logic.Difficulty;
 import hr.kravarscan.enchantedfortress.logic.Game;
 import hr.kravarscan.enchantedfortress.logic.Technology;
 import hr.kravarscan.enchantedfortress.storage.HighScores;
 import hr.kravarscan.enchantedfortress.storage.SaveLoad;
 
-public class GameActivity extends Activity {
+public class GameActivity extends AppCompatActivity {
 
     private static final String LOG_TAG = "GameActivity";
 

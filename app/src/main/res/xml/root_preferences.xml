@@ -25,12 +25,13 @@
             app:defaultValue="default"
             app:entries="@array/night_mode_entries"
             app:entryValues="@array/night_mode_values"
-            app:key="reply"
+            app:key="night_mode"
             app:title="@string/nightMode"
             app:useSimpleSummaryProvider="true" />
 
         <Preference
-            app:title="@string/resetHofButton" />
+            app:title="@string/resetHofButton"
+            app:key="resetHof"/>
 
     </PreferenceCategory>
 

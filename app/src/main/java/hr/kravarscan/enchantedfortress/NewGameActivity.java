@@ -19,7 +19,6 @@
 
 package hr.kravarscan.enchantedfortress;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -30,9 +29,11 @@ import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import hr.kravarscan.enchantedfortress.logic.Difficulty;
 
-public class NewGameActivity extends Activity {
+public class NewGameActivity extends AppCompatActivity {
 
     private static final String LOG_TAG = "NewGameActivity";
 

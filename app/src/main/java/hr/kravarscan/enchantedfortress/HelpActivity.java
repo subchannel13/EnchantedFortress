@@ -19,12 +19,13 @@
 
 package hr.kravarscan.enchantedfortress;
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
 
-public class HelpActivity extends Activity {
+import androidx.appcompat.app.AppCompatActivity;
+
+public class HelpActivity extends AppCompatActivity {
 
     private static final String LOG_TAG = "HelpActivity";
 

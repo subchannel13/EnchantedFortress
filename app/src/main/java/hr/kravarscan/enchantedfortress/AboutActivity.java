@@ -19,14 +19,15 @@
 
 package hr.kravarscan.enchantedfortress;
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
-public class AboutActivity extends Activity {
+import androidx.appcompat.app.AppCompatActivity;
+
+public class AboutActivity extends AppCompatActivity {
 
     private static final String LOG_TAG = "AboutActivity";
 
