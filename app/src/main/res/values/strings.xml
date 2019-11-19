@@ -78,7 +78,10 @@
     <string name="scoutNotification">scout report</string>
     <string name="settings">Settings</string>
     <string name="nightMode">Day/night mode</string>
-    <string name="resetHofButton">Reset hall of fame</string>
+    <string name="resetHofPreference">Reset hall of fame</string>
+    <string name="resetHofDialogTitle">Are you sure you want to reset hall of fame?</string>
+    <string name="alertYes">Yes</string>
+    <string name="alertNo">No</string>
     <!-- Accessibility -->
     <string name="minusButton">Minus button</string>
     <string name="plusButton">Plus button</string>

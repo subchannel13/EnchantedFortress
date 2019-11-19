@@ -20,11 +20,13 @@
 package hr.kravarscan.enchantedfortress;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.preference.Preference;
@@ -90,7 +92,19 @@ public class SettingsActivity extends AppCompatActivity {
                     public boolean onPreferenceClick(Preference preference) {
                         Log.d(LOG_TAG, "setOnPreferenceClickListener resetHof");
 
-                        HighScores.get().clear(getContext());
+                        AlertDialog.Builder alert = new AlertDialog.Builder(getContext());
+                        alert.setTitle(getResources().getString(R.string.resetHofPreference));
+
+                        alert.setMessage(R.string.resetHofDialogTitle);
+                        alert.setPositiveButton(getContext().getString(R.string.alertYes), new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int whichButton) {
+                                HighScores.get().clear(getContext());
+                            }
+                        });
+                        alert.setNegativeButton(getContext().getString(R.string.alertNo), null);
+                        alert.setCancelable(true);
+                        alert.show();
+
                         return true;
                     }
                 });

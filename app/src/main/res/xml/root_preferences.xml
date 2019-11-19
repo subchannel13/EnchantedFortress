@@ -30,7 +30,7 @@
             app:useSimpleSummaryProvider="true" />
 
         <Preference
-            app:title="@string/resetHofButton"
+            app:title="@string/resetHofPreference"
             app:key="resetHof"/>
 
     </PreferenceCategory>

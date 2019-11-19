@@ -84,6 +84,9 @@
     <!--
     <string name="settings"></string>
     <string name="nightMode"></string>
-    <string name="resetHofButton"></string>
+    <string name="resetHofPreference"></string>
+    <string name="resetHofDialogTitle"></string>
+    <string name="alertYes"></string>
+    <string name="alertNo"></string>
     -->
 </resources>
