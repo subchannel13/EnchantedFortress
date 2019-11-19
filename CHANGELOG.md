@@ -2,6 +2,13 @@
 All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
+### Added
+- Night mode support
+- Setting screen
+- Option to reset hall of fame
+
+### Fixed
+- Hall of fame not loading
 
 ## [v1.12] 2019-08-09
 ### Added

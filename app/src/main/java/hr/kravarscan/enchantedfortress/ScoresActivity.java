@@ -45,7 +45,7 @@ public class ScoresActivity extends AppCompatActivity {
         CharSequence[] difficultyNames = this.getResources().getTextArray(R.array.difficultyLevels);
         ViewGroup listView = this.findViewById(R.id.scoreList);
 
-        for (ScoreEntry score : HighScores.get().getAll()) {
+        for (ScoreEntry score : HighScores.get().getAll(this)) {
             View itemView = LayoutInflater.from(this).inflate(R.layout.score_entry_view, listView, false);
 
             ((TextView)itemView.findViewById(R.id.turnsText)).setText(Integer.toString(score.getTurn()));

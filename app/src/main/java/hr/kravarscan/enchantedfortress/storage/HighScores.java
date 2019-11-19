@@ -40,6 +40,7 @@ public class HighScores {
 
     private static final String ScoresFileName = "highscores.dat";
     private static HighScores instance = null;
+    private boolean loaded = false;
 
     public static HighScores get() {
         if (instance == null)
@@ -58,6 +59,8 @@ public class HighScores {
             Log.d(LOG_TAG, "add, player dead, no new high score");
             return;
         }
+
+        this.load(context);
 
         Integer diffIndex = new Integer(game.getDifficulty().getIndex());
         Log.d(LOG_TAG, "add, difficulty index: " + diffIndex);
@@ -83,8 +86,10 @@ public class HighScores {
         save(context);
     }
 
-    public List<ScoreEntry> getAll() {
+    public List<ScoreEntry> getAll(Context context) {
         List<ScoreEntry> list = new ArrayList<>();
+
+        this.load(context);
 
         for (int diff = Difficulty.Levels.length - 1; diff >= 0; diff--)
             if (this.scores.containsKey(new Integer(diff)))
@@ -93,7 +98,10 @@ public class HighScores {
         return list;
     }
 
-    public void load(Context context) {
+    private void load(Context context) {
+        if (this.loaded)
+            return;
+
         this.scores.clear();
         byte[] byteBuffer = new byte[Double.SIZE / Byte.SIZE];
 
@@ -138,6 +146,8 @@ public class HighScores {
         } catch (Exception e) {
             Log.e(LOG_TAG, "Loading high scores failed", e);
         }
+
+        this.loaded = true;
     }
 
     private void save(Context context) {
@@ -172,6 +182,8 @@ public class HighScores {
     }
 
     public void clear(Context context) {
+        this.scores.clear();
+
         try
         {
             context.deleteFile(ScoresFileName);
