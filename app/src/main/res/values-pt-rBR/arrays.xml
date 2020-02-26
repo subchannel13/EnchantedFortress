@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~ Copyright 2019 Ivan Kravarščan
+  ~
+  ~ This file is part of Enchanted Fortress.
+  ~
+  ~ Enchanted Fortress is free software: you can redistribute it and/or modify
+  ~ it under the terms of the GNU General Public License as published by
+  ~ the Free Software Foundation, either version 3 of the License, or
+  ~ (at your option) any later version.
+  ~
+  ~ Enchanted Fortress is distributed in the hope that it will be useful,
+  ~ but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  ~ GNU General Public License for more details.
+  ~
+  ~ You should have received a copy of the GNU General Public License
+  ~ along with Enchanted Fortress.  If not, see <http://www.gnu.org/licenses/>.
+  -->
+
+<resources>
+    <string-array name="difficultyLevels">
+        <item>Fácil</item>
+        <item>Normal</item>
+        <item>Difícil</item>
+    </string-array>
+    <string-array name="translators">
+        <item>German (de) - mueller-ma</item>
+        <item>French (fr) - Julien Lepiller</item>
+        <item>Brazilian Portuguese (pt-br) - Ivan Amaro</item>
+    </string-array>
+
+    <string-array name="night_mode_entries">
+        <item>Padrão</item>
+        <item>Dia</item>
+        <item>Noite</item>
+    </string-array>
+
+    <string-array name="night_mode_values">
+        <item>padrão</item>
+        <item>dia</item>
+        <item>noite</item>
+    </string-array>
+</resources>

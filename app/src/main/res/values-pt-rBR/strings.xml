@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright 2019 Ivan Kravarščan
+  ~
+  ~ This file is part of Enchanted Fortress.
+  ~
+  ~ Enchanted Fortress is free software: you can redistribute it and/or modify
+  ~ it under the terms of the GNU General Public License as published by
+  ~ the Free Software Foundation, either version 3 of the License, or
+  ~ (at your option) any later version.
+  ~
+  ~ Enchanted Fortress is distributed in the hope that it will be useful,
+  ~ but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  ~ GNU General Public License for more details.
+  ~
+  ~ You should have received a copy of the GNU General Public License
+  ~ along with Enchanted Fortress.  If not, see <http://www.gnu.org/licenses/>.
+  -->
+
+<resources>
+    <string name="app_name">Enchanted Fortress</string>
+    <string name="newGame">Novo Jogo</string>
+    <string name="end_turn">FIm Da Rodada</string>
+    <string name="population">População</string>
+    <string name="farmers">Fazendeiros</string>
+    <string name="scholars">Acadêmicos</string>
+    <string name="builders">Construtores</string>
+    <string name="soldiers">Soldados</string>
+    <string name="popDelta">Crescimento Da População</string>
+    <string name="wallDelta">Novos muros</string>
+    <string name="militaryStrength">Força</string>
+    <string name="researchDelta">Pesquisa</string>
+    <string name="walls">Muros Da Cidade</string>
+    <string name="scouted">Relatório Do Vigilante: %1$s demônios</string>
+    <string name="scoutedLong">Relatório Do Vigilante:\n%1$s demônios\n%2$s força\n%3$s poder militar total</string>
+    <string name="attacked">Atacado!\n%1$s demônio(s) atacante(s)\n%2$s vítima(s)</string>
+    <string name="noVictims">Ataque demoníaco repelido sem baixas</string>
+    <string name="farmingTech">Agricultura</string>
+    <string name="buildTech">Alvenaria</string>
+    <string name="soldierTech">Treinamento</string>
+    <string name="scholarTech">Sabedoria</string>
+    <string name="banishTech">Banir demônios</string>
+    <string name="gameOver">Voltar para o menu principal</string>
+    <string name="defeat">Demônios derrotaram voce!\nNinguém em sua fortaleza sobreviveu e o reino está em grande perigo.</string>
+    <string name="victory">Vitória!\nVoce baniu todos os demônios e o reino está seguro agora.</string>
+    <string name="help">Story &amp; Ajuda</string>
+    <string name="helpText"><b>História</b>\n\nDias sombrios estão sob sua terra; pessoas sem noção fizeram pacto com o capeta, portais do inferno foram abertos e diversos tipos de demônios vagam nesse mundo.  Com o passar do tempo, mais portas do inferno se abrem e o exército demoníaco se torna mais forte e mais ousado. Se eles não forem parados, o reino ruirá.\n\nAcadêmicos especulam que há um ritual para trazer os demônios, então há uma forma de bani-los. Ajude-os a relizar o exorcismo e defenda-os dos demônios que tentaráo impedi-los.\n\n<b>Como jogar</b>\n\nA maioria do jogo gira em torno da distribuição da população entre os seguintes trabalhos:\n- Fazendeiros - aumentam o cresimento da população\n- Construtores - constroem muros na cidade\n- Soldados - aumentam a força militar\n- Acadêmicos - melhorias na pesquisa e bane demônios\n\nCom o passar do tempo (turnos), a força do exército de demônios aumentará e montarão um ataque quando ficarem confiantes o suficiente. Os ataques não chegam sem aviso; seus súditos informarão quantos demônios avistaram. Não é um número exato, mas espere muitos demônios. Quando um ataque chega, toda população participa da defesa, soldados e trabalhadores. Soldados são fortes defensores, mas se você for pego despreparado, os civis farão o possível para sobreviver. Uma muralha alta da cidade é uma ótima maneira de não ser pego despreparado.\n\nEm última análise, seu sucesso depende de equilibrar seu poder militar e economia. É tentador empregar o maior número possível de soldados, mas se o ataque não ocorrer em um determinado turno, sua economia não crescerá rápido o suficiente para lidar com futuros ataques de demônios. Desde o início, a agricultura melhora a economia, quanto mais pessoas tiver, mais você poderá empregar para construir muros e soldados. A pesquisa é outra maneira de melhorar seu poder militar e sua economia a longo prazo. Toda a população participa de pesquisas, mas, semelhante à força militar, nem todos contribuem igualmente. Os acadêmicos (pessoas não designadas para agricultura, construção ou vigilância) geram mais pontos de pesquisa do que outros.\n\nFicar entrincheirado atrás do muro não o tornará invencível; eventualmente, os demônios se tornarão poderosos o suficiente para superar quaisquer defesas. O ritual de banimento é a única maneira de derrotar os demônios para sempre. O exorcismo fechará os portões do inferno, tornando o exército demoníaco mais lento; uma vez terminado o ritual, interromperá permanentemente a invasão demoníaca.</string>
+    <string name="aboutMe">Sobre</string>
+    <string name="turns">turnos</string>
+    <string name="turn">Turno</string>
+    <string name="continueText">Continuar</string>
+    <string name="difficultySelect">Escolher dificuldade:</string>
+    <string name="aboutDevelopBy">Desenvolvido por %1$s</string>
+    <string name="aboutTranslateBy">Tradução por\n%1$s</string>
+    <string name="aboutTrackerAt">Reportar erros:\n%1$s</string>
+    <string name="aboutCodeAt">Código:\n%1$s</string>
+    <string name="aboutVersion">Versão: %1$s</string>
+    <string name="aboutSupportAt">Apoiar o desenvolvimento:\n%1$s</string>
+    <string name="startGame">Iniciar jogo</string>
+    <string name="gatesClosed">%1d portão(ões) do inferno fechado(s)</string>
+    <string name="gatesOpened">, demônio(s) reabriram %1d portão(ões)</string>
+    <string name="gatesLeft">%1d portão(ões)</string>
+    <string name="difficultyStartingPop">População inicial: %1s</string>
+    <string name="difficultyDemonSpawn">Taxa de nascimento dos demômios: %1s</string>
+    <string name="difficultyDemonGrowth">Poder de cresimento dos demônios: %1s</string>
+    <string name="banishNever">sem esperança</string>
+    <string name="banishSlow">para sempre</string>
+    <string name="scoresTitle">Calçada Da Fama</string>
+    <string name="scoresTurns">Turnos</string>
+    <string name="scoresDifficulty">Dificuldade</string>
+    <string name="scoresButton">Calçada Da Fama</string>
+    <string name="banishProgress">Os acadêmicos realizam um exorcismo e os demônios tentam aumentar seu poder. O poder do(s) demônio(s) é agora %1d.</string>
+    <string name="banishProgressShort">O poder demoníaco está agora em %1d.</string>
+    <string name="newsButton">Botão lista de notícias</string>
+    <string name="moreNews">Outros relatórios</string>
+    <string name="battleNotification">Fomos atacados!</string>
+    <string name="banishNotification">banimento</string>
+    <string name="scoutNotification">relatório do vigilante</string>
+    <string name="settings">Configurações</string>
+    <string name="nightMode">Modo dia/noite</string>
+    <string name="resetHofPreference">Reiniciar calçada da fama</string>
+    <string name="resetHofDialogTitle">Tem certeza que deseja reiniciar a calçada da fama?</string>
+    <string name="alertYes">Sim</string>
+    <string name="alertNo">Não</string>
+    <!-- Accessibility -->
+    <string name="minusButton">Botão menos</string>
+    <string name="plusButton">Botão Mais</string>
+</resources>
