@@ -77,16 +77,13 @@
     <string name="battleNotification">Nous avons été attaqués !</string>
     <string name="banishNotification">bannissement</string>
     <string name="scoutNotification">rapport d\'éclaireurs</string>
+    <string name="settings">Paramètres</string>
+    <string name="nightMode">Mode jour/nuit</string>
+    <string name="resetHofPreference">Réinitialiser le temple de la renommée</string>
+    <string name="resetHofDialogTitle">Êtes-vous sûr de vouloir réinitialiser le temple de la renommée ?</string>
+    <string name="alertYes">Oui</string>
+    <string name="alertNo">Non</string>
     <!-- Accessibility -->
     <string name="minusButton">Bouton moins</string>
     <string name="plusButton">Bouton plus</string>
-    <!-- Untranslated -->
-    <!--
-    <string name="settings"></string>
-    <string name="nightMode"></string>
-    <string name="resetHofPreference"></string>
-    <string name="resetHofDialogTitle"></string>
-    <string name="alertYes"></string>
-    <string name="alertNo"></string>
-    -->
 </resources>
