@@ -1,0 +1,6 @@
+Added
+* Night mode support
+* Settings screen
+* Option to reset hall of fame
+Fixed
+* Hall of fame not loading

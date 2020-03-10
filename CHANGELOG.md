@@ -2,9 +2,11 @@
 All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
+
+## [v1.13] 2020-03-10
 ### Added
 - Night mode support
-- Setting screen
+- Settings screen
 - Option to reset hall of fame
 
 ### Fixed
