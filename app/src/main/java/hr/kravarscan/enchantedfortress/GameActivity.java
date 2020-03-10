@@ -71,7 +71,7 @@ public class GameActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         if (savedInstanceState != null) {
-            SaveLoad.get().deserialize(this.game, savedInstanceState.getDoubleArray(SaveLoad.SaveKey));
+            SaveLoad.get().deserialize(this.game, savedInstanceState.get(SaveLoad.SaveKey));
         }
         else if (intent.getBooleanExtra(ContinueGame, false))
         {

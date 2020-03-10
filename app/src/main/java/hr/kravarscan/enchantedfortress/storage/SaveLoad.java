@@ -127,16 +127,33 @@ public final class SaveLoad {
         return result;
     }
 
-    public void deserialize(Game game, double[] rawData) {
-        if (rawData == null || rawData.length == 0) {
-            Log.d(LOG_TAG, "deserialize");
+    public void deserialize(Game game, Object rawData) {
+        Log.d(LOG_TAG, "deserialize");
+
+        byte[] dataArray = rawData instanceof double[] ?
+                doubleArrayToByte((double[])rawData) :
+                (byte[])rawData;
+
+        if (dataArray == null || dataArray.length == 0) {
             return;
         }
+        ByteBuffer byteBuffer = ByteBuffer.wrap(dataArray);
 
-        int version = (int) rawData[0];
-        if (rawData.length != LatestSaveKeys.KEY_COUNT.ordinal() || version > BuildConfig.VERSION_CODE)
+        int version = (int) byteBuffer.getDouble();
+        if (version > BuildConfig.VERSION_CODE)
             return;
 
-        game.load(rawData);
+        game.load(byteBuffer);
+    }
+
+    private byte[] doubleArrayToByte(double[] rawData) {
+        byte[] result = new byte[rawData.length * Double.SIZE / Byte.SIZE];
+        ByteBuffer byteBuffer = ByteBuffer.wrap(result);
+
+        for (double value : rawData) {
+            byteBuffer.putDouble(value);
+        }
+
+        return result;
     }
 }
