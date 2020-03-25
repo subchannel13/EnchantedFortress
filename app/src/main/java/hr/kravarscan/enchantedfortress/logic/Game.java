@@ -24,8 +24,6 @@ import android.util.Log;
 import java.nio.ByteBuffer;
 import java.util.Random;
 
-import hr.kravarscan.enchantedfortress.storage.LatestSaveKeys;
-
 public class Game {
     private static final String LOG_TAG = "Game";
 
@@ -58,7 +56,7 @@ public class Game {
     public double walls = 0;
     private int demons = 0;
     private int demonLevel = 0;
-    public int demonGates = 0;
+    private int demonGates = 0;
     public int demonBanishCost = 10000;
     private Difficulty difficulty;
 
@@ -75,7 +73,7 @@ public class Game {
 
     public int reportAttackers = 0;
     public int reportHellgateClose = 0;
-    public int reportHellgateOpen = 0;
+    private int reportHellgateOpen = 0;
     public int reportVictims = 0;
     public int reportScoutedDemons = 0;
     public boolean reportFirstBanish = true;
@@ -369,7 +367,7 @@ public class Game {
 
     private void spawnDemons() {
         if (this.demonBanishCost > 0) {
-            double gatesDelta = this.roundedPop() + this.demonBanishCost / 100;
+            double gatesDelta = this.roundedPop() + this.demonBanishCost / 100.0;
             Log.d(LOG_TAG, "spawnDemons, gatesDelta: " + gatesDelta + ", previous gates: " + this.demonGates + ", old banish cost: " + this.demonBanishCost);
 
             if (this.demonGates + gatesDelta > MaxDemonGates)

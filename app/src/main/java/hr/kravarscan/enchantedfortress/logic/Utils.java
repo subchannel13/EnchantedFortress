@@ -19,7 +19,7 @@
 
 package hr.kravarscan.enchantedfortress.logic;
 
-public final class Utils {
+final class Utils {
     private Utils()
     {}
 

@@ -62,7 +62,7 @@ public class HighScores {
 
         this.load(context);
 
-        Integer diffIndex = new Integer(game.getDifficulty().getIndex());
+        Integer diffIndex = game.getDifficulty().getIndex();
         Log.d(LOG_TAG, "add, difficulty index: " + diffIndex);
 
         if (!this.scores.containsKey(diffIndex)) {
@@ -92,8 +92,8 @@ public class HighScores {
         this.load(context);
 
         for (int diff = Difficulty.Levels.length - 1; diff >= 0; diff--)
-            if (this.scores.containsKey(new Integer(diff)))
-                list.addAll(this.scores.get(new Integer(diff)));
+            if (this.scores.containsKey(diff))
+                list.addAll(this.scores.get(diff));
 
         return list;
     }

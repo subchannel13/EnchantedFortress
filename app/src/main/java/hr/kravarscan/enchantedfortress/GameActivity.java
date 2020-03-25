@@ -31,6 +31,7 @@ import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import hr.kravarscan.enchantedfortress.logic.Difficulty;
@@ -193,10 +194,9 @@ public class GameActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                finish();
-                return true;
+        if (item.getItemId() == android.R.id.home) {
+            finish();
+            return true;
         }
 
         return super.onOptionsItemSelected(item);
@@ -212,14 +212,14 @@ public class GameActivity extends AppCompatActivity {
     }
 
     @Override
-    public void onSaveInstanceState(Bundle outState) {
+    public void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
         Log.d(LOG_TAG, "onSaveInstanceState");
 
         outState.putDoubleArray(SaveLoad.SaveKey, SaveLoad.get().serialize(this.game));
     }
 
-    public void onNews() {
+    private void onNews() {
         Log.d(LOG_TAG, "onNews");
 
         Intent intent = new Intent(this, NewsActivity.class);
@@ -228,6 +228,8 @@ public class GameActivity extends AppCompatActivity {
         intent.putExtra(NewsActivity.DemonIndividualStrength, this.game.demonIndividualStrength());
         intent.putExtra(NewsActivity.FirstBanish, this.game.reportFirstBanish);
         intent.putExtra(NewsActivity.HellgatesClosed, this.game.reportHellgateClose);
+        intent.putExtra(NewsActivity.BattleAttackers, this.game.reportAttackers);
+        intent.putExtra(NewsActivity.BattleVictims, this.game.reportVictims);
         intent.putExtra(NewsActivity.ScoutedDemons, this.game.reportScoutedDemons);
         startActivity(intent);
     }
@@ -245,7 +247,7 @@ public class GameActivity extends AppCompatActivity {
 
         if (banishDelta <= 0)
             banishEta = " - " + getResources().getString(R.string.banishNever);
-        else if (banishDelta < this.game.demonBanishCost / 1000)
+        else if (banishDelta < this.game.demonBanishCost / 1000.0)
             banishEta = " - " + getResources().getString(R.string.banishSlow);
         else if (this.game.demonBanishCost > 0)
             banishEta = " - " + (int) Math.ceil(this.game.demonBanishCost / banishDelta) + " " + getResources().getString(R.string.turns);
@@ -292,9 +294,9 @@ public class GameActivity extends AppCompatActivity {
         this.updateTechList();
         this.techListAdapter.notifyDataSetChanged();
 
-        this.gameInfo.setText(getResources().getString(R.string.turn) + ": " + Integer.toString(this.game.turn) + "\n" +
-                getResources().getString(R.string.population) + ": " + Integer.toString((int) this.game.roundedPop()) + "\n" +
-                getResources().getString(R.string.walls) + ": " + Integer.toString((int) this.game.walls)
+        this.gameInfo.setText(getResources().getString(R.string.turn) + ": " + this.game.turn + "\n" +
+                getResources().getString(R.string.population) + ": " + (int) this.game.roundedPop() + "\n" +
+                getResources().getString(R.string.walls) + ": " + (int) this.game.walls
         );
 
         if (this.game.isOver()) {
@@ -330,10 +332,9 @@ public class GameActivity extends AppCompatActivity {
     }
 
     private String sliderText(int sliderTextId, int sliderValue, int descriptionTextId, int effectValue) {
-        Integer percents = (int) (sliderValue * (100 / Game.SliderTicks));
-        Integer effect = effectValue;
+        int percents = (int) (sliderValue * (100 / Game.SliderTicks));
 
-        return getResources().getString(sliderTextId) + ": " + percents.toString() + "%\n" +
-                getResources().getString(descriptionTextId) + ": " + effect.toString();
+        return getResources().getString(sliderTextId) + ": " + percents + "%\n" +
+                getResources().getString(descriptionTextId) + ": " + effectValue;
     }
 }

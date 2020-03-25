@@ -103,7 +103,7 @@ public class MainActivity extends AppCompatActivity {
         overridePendingTransition(0,0);
     }
 
-    public void onContinue() {
+    private void onContinue() {
         Log.d(LOG_TAG, "onContinue");
 
         Intent intent = new Intent(this, GameActivity.class);
@@ -112,7 +112,7 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void onNewGame() {
+    private void onNewGame() {
         Log.d(LOG_TAG, "onNewGame");
 
         Intent intent = new Intent(this, NewGameActivity.class);
@@ -120,7 +120,7 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void onScores() {
+    private void onScores() {
         Log.d(LOG_TAG, "onScores");
 
         Intent intent = new Intent(this, ScoresActivity.class);
@@ -128,7 +128,7 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void onHelp() {
+    private void onHelp() {
         Log.d(LOG_TAG, "onHelp");
 
         Intent intent = new Intent(this, HelpActivity.class);
@@ -144,7 +144,7 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void onAbout() {
+    private void onAbout() {
         Log.d(LOG_TAG, "onAbout");
 
         Intent intent = new Intent(this, AboutActivity.class);

@@ -36,6 +36,8 @@ public class NewsActivity extends AppCompatActivity {
     public static final String DemonIndividualStrength = "DemonIndividualStrength";
     public static final String FirstBanish = "FirstBanish";
     public static final String HellgatesClosed = "HellgatesClosed";
+    public static final String BattleAttackers = "BattleAttackers";
+    public static final String BattleVictims = "BattleVictims";
     public static final String ScoutedDemons = "ScoutedDemons";
 
     @Override
@@ -54,6 +56,8 @@ public class NewsActivity extends AppCompatActivity {
         else
             goalReport.setText(getResources().getString(R.string.banishProgressShort, intent.getIntExtra(BanishCost, 0) / 100));
 
+        //TODO add battle report
+
         TextView scoutReport = this.findViewById(R.id.scoutReport);
         scoutReport.setText(
                 getResources().getString(R.string.scoutedLong,
@@ -70,10 +74,9 @@ public class NewsActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                finish();
-                return true;
+        if (item.getItemId() == android.R.id.home) {
+            finish();
+            return true;
         }
 
         return super.onOptionsItemSelected(item);
