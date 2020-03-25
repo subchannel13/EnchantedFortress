@@ -24,7 +24,6 @@ gradle-app.setting
 .idea/dictionaries/*.xml
 .idea/codeStyleSettings.xml
 .idea/misc.xml
-gradle.properties
 .idea/vcs.xml
 .idea/assetWizardSettings.xml
 .idea/caches/*
