@@ -2,8 +2,13 @@
 All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
+
+## [v1.14] 2020-03-26
 ### Added
 - Brazilian Portuguese translation (thanks to Ivan Amaro)
+### Changed
+- Internal representation of high score data
+
 ## [v1.13] 2020-03-10
 ### Added
 - Night mode support
