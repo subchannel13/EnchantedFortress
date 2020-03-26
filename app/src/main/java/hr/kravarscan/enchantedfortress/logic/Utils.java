@@ -19,11 +19,14 @@
 
 package hr.kravarscan.enchantedfortress.logic;
 
-final class Utils {
+import java.io.IOException;
+import java.io.InputStream;
+
+public class Utils {
     private Utils()
     {}
 
-    public static double clamp(double x, double min, double max) {
+    static double clamp(double x, double min, double max) {
         if (x < min)
             return min;
         else if (x > max)
@@ -32,7 +35,15 @@ final class Utils {
         return x;
     }
 
-    public static int integerDelta(double x, double delta) {
+    static int integerDelta(double x, double delta) {
         return (int)(Math.floor(x + delta) - Math.floor(x));
+    }
+
+    public static void readStream(InputStream stream, byte[] buffer) throws IOException {
+        int readLength = stream.read(buffer);
+
+        if (readLength != buffer.length){
+            throw new IOException("Read " + readLength + " bytes instead of expected " + buffer.length);
+        }
     }
 }

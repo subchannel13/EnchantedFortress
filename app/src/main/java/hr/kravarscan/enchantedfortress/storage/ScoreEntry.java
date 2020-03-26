@@ -19,29 +19,31 @@
 
 package hr.kravarscan.enchantedfortress.storage;
 
-import java.util.List;
+import java.io.IOException;
+import java.io.InputStream;
+import java.nio.ByteBuffer;
+
+import hr.kravarscan.enchantedfortress.logic.Utils;
 
 public class ScoreEntry {
-    public static final int SaveLength = 2;
-
     private final int turn;
     private final int difficulty;
 
-    public ScoreEntry(int turn, int difficulty) {
+    ScoreEntry(int turn, int difficulty) {
         this.turn = turn;
         this.difficulty = difficulty;
     }
 
-    public boolean isBetter(ScoreEntry scoreEntry) {
+    boolean isBetter(ScoreEntry scoreEntry) {
         return this.turn < scoreEntry.turn;
     }
 
-    public double[] saveData() {
-        return new double[]
-                {
-                        this.turn,
-                        this.difficulty
-                };
+    byte[] saveData() {
+        ByteBuffer wrapper = ByteBuffer.wrap(new byte[2 * Integer.SIZE / Byte.SIZE]);
+        wrapper.putInt(this.turn);
+        wrapper.putInt(this.difficulty);
+
+        return wrapper.array();
     }
 
     public int getTurn() {
@@ -52,7 +54,17 @@ public class ScoreEntry {
         return difficulty;
     }
 
-    public static ScoreEntry Load(List<Double> data) {
-        return new ScoreEntry(data.get(0).intValue(), data.get(1).intValue());
+    static ScoreEntry Load(InputStream stream, int version) throws IOException {
+        if (version < 15) {
+            byte[] byteBuffer = new byte[2 * Double.SIZE / Byte.SIZE];
+            Utils.readStream(stream, byteBuffer);
+            ByteBuffer wrapper = ByteBuffer.wrap(byteBuffer);
+            return new ScoreEntry((int)wrapper.getDouble(), (int)wrapper.getDouble());
+        }
+
+        byte[] byteBuffer = new byte[2 * Integer.SIZE / Byte.SIZE];
+        Utils.readStream(stream, byteBuffer);
+        ByteBuffer wrapper = ByteBuffer.wrap(byteBuffer);
+        return new ScoreEntry(wrapper.getInt(), wrapper.getInt());
     }
 }

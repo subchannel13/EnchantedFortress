@@ -33,6 +33,7 @@ import java.util.Map;
 import hr.kravarscan.enchantedfortress.BuildConfig;
 import hr.kravarscan.enchantedfortress.logic.Difficulty;
 import hr.kravarscan.enchantedfortress.logic.Game;
+import hr.kravarscan.enchantedfortress.logic.Utils;
 
 public class HighScores {
     private static final String LOG_TAG = "HighScores";
@@ -109,7 +110,7 @@ public class HighScores {
         try {
             FileInputStream stream = context.openFileInput(ScoresFileName);
 
-            stream.read(byteBuffer);
+            Utils.readStream(stream, byteBuffer);
             int version = (int)ByteBuffer.wrap(byteBuffer).getDouble();
 
             if (version < 8) {
@@ -117,25 +118,27 @@ public class HighScores {
                 Log.i(LOG_TAG, "load rejected, was faulty in v1.7");
                 return;
             }
-            else if (version < BuildConfig.VERSION_CODE)
-            {
-                //no operation, placeholder
-            }
 
             while (stream.available() > 0) {
-                int mode = stream.read();
-                int count = stream.read();
+                int mode, count;
+                if (version < 15) {
+                    mode = stream.read();
+                    count = stream.read();
+                }
+                else
+                {
+                    byteBuffer = new byte[2 * Integer.SIZE / Byte.SIZE];
+                    Utils.readStream(stream, byteBuffer);
+                    ByteBuffer wrapper = ByteBuffer.wrap(byteBuffer);
+
+                    mode = wrapper.getInt();
+                    count = wrapper.getInt();
+                }
                 List<ScoreEntry> modeScores = new ArrayList<>();
 
                 Log.d(LOG_TAG, "load mode: " + mode + ", entry count: " + count);
                 for (int i = 0; i < count; i++) {
-                    List<Double> scoreData = new ArrayList<>();
-                    for (int j = 0; j < ScoreEntry.SaveLength; j++) {
-                        stream.read(byteBuffer);
-                        scoreData.add(ByteBuffer.wrap(byteBuffer).getDouble());
-                    }
-
-                    modeScores.add(ScoreEntry.Load(scoreData));
+                    modeScores.add(ScoreEntry.Load(stream, version));
                 }
 
                 this.scores.put(mode, modeScores);
@@ -161,16 +164,14 @@ public class HighScores {
             stream.write(byteBuffer);
 
             for (Map.Entry<Integer, List<ScoreEntry>> group : this.scores.entrySet()) {
-                stream.write(group.getKey());
-                stream.write(group.getValue().size());
+                byteBuffer = new byte[2 * Integer.SIZE / Byte.SIZE];
+                ByteBuffer bufferBuilder = ByteBuffer.wrap(byteBuffer);
+                bufferBuilder.putInt(group.getKey());
+                bufferBuilder.putInt(group.getValue().size());
+                stream.write(byteBuffer);
 
                 for (ScoreEntry score : group.getValue()) {
-                    double[] data = score.saveData();
-
-                    for (double val : data) {
-                        ByteBuffer.wrap(byteBuffer).putDouble(val);
-                        stream.write(byteBuffer);
-                    }
+                    stream.write(score.saveData());
                 }
             }
 
