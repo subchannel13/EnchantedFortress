@@ -26,6 +26,7 @@
     <string-array name="translators">
         <item>German (de) - mueller-ma</item>
         <item>French (fr) - Julien Lepiller</item>
+        <item>Brazilian Portuguese (pt-br) - Ivan Amaro</item>
     </string-array>
 
     <string-array name="night_mode_entries">

@@ -1,6 +1,6 @@
 Added
 * Change log file
-* French translation
+* French translation (thanks to Julien Lepiller)
 * Difficulty levels
 Fixed
 * Back button always navigates from other views to main menu

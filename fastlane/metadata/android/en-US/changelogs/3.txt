@@ -1,6 +1,6 @@
 Added
 * Autosave and continue game session
-* German translation
+* German translation (thanks to mueller-ma)
 Changed
 * Moderate code cleanup
 * Reduced APK size

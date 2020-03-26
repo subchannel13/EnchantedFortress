@@ -2,7 +2,8 @@
 All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
-
+### Added
+- Brazilian Portuguese translation (thanks to Ivan Amaro)
 ## [v1.13] 2020-03-10
 ### Added
 - Night mode support
@@ -107,7 +108,7 @@ All notable changes to this project will be documented in this file.
 ## [v1.3] - 2017-07-12
 ### Added
 - Change log file
-- French translation
+- French translation (thanks to Julien Lepiller)
 - Difficulty levels
 
 ### Fixed
@@ -117,7 +118,7 @@ All notable changes to this project will be documented in this file.
 ## [v1.2] - 2017-06-21
 ### Added
 - Autosave and continue game session
-- German translation
+- German translation (thanks to mueller-ma)
 
 ### Changed
 - Moderate code cleanup
