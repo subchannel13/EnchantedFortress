@@ -62,7 +62,7 @@
     <string name="gatesOpened">, i demoni hanno riaperto %1d portali</string>
     <string name="gatesLeft">%1d portali</string>
     <string name="difficultyStartingPop">Popolazione iniziale: %1s</string>
-    <string name="difficultyDemonSpawn">tasso apparizione demoni: %1s</string>
+    <string name="difficultyDemonSpawn">Tasso apparizione demoni: %1s</string>
     <string name="difficultyDemonGrowth">Aumento potere demoni: %1s</string>
     <string name="banishNever">senza speranza</string>
     <string name="banishSlow">par sempre</string>
