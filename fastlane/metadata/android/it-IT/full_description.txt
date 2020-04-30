@@ -1,0 +1,1 @@
+Un semplice gioco ispirato a Age of Castles. Distribuisci la tua popolazione tra contadini, muratori, soldati e sapienti. Sopravvivi all'invasione dei demoni e trova un modo per scacciarli per sempre.
