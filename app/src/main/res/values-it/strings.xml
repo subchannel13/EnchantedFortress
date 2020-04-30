@@ -19,7 +19,7 @@
   -->
 
 <resources>
-    <string name="app_name">Fortezza Incantata/string>
+    <string name="app_name">Fortezza Incantata</string>
     <string name="newGame">Nuova partita</string>
     <string name="end_turn">Termina turno</string>
     <string name="population">Popolazione</string>
