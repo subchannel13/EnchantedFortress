@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright 2019 Ivan Kravarščan
+  ~
+  ~ This file is part of Enchanted Fortress.
+  ~
+  ~ Enchanted Fortress is free software: you can redistribute it and/or modify
+  ~ it under the terms of the GNU General Public License as published by
+  ~ the Free Software Foundation, either version 3 of the License, or
+  ~ (at your option) any later version.
+  ~
+  ~ Enchanted Fortress is distributed in the hope that it will be useful,
+  ~ but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  ~ GNU General Public License for more details.
+  ~
+  ~ You should have received a copy of the GNU General Public License
+  ~ along with Enchanted Fortress.  If not, see <http://www.gnu.org/licenses/>.
+  -->
+
+<resources>
+    <string name="app_name">Fortezza Incantata</string>
+    <string name="newGame">Nuova partita</string>
+    <string name="end_turn">Termina turno</string>
+    <string name="population">Popolazione</string>
+    <string name="farmers">Contadini</string>
+    <string name="scholars">Sapienti</string>
+    <string name="builders">Muratori</string>
+    <string name="soldiers">Soldati</string>
+    <string name="popDelta">Crescita della popolazione</string>
+    <string name="wallDelta">Nuove mura</string>
+    <string name="militaryStrength">Forza</string>
+    <string name="researchDelta">Ricerca</string>
+    <string name="walls">Mura della città</string>
+    <string name="scouted">Rapporto esploratori: %1$s demoni</string>
+    <string name="scoutedLong">Rapporto esploratori:\n%1$s demoni \n%2$s forza \n%3$s potenza militare totale</string>
+    <string name="attacked">Sotto attacco!\n%1$s demoni attacanti \n%2$s vittime</string>
+    <string name="noVictims">Attacco dei demoni respinto senza vittime</string>
+    <string name="farmingTech">Agricultura</string>
+    <string name="buildTech">Edilizia</string>
+    <string name="soldierTech">Addestramento</string>
+    <string name="scholarTech">Sapienza</string>
+    <string name="banishTech">Esilia i demoni</string>
+    <string name="gameOver">Torna al menu principale</string>
+    <string name="defeat">I demoni ti hanno sconfitto!\nNessuno è sopravvissuto nella tua fortezza e il regno è in grave pericolo.</string>
+    <string name="victory">Vittoria!\nHai esiliato tutti i demoni e il regno è salvo.</string>
+    <string name="help">Storia &amp; Aiuto</string>
+    <string name="helpText"><b>Storia</b>\n\nGiorni scuri incombono sulla tua terra; gente perversa ha fatto un patto coi demoni, le porte dell\'inferno sono state aperte, e la razza dei demoni ha iniziato a vagare per questo mondo. Col passare del tempo, sempre più portali infernali vengono aperti e l\'esercito dei demoni diventa sempre più forte e audce. Se non saranno fermati, il regno verrà invaso.\n\n I tuoi sapienti sostengono che se esiste un rituale per invocare i demoni, allora deve esisterne uno per esiliarli. Aiutali a compiere il rituale e difendili dai demoni che tenteranno di fermarli.\n\n<b>Come si gioca</b>\n\nLa maggior parte del gioco consiste nel distribuire la popolazione tra i seguenti ruoli:\n- Contadini - aumentano la crescita della popolazione\n- Muratori - costruiscono le mura della città\n- Soldati - aumentano la forza militare\n- Sapienti - studiano le innovazioni e la cacciata dei demoni\n\n Col passare del tempo (turni), la forza dell\'esercito dei demoni crescerà, ed essi sferreranno un attacco quando si sentiranno abbastanza pronti.L\'attacco non avverrà a sorpresa; i tuoi esploratori faranno rapporto su quanti demoni hanno visto. Non è un numero preciso, ma puoi aspettarti che essi abbiano almeno quel numero di truppe. Quando parte l\'attacco, tutta la tua popolazione parteciperà alla difesa, sia soldati che lavoratori. I soldati sono difensori più forti, ma se l\'attacco ti coglie alla sprovvista, i civili faranno del loro meglio per sopravvivere. Avere delle mura della città alte è un ottimo modo per non essere colti impreparati.\n\nIn definitiva, il tuo successo dipende dal bilanciare la tua potenza militare e e l\'economia. Potrebbe tentarti l\'idea di reclutare il maggior numero possibile di persone come soldati, ma se l\'attacco non avviene in un determinato turno, la tua economia non crescera abbastanza in fretta per poter sopportare futuri attacchi dei demoni. All\'inizio, l\'agricoltura è il miglior modo di far crescere l\'economia—più persone hai, più ne puoi assegnare alla costruzione di mura e sul campo come soldati.La ricerca è un altro modo per migliorare l\'economia e l\'esercito nel lungo periodo. L\'intera popolazione partecipa nella ricerca, ma come per la forza militare, non tutti contribuiscono nella stessa misura. i Sapienti (persone non assegnati all\'agricoltura, alla costruzione o ai turni di guardia) generano più punti ricerca degli altri. \n\nBarricarti dietro le mura non ti renderà imbattible; prima o poi i demoni diventeranno abbastanza forti per superare qualsiasi difesa. Il rituale di esilio dei demoni è l\'unico modo per sconfiggerli definitivamente. Compierlo chiuderà gradualmente i portali dell\'inferno, rallentando la crescita dell\'esercito dei demoni; una volta completato, fermerà l\'invasione dei demoni definitivamente.</string>
+    <string name="aboutMe">Info</string>
+    <string name="turns">turni</string>
+    <string name="turn">Turno</string>
+    <string name="continueText">Continua</string>
+    <string name="difficultySelect">Selezione difficoltà</string>
+    <string name="aboutDevelopBy">Sviluppato da %1$s</string>
+    <string name="aboutTranslateBy">Tradotto da\n%1$s</string>
+    <string name="aboutTrackerAt">Segnala errori a:\n%1$s</string>
+    <string name="aboutCodeAt">Codice:\n%1$s</string>
+    <string name="aboutVersion">Versione: %1$s</string>
+    <string name="aboutSupportAt">Supporta lo sviluppatore:\n%1$s</string>
+    <string name="startGame">Avvia gioco</string>
+    <string name="gatesClosed">Chiusi %1d portali infernali</string>
+    <string name="gatesOpened">, i demoni hanno riaperto %1d portali</string>
+    <string name="gatesLeft">%1d portali</string>
+    <string name="difficultyStartingPop">Popolazione iniziale: %1s</string>
+    <string name="difficultyDemonSpawn">Tasso apparizione demoni: %1s</string>
+    <string name="difficultyDemonGrowth">Aumento potere demoni: %1s</string>
+    <string name="banishNever">senza speranza</string>
+    <string name="banishSlow">par sempre</string>
+    <string name="scoresTitle">Partite Leggendarie</string>
+    <string name="scoresTurns">Turni</string>
+    <string name="scoresDifficulty">Difficoltà</string>
+    <string name="scoresButton">Partite Leggendarie</string>
+    <string name="banishProgress">I sapienti hanno compiuto il rituale di esilio e i demoni tentano di aumentare il loro potere. Il potere dei demoni ora è %1d.</string>
+    <string name="banishProgressShort">Il potere dei demoni ora è %1d.</string>
+    <string name="newsButton">Pulsante lista notizie</string>
+    <string name="moreNews">Altri rapporti</string>
+    <string name="battleNotification">Siamo stati attacati!</string>
+    <string name="banishNotification">Esilio</string>
+    <string name="scoutNotification">rapporto degli esploratori</string>
+    <string name="settings">Configurazione</string>
+    <string name="nightMode">Modalità giorno/notte</string>
+    <string name="resetHofPreference">Azzera Partite Leggendarie</string>
+    <string name="resetHofDialogTitle">Sei sicuro di voler azzerare le Partite Leggendarie?</string>
+    <string name="alertYes">Sì</string>
+    <string name="alertNo">No</string>
+    <!-- Accessibility -->
+    <string name="minusButton">Pulsante più</string>
+    <string name="plusButton">Pulsante meno</string>
+</resources>

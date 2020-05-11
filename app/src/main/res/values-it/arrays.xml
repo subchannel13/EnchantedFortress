@@ -19,26 +19,26 @@
 
 <resources>
     <string-array name="difficultyLevels">
-        <item>Easy</item>
-        <item>Normal</item>
-        <item>Hard</item>
+        <item>Facile</item>
+        <item>Normale</item>
+        <item>Difficile</item>
     </string-array>
     <string-array name="translators">
-        <item>German (de) - mueller-ma</item>
-        <item>French (fr) - Julien Lepiller</item>
-        <item>Brazilian Portuguese (pt-br) - Ivan Amaro</item>
-        <item>Italian (it) - Matteo Haenen</item>
+        <item>Tedesco (de) - mueller-ma</item>
+        <item>Francese (fr) - Julien Lepiller</item>
+        <item>Portoghese brasiliano (pt-br) - Ivan Amaro</item>
+	<item>Italiano (it) - Matteo Haenen</item>
     </string-array>
 
     <string-array name="night_mode_entries">
-        <item>Default</item>
-        <item>Day</item>
-        <item>Night</item>
+        <item>Predefinito</item>
+        <item>Giorno</item>
+        <item>Notte</item>
     </string-array>
 
     <string-array name="night_mode_values">
-        <item>default</item>
-        <item>day</item>
-        <item>night</item>
+        <item>predefinito</item>
+        <item>giorno</item>
+        <item>notte</item>
     </string-array>
 </resources>
