@@ -273,6 +273,7 @@ public class GameActivity extends AppCompatActivity {
 
         if (this.game.isOver()) {
             HighScores.get().add(this.game, this);
+            SaveLoad.get().deleteAutosave(this);
 
             Intent intent = new Intent(this, MainActivity.class);
             intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);

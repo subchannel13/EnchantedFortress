@@ -22,6 +22,7 @@ package hr.kravarscan.enchantedfortress.storage;
 import android.content.Context;
 import android.util.Log;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.nio.ByteBuffer;
@@ -52,6 +53,21 @@ public final class SaveLoad {
 
     public boolean hasAutosave(Context context) {
         return context.getFileStreamPath(SaveFileName).exists();
+    }
+
+    public void deleteAutosave(Context context)
+    {
+        Log.d(LOG_TAG, "Clearing autosave");
+        File saveFile = context.getFileStreamPath(SaveFileName);
+
+        if (saveFile.exists()) {
+            try {
+                saveFile.delete();
+                Log.d(LOG_TAG, "Successful");
+            } catch (Exception e) {
+                Log.d(LOG_TAG, "Exception", e);
+            }
+        }
     }
 
     public void save(Game game, Context context) {
