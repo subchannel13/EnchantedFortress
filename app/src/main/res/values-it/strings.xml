@@ -86,4 +86,8 @@
     <!-- Accessibility -->
     <string name="minusButton">Pulsante più</string>
     <string name="plusButton">Pulsante meno</string>
+    <!-- Untranslated -->
+    <!--
+    <string name="noScores"></string>
+    -->
 </resources>

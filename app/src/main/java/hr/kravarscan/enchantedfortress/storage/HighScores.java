@@ -37,7 +37,7 @@ import hr.kravarscan.enchantedfortress.logic.Utils;
 
 public class HighScores {
     private static final String LOG_TAG = "HighScores";
-    private static final int MaxScores = 5;
+    private static final int MaxScores = 20;
 
     private static final String ScoresFileName = "highscores.dat";
     private static HighScores instance = null;
@@ -85,6 +85,17 @@ public class HighScores {
             modeScores.remove(MaxScores);
 
         save(context);
+    }
+
+    public  boolean hasAny(Context context)
+    {
+        this.load(context);
+
+        for (int diff = Difficulty.Levels.length - 1; diff >= 0; diff--)
+            if (this.scores.containsKey(diff) && this.scores.get(diff).size() > 0)
+                return true;
+
+        return false;
     }
 
     public List<ScoreEntry> getAll(Context context) {

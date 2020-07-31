@@ -42,6 +42,14 @@ public class ScoresActivity extends AppCompatActivity {
         Log.d(LOG_TAG, "onCreate");
         setContentView(R.layout.activity_scores);
 
+        if (!HighScores.get().hasAny(this))
+        {
+            this.findViewById(R.id.noScoresHeader).setVisibility(View.VISIBLE);
+            this.findViewById(R.id.turnsHeader).setVisibility(View.GONE);
+            this.findViewById(R.id.difficultyHeader).setVisibility(View.GONE);
+            return;
+        }
+
         CharSequence[] difficultyNames = this.getResources().getTextArray(R.array.difficultyLevels);
         ViewGroup listView = this.findViewById(R.id.scoreList);
 
