@@ -39,6 +39,10 @@ public class Utils {
         return (int)(Math.floor(x + delta) - Math.floor(x));
     }
 
+    static  double interpolate(double x, double min, double max) {
+        return x * (max - min) + min;
+    }
+
     public static void readStream(InputStream stream, byte[] buffer) throws IOException {
         int readLength = stream.read(buffer);
 

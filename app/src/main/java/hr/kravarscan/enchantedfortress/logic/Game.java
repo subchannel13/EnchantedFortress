@@ -329,20 +329,23 @@ public class Game {
         Log.d(LOG_TAG, "doCombat demonLevel: " + this.demonLevel + ", demonStrBonus: " + demonStrBonus + ", attackerStr: " + attackerStr);
 
         for (int i = 0; attackerStr > 0 && defenderStr > 0 && i < CombatRounds; i++) {
+            double firstStrikers = rand.nextDouble();
             if (rand.nextDouble() > 0.5) {
-                defenderStr -= attackerStr * rand.nextDouble();
+                defenderStr -= attackerStr * firstStrikers * Utils.interpolate(rand.nextDouble(), 0.1, 0.5);
                 Log.d(LOG_TAG, "doCombat round: " + i + ", demons first, defenderStr down to " + defenderStr);
                 if (defenderStr < 0)
                     break;
-                attackerStr -= defenderStr * rand.nextDouble();
+                attackerStr -= Math.min(defenderStr * Utils.interpolate(rand.nextDouble(), 0.1, 0.5), attackerStr * firstStrikers);
                 Log.d(LOG_TAG, "doCombat humans retaliate, attackerStr down to " + attackerStr);
             } else {
-                attackerStr -= defenderStr * rand.nextDouble();
+                double attackerLocalStr = attackerStr * (1 - firstStrikers);
+                attackerStr -= attackerLocalStr;
+                attackerLocalStr -= Math.max(defenderStr * Utils.interpolate(rand.nextDouble(), 0.1, 0.5), 0);
                 Log.d(LOG_TAG, "doCombat round: " + i + ", humans first, attackerStr down to " + attackerStr);
-                if (attackerStr < 0)
-                    break;
-                defenderStr -= attackerStr * rand.nextDouble();
+
+                defenderStr -= attackerLocalStr * Utils.interpolate(rand.nextDouble(), 0.1, 0.5);
                 Log.d(LOG_TAG, "doCombat demons retaliate, defenderStr down to " + defenderStr);
+                attackerStr += attackerLocalStr;
             }
         }
 
