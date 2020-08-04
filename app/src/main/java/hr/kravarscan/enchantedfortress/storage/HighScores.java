@@ -37,7 +37,7 @@ import hr.kravarscan.enchantedfortress.logic.Utils;
 
 public class HighScores {
     private static final String LOG_TAG = "HighScores";
-    private static final int MaxScores = 20;
+    private static final int MaxScores = 10;
 
     private static final String ScoresFileName = "highscores.dat";
     private static HighScores instance = null;

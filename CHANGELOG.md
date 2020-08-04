@@ -8,8 +8,11 @@ All notable changes to this project will be documented in this file.
 - Brazilian Portuguese translation (thanks to Ivan Amaro)
 ### Changed
 - Internal representation of high score data
+- Allowed more high score entries
 - In combat random portion of demons strikes first (was all or nothing)
 - Both sides in combat do between 10% and 50% damage per round (was [0%, 100%])
+### Fixed
+- Main screens updates "Continue" button even if it was not restarted
 
 ## [v1.13] 2020-03-10
 ### Added

@@ -39,17 +39,13 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         SettingsActivity.setNightMode(this);
 
-        View continueButton = this.findViewById(R.id.continueButton);
-        continueButton.setOnClickListener(new View.OnClickListener() {
+        this.findViewById(R.id.continueButton).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 onContinue();
             }
         });
-
-        Log.d(LOG_TAG, "Has saved instance? " + (savedInstanceState != null));
-        if (!SaveLoad.get().hasAutosave(this))
-            continueButton.setVisibility(View.GONE);
+        this.checkAutosave();
 
         this.findViewById(R.id.newGameButton).setOnClickListener(
                 new View.OnClickListener() {
@@ -101,6 +97,23 @@ public class MainActivity extends AppCompatActivity {
     public void finish() {
         super.finish();
         overridePendingTransition(0,0);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        this.checkAutosave();
+    }
+
+    private void checkAutosave() {
+        if (!SaveLoad.get().hasAutosave(this)) {
+            Log.d(LOG_TAG, "Doesn't have autosave");
+            this.findViewById(R.id.continueButton).setVisibility(View.GONE);
+        }
+        else {
+            Log.d(LOG_TAG, "Has autosave");
+            this.findViewById(R.id.continueButton).setVisibility(View.VISIBLE);
+        }
     }
 
     private void onContinue() {

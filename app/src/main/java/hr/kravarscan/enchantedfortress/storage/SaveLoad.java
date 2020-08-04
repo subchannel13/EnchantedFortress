@@ -52,6 +52,7 @@ public final class SaveLoad {
     }
 
     public boolean hasAutosave(Context context) {
+        Log.d(LOG_TAG, "Looking for autosave");
         return context.getFileStreamPath(SaveFileName).exists();
     }
 
