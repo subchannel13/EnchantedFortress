@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
   ~ Copyright 2020 Ivan Kravarščan
   ~
   ~ This file is part of Enchanted Fortress.
@@ -30,25 +29,54 @@
         android:theme="@style/Theme.AppCompat.DayNight">
         <activity
             android:name=".SettingsActivity"
-            android:parentActivityName=".MainActivity" />
+            android:parentActivityName=".MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MainActivity" />
+        </activity>
         <activity
             android:name=".GameActivity"
-            android:parentActivityName=".MainActivity" />
+            android:parentActivityName=".MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MainActivity" />
+        </activity>
         <activity
             android:name=".ScoresActivity"
-            android:parentActivityName=".MainActivity" />
+            android:parentActivityName=".MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MainActivity" />
+        </activity>
         <activity
             android:name=".NewGameActivity"
-            android:parentActivityName=".MainActivity" />
+            android:noHistory="true"
+            android:parentActivityName=".MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MainActivity" />
+        </activity>
         <activity
             android:name=".AboutActivity"
-            android:parentActivityName=".MainActivity" />
+            android:parentActivityName=".MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MainActivity" />
+        </activity>
         <activity
             android:name=".HelpActivity"
-            android:parentActivityName=".MainActivity" />
+            android:parentActivityName=".MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MainActivity" />
+        </activity>
         <activity
             android:name=".NewsActivity"
-            android:parentActivityName=".GameActivity" />
+            android:parentActivityName=".GameActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".GameActivity" />
+        </activity>
         <activity
             android:name=".MainActivity"
             android:launchMode="singleTop">

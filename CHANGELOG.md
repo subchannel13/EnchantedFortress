@@ -13,6 +13,7 @@ All notable changes to this project will be documented in this file.
 - Both sides in combat do between 10% and 50% damage per round (was [0%, 100%])
 ### Fixed
 - Main screens updates "Continue" button even if it was not restarted
+- Game screen propely navigates back to main screen
 
 ## [v1.13] 2020-03-10
 ### Added
