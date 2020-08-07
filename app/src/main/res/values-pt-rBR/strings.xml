@@ -91,5 +91,6 @@
     <string name="noScores"></string>
     <string name="nameHeader">Name:</string>
     <string name="battleReport"></string>
+    <string name="nameHint"></string>
     -->
 </resources>

@@ -92,5 +92,6 @@
     <!--
     <string name="minusButton"></string>
     <string name="plusButton"></string>
+    <string name="nameHint"></string>
     -->
 </resources>

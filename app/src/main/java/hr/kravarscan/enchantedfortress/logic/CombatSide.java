@@ -23,7 +23,7 @@ import java.util.Random;
 
 class CombatSide {
     private double numbers;
-    private double strength;
+    private final double strength;
 
     public CombatSide(double numbers, double strength) {
         this.numbers = numbers;

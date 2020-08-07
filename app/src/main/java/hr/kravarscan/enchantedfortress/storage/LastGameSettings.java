@@ -38,7 +38,6 @@ public class LastGameSettings {
     private static final String FileName = "lastgame.dat";
     private static LastGameSettings instance = null;
 
-    private Context context;
     private String name;
     private Difficulty difficulty;
 
@@ -50,8 +49,7 @@ public class LastGameSettings {
         return instance;
     }
 
-    public LastGameSettings(Context context, String name, Difficulty difficulty) {
-        this.context = context;
+    public LastGameSettings(String name, Difficulty difficulty) {
         this.name = name;
         this.difficulty = difficulty;
     }
@@ -72,12 +70,12 @@ public class LastGameSettings {
         this.difficulty = difficulty;
     }
 
-    public void save() {
+    public void save(Context context) {
         byte[] intBuffer = new byte[Integer.SIZE / Byte.SIZE];
 
         Log.d(LOG_TAG, "Saving");
         try {
-            FileOutputStream stream = this.context.openFileOutput(FileName, Context.MODE_PRIVATE);
+            FileOutputStream stream = context.openFileOutput(FileName, Context.MODE_PRIVATE);
 
             ByteBuffer.wrap(intBuffer).putInt(BuildConfig.VERSION_CODE);
             stream.write(intBuffer);
@@ -121,12 +119,12 @@ public class LastGameSettings {
             stream.close();
             Log.i(LOG_TAG, "loaded");
 
-            return new LastGameSettings(context, name, difficulty);
+            return new LastGameSettings( name, difficulty);
         } catch (Exception e) {
             Log.e(LOG_TAG, "Loading last game settings failed", e);
         }
 
         Log.i(LOG_TAG, "Initializing default last game settings");
-        return new LastGameSettings(context, DefaultName, Difficulty.Medium);
+        return new LastGameSettings(DefaultName, Difficulty.Medium);
     }
 }

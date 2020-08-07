@@ -30,9 +30,7 @@ import java.nio.ByteBuffer;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import hr.kravarscan.enchantedfortress.BuildConfig;
 import hr.kravarscan.enchantedfortress.logic.Difficulty;
@@ -106,7 +104,7 @@ public final class SaveLoad {
 
             if (version < 16) {
                 List<Double> legacyData = new ArrayList<>();
-                legacyData.add(new Double(version));
+                legacyData.add(Double.valueOf(version));
 
                 while (stream.read(doubleBuffer) == doubleBuffer.length && legacyData.size() < MaxSaveLength)
                     legacyData.add(ByteBuffer.wrap(doubleBuffer).getDouble());
@@ -114,8 +112,7 @@ public final class SaveLoad {
                 data = upgradeDoubleFormat(legacyData);
             }
             else {
-                data = new ArrayList<>();
-                data.addAll(Utils.toBytes((double)version));
+                data = new ArrayList<>(Utils.toBytes((double) version));
                 for(int b = stream.read(); b >= 0 && b <256; b = stream.read())
                     data.add((byte)b);
             }

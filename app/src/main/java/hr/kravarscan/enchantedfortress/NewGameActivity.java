@@ -123,7 +123,7 @@ public class NewGameActivity extends AppCompatActivity {
 
         LastGameSettings.get().setName(name);
         LastGameSettings.get().setDifficulty(Difficulty.Levels[difficultySelector.getSelectedItemPosition()]);
-        LastGameSettings.get().save();
+        LastGameSettings.get().save(this);
 
         Intent intent = new Intent(this, GameActivity.class);
         intent.putExtra(GameActivity.ContinueGame, false);

@@ -88,4 +88,5 @@
     <!-- Accessibility -->
     <string name="minusButton">Minus button</string>
     <string name="plusButton">Plus button</string>
+    <string name="nameHint">Player name</string>
 </resources>

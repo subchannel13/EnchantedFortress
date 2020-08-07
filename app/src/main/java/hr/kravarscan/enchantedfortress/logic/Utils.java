@@ -24,7 +24,6 @@ import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 import java.nio.ByteBuffer;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import hr.kravarscan.enchantedfortress.storage.SaveLoad;
@@ -88,10 +87,10 @@ public class Utils {
     }
 
     private static List<Byte> toList(byte[] bytes) {
-        ArrayList<Byte> result = new ArrayList<Byte>(bytes.length);
+        ArrayList<Byte> result = new ArrayList<>(bytes.length);
 
-        for (int i = 0; i < bytes.length; i++) {
-            result.add(bytes[i]);
+        for (byte b : bytes) {
+            result.add(b);
         }
 
         return result;
