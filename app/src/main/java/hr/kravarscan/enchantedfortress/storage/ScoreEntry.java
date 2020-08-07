@@ -21,6 +21,7 @@ package hr.kravarscan.enchantedfortress.storage;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.UnsupportedEncodingException;
 import java.nio.ByteBuffer;
 
 import hr.kravarscan.enchantedfortress.logic.Utils;
@@ -28,43 +29,68 @@ import hr.kravarscan.enchantedfortress.logic.Utils;
 public class ScoreEntry {
     private final int turn;
     private final int difficulty;
+    private final String name;
 
-    ScoreEntry(int turn, int difficulty) {
+    ScoreEntry(int turn, int difficulty, String name) {
         this.turn = turn;
         this.difficulty = difficulty;
+        this.name = name;
     }
 
-    boolean isBetter(ScoreEntry scoreEntry) {
+    public boolean isBetter(ScoreEntry scoreEntry) {
         return this.turn < scoreEntry.turn;
     }
 
-    byte[] saveData() {
-        ByteBuffer wrapper = ByteBuffer.wrap(new byte[2 * Integer.SIZE / Byte.SIZE]);
+    public byte[] saveData() throws UnsupportedEncodingException {
+        byte[] nameBytes = this.name.getBytes(SaveLoad.Encoding);
+
+        ByteBuffer wrapper = ByteBuffer.wrap(new byte[3 * Integer.SIZE / Byte.SIZE + nameBytes.length]);
         wrapper.putInt(this.turn);
         wrapper.putInt(this.difficulty);
+        wrapper.putInt(nameBytes.length);
+        wrapper.put(nameBytes);
 
         return wrapper.array();
     }
 
     public int getTurn() {
-        return turn;
+        return this.turn;
     }
 
     public int getDifficulty() {
-        return difficulty;
+        return this.difficulty;
     }
 
-    static ScoreEntry Load(InputStream stream, int version) throws IOException {
+    public String getName() {
+        return this.name;
+    }
+
+    public static ScoreEntry Load(InputStream stream, int version) throws IOException {
         if (version < 15) {
             byte[] byteBuffer = new byte[2 * Double.SIZE / Byte.SIZE];
             Utils.readStream(stream, byteBuffer);
             ByteBuffer wrapper = ByteBuffer.wrap(byteBuffer);
-            return new ScoreEntry((int)wrapper.getDouble(), (int)wrapper.getDouble());
+            return new ScoreEntry((int)wrapper.getDouble(), (int)wrapper.getDouble(), "");
         }
 
         byte[] byteBuffer = new byte[2 * Integer.SIZE / Byte.SIZE];
         Utils.readStream(stream, byteBuffer);
         ByteBuffer wrapper = ByteBuffer.wrap(byteBuffer);
-        return new ScoreEntry(wrapper.getInt(), wrapper.getInt());
+        int turn = wrapper.getInt();
+        int difficulty = wrapper.getInt();
+
+        if (version < 16) {
+            return new ScoreEntry(turn, difficulty, "");
+        }
+
+        byteBuffer = new byte[Integer.SIZE / Byte.SIZE];
+        Utils.readStream(stream, byteBuffer);
+        int nameLength = (int) ByteBuffer.wrap(byteBuffer).getInt();
+
+        byte[] stringBytes = new byte[nameLength];
+        Utils.readStream(stream, stringBytes);
+        String name = new String(stringBytes, SaveLoad.Encoding);
+
+        return new ScoreEntry(turn, difficulty, name);
     }
 }

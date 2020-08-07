@@ -21,8 +21,13 @@ package hr.kravarscan.enchantedfortress.logic;
 
 import android.util.Log;
 
+import java.io.UnsupportedEncodingException;
 import java.nio.ByteBuffer;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
+
+import hr.kravarscan.enchantedfortress.storage.SaveLoad;
 
 public class Game {
     private static final String LOG_TAG = "Game";
@@ -51,6 +56,7 @@ public class Game {
 
     private static final Random rand = new Random();
 
+    private String name;
     public int turn = 1;
     private double population;
     public double walls = 0;
@@ -79,14 +85,19 @@ public class Game {
     public boolean reportFirstBanish = true;
     public int banishCostGrowth = Integer.MAX_VALUE;
 
-    public Game(Difficulty difficulty)
+    public Game(Difficulty difficulty, String playerName)
     {
+        this.name = playerName;
         this.difficulty = difficulty;
         this.population = difficulty.getStartingPop();
     }
 
     public Difficulty getDifficulty() {
         return this.difficulty;
+    }
+
+    public String getName() {
+        return this.name;
     }
 
     /*
@@ -439,70 +450,80 @@ public class Game {
     /*
         Saving and loading
      */
-    public double[] save() {
-        return new double[]
-                {
-                        this.difficulty.getIndex(),
-                        this.turn,
-                        this.population,
-                        this.walls,
-                        this.demons,
-                        this.demonLevel,
-                        this.demonGates,
-                        this.demonBanishCost,
+    public List<Byte> save() throws UnsupportedEncodingException {
+        ArrayList<Byte> bytes = new ArrayList<>();
 
-                        this.farmerSlider,
-                        this.builderSlider,
-                        this.soldierSlider,
-                        this.selectedTech,
+        bytes.addAll(Utils.toBytes(this.difficulty.getIndex()));
+        bytes.addAll(Utils.toBytes(this.turn));
+        bytes.addAll(Utils.toBytes(this.population));
+        bytes.addAll(Utils.toBytes(this.walls));
+        bytes.addAll(Utils.toBytes(this.demons));
+        bytes.addAll(Utils.toBytes(this.demonLevel));
+        bytes.addAll(Utils.toBytes(this.demonGates));
+        bytes.addAll(Utils.toBytes(this.demonBanishCost));
 
-                        this.farming.level,
-                        this.farming.points,
-                        this.building.level,
-                        this.building.points,
-                        this.soldiering.level,
-                        this.soldiering.points,
-                        this.scholarship.level,
-                        this.scholarship.points,
+        bytes.addAll(Utils.toBytes(this.farmerSlider));
+        bytes.addAll(Utils.toBytes(this.builderSlider));
+        bytes.addAll(Utils.toBytes(this.soldierSlider));
+        bytes.addAll(Utils.toBytes(this.selectedTech));
 
-                        this.reportAttackers,
-                        this.reportHellgateClose,
-                        this.reportHellgateOpen,
-                        this.reportVictims,
-                        this.reportScoutedDemons,
-                        this.banishCostGrowth,
-                };
+        bytes.addAll(Utils.toBytes(this.farming.level));
+        bytes.addAll(Utils.toBytes(this.farming.points));
+        bytes.addAll(Utils.toBytes(this.building.level));
+        bytes.addAll(Utils.toBytes(this.building.points));
+        bytes.addAll(Utils.toBytes(this.soldiering.level));
+        bytes.addAll(Utils.toBytes(this.soldiering.points));
+        bytes.addAll(Utils.toBytes(this.scholarship.level));
+        bytes.addAll(Utils.toBytes(this.scholarship.points));
+
+        bytes.addAll(Utils.toBytes(this.reportAttackers));
+        bytes.addAll(Utils.toBytes(this.reportHellgateClose));
+        bytes.addAll(Utils.toBytes(this.reportHellgateOpen));
+        bytes.addAll(Utils.toBytes(this.reportVictims));
+        bytes.addAll(Utils.toBytes(this.reportScoutedDemons));
+        bytes.addAll(Utils.toBytes(this.banishCostGrowth));
+
+        bytes.addAll(Utils.toBytes(this.name));
+
+        return bytes;
     }
 
-    public void load(ByteBuffer data) {
-        this.difficulty = Difficulty.Levels[(int) data.getDouble()];
-        this.turn = (int) data.getDouble();
-        this.population = (int) data.getDouble();
+    public void load(ByteBuffer data) throws UnsupportedEncodingException {
+        this.difficulty = Difficulty.Levels[data.getInt()];
+        this.turn = data.getInt();
+        this.population = data.getDouble();
         this.walls = data.getDouble();
-        this.demons = (int) data.getDouble();
-        this.demonLevel = (int) data.getDouble();
-        this.demonGates = (int) data.getDouble();
-        this.demonBanishCost = (int) data.getDouble();
+        this.demons = data.getInt();
+        this.demonLevel = data.getInt();
+        this.demonGates = data.getInt();
+        this.demonBanishCost = data.getInt();
 
-        this.farmerSlider = (int) data.getDouble();
-        this.builderSlider = (int) data.getDouble();
-        this.soldierSlider = (int) data.getDouble();
-        this.selectedTech = (int) data.getDouble();
+        this.farmerSlider = data.getInt();
+        this.builderSlider = data.getInt();
+        this.soldierSlider = data.getInt();
+        this.selectedTech = data.getInt();
 
-        this.farming.level = (int) data.getDouble();
+        this.farming.level = data.getInt();
         this.farming.points = data.getDouble();
-        this.building.level = (int) data.getDouble();
+        this.building.level = data.getInt();
         this.building.points = data.getDouble();
-        this.soldiering.level = (int) data.getDouble();
+        this.soldiering.level = data.getInt();
         this.soldiering.points = data.getDouble();
-        this.scholarship.level = (int) data.getDouble();
+        this.scholarship.level = data.getInt();
         this.scholarship.points = data.getDouble();
 
-        this.reportAttackers = (int) data.getDouble();
-        this.reportHellgateClose = (int) data.getDouble();
-        this.reportHellgateOpen = (int) data.getDouble();
-        this.reportVictims = (int) data.getDouble();
-        this.reportScoutedDemons = (int) data.getDouble();
-        this.banishCostGrowth = (int) data.getDouble();
+        this.reportAttackers = data.getInt();
+        this.reportHellgateClose = data.getInt();
+        this.reportHellgateOpen = data.getInt();
+        this.reportVictims = data.getInt();
+        this.reportScoutedDemons = data.getInt();
+        this.banishCostGrowth = data.getInt();
+
+        int nameLength = data.getInt();
+        byte[] nameBytes = new byte[nameLength];
+        for (int i = 0; i < nameLength; i++) {
+            nameBytes[i] = data.get();
+        }
+        this.name = new String(nameBytes, SaveLoad.Encoding);
     }
 }

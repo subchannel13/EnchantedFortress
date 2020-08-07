@@ -83,6 +83,7 @@
     <string name="resetHofDialogTitle">Are you sure you want to reset hall of fame?</string>
     <string name="alertYes">Yes</string>
     <string name="alertNo">No</string>
+    <string name="nameHeader">Name:</string>
     <!-- Accessibility -->
     <string name="minusButton">Minus button</string>
     <string name="plusButton">Plus button</string>

@@ -72,7 +72,7 @@ public class HighScores {
         }
         List<ScoreEntry> modeScores = this.scores.get(diffIndex);
 
-        ScoreEntry score = new ScoreEntry(game.turn, diffIndex);
+        ScoreEntry score = new ScoreEntry(game.turn, diffIndex, game.getName());
         int putIndex = 0;
 
         for (; putIndex < modeScores.size(); putIndex++)
@@ -87,7 +87,7 @@ public class HighScores {
         save(context);
     }
 
-    public  boolean hasAny(Context context)
+    public boolean hasAny(Context context)
     {
         this.load(context);
 

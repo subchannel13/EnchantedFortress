@@ -89,5 +89,6 @@
     <!-- Untranslated -->
     <!--
     <string name="noScores"></string>
+    <string name="nameHeader"></string>
     -->
 </resources>

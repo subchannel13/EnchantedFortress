@@ -25,17 +25,24 @@ import android.util.Log;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.UnsupportedEncodingException;
 import java.nio.ByteBuffer;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import hr.kravarscan.enchantedfortress.BuildConfig;
 import hr.kravarscan.enchantedfortress.logic.Difficulty;
 import hr.kravarscan.enchantedfortress.logic.Game;
+import hr.kravarscan.enchantedfortress.logic.Utils;
 
 public final class SaveLoad {
     private static final String LOG_TAG = "SaveLoad";
 
+    public static final String Encoding = "UTF-8";
     public static final String SaveKey = "GameState";
     private static final String SaveFileName = "autosave.dat";
     private static final int MaxSaveLength = LatestSaveKeys.KEY_COUNT.ordinal();
@@ -72,17 +79,11 @@ public final class SaveLoad {
     }
 
     public void save(Game game, Context context) {
-        byte[] byteBuffer = new byte[Double.SIZE / Byte.SIZE];
-        double[] data = this.serialize(game);
-
         Log.d(LOG_TAG, "Saving");
         try {
             FileOutputStream stream = context.openFileOutput(SaveFileName, Context.MODE_PRIVATE);
 
-            for (double val : data) {
-                ByteBuffer.wrap(byteBuffer).putDouble(val);
-                stream.write(byteBuffer);
-            }
+            stream.write(this.serialize(game));
 
             stream.close();
             Log.d(LOG_TAG, "Saved");
@@ -91,33 +92,54 @@ public final class SaveLoad {
         }
     }
 
-    public double[] load(Context context) {
-        byte[] byteBuffer = new byte[Double.SIZE / Byte.SIZE];
-        List<Double> data = new ArrayList<>();
+    public byte[] load(Context context) {
+        byte[] doubleBuffer = new byte[Double.SIZE / Byte.SIZE];
+        List<Byte> data;
+        byte[] byteBuffer;
 
         Log.d(LOG_TAG, "Loading");
         try {
             FileInputStream stream = context.openFileInput(SaveFileName);
 
-            while (stream.read(byteBuffer) == byteBuffer.length && data.size() < MaxSaveLength)
-                data.add(ByteBuffer.wrap(byteBuffer).getDouble());
+            Utils.readStream(stream, doubleBuffer);
+            int version = (int)ByteBuffer.wrap(doubleBuffer).getDouble();
+
+            if (version < 16) {
+                List<Double> legacyData = new ArrayList<>();
+                legacyData.add(new Double(version));
+
+                while (stream.read(doubleBuffer) == doubleBuffer.length && legacyData.size() < MaxSaveLength)
+                    legacyData.add(ByteBuffer.wrap(doubleBuffer).getDouble());
+
+                data = upgradeDoubleFormat(legacyData);
+            }
+            else {
+                data = new ArrayList<>();
+                data.addAll(Utils.toBytes((double)version));
+                for(int b = stream.read(); b >= 0 && b <256; b = stream.read())
+                    data.add((byte)b);
+            }
 
             stream.close();
-            Log.d(LOG_TAG, "loaded");
-            upgradeSave(data);
+            Log.d(LOG_TAG, "Reading autosave finished");
+
+            byteBuffer = new byte[data.size()];
+            ByteBuffer wrapper =  ByteBuffer.wrap(byteBuffer);
+            for (Byte b : data) {
+                wrapper.put(b);
+            }
+
+            Log.d(LOG_TAG, "Loaded");
+
         } catch (Exception e) {
             Log.e(LOG_TAG, "Loading autosave failed", e);
             return null;
         }
 
-        double[] result = new double[data.size()];
-        for (int i = 0; i < result.length; i++)
-            result[i] = data.get(i);
-
-        return result;
+        return byteBuffer;
     }
 
-    private void upgradeSave(List<Double> data) {
+    private List<Byte> upgradeDoubleFormat(List<Double> data) {
         Log.d(LOG_TAG, "upgradeSave from " + data.get(LatestSaveKeys.VERSION.ordinal()));
 
         if (data.get(LatestSaveKeys.VERSION.ordinal()) <= 3) {
@@ -128,28 +150,48 @@ public final class SaveLoad {
         if (data.get(LatestSaveKeys.VERSION.ordinal()) <= 7) {
             Log.d(LOG_TAG, "upgradeSave to version 7");
 
-            data.add(LatestSaveKeys.DEMON_LEVEL.ordinal(), Math.floor(0.5 * data.get(LatestSaveKeys.TURN.ordinal())));
-            data.add(LatestSaveKeys.REPORT_HELLGATE_CLOSE.ordinal(), 0.0);
-            data.add(LatestSaveKeys.REPORT_HELLGATE_OPEN.ordinal(), 0.0);
-            data.add(LatestSaveKeys.BANISH_COST_GROWTH.ordinal(), 0.0);
+            data.add(SaveKeysV15.DEMON_LEVEL.ordinal(), Math.floor(0.5 * data.get(SaveKeysV15.TURN.ordinal())));
+            data.add(SaveKeysV15.REPORT_HELLGATE_CLOSE.ordinal(), 0.0);
+            data.add(SaveKeysV15.REPORT_HELLGATE_OPEN.ordinal(), 0.0);
+            data.add(SaveKeysV15.BANISH_COST_GROWTH.ordinal(), 0.0);
         }
+
+        Collection<LatestSaveKeys> doubles = Arrays.asList(
+                LatestSaveKeys.VERSION,
+                LatestSaveKeys.POPULATION, LatestSaveKeys.WALLS,
+                LatestSaveKeys.BUILDING_POINTS, LatestSaveKeys.FARMING_POINTS,
+                LatestSaveKeys.SCHOLARSHIP_POINTS, LatestSaveKeys.SOLDIERING_POINTS
+        );
+
+        ArrayList<Byte> bytes = new ArrayList<>();
+        for (int i = 0; i < LatestSaveKeys.KEY_COUNT.ordinal(); i++) {
+            if (doubles.contains(LatestSaveKeys.values()[i]))
+                bytes.addAll(Utils.toBytes(data.get(i)));
+            else
+                bytes.addAll(Utils.toBytes(data.get(i).intValue()));
+        }
+
+        return bytes;
     }
 
-    public double[] serialize(Game game) {
-        double[] result = new double[LatestSaveKeys.KEY_COUNT.ordinal()];
+    public byte[] serialize(Game game) throws UnsupportedEncodingException {
+        List<Byte> gameData = game.save();
 
-        result[0] = BuildConfig.VERSION_CODE;
-        System.arraycopy(game.save(), 0, result, 1, result.length - 1);
+        byte[] byteBuffer = new byte[Double.SIZE / Byte.SIZE + gameData.size()];
+        ByteBuffer wrapper =  ByteBuffer.wrap(byteBuffer);
 
-        return result;
+        wrapper.putDouble(BuildConfig.VERSION_CODE);
+        for (Byte b : gameData) {
+            wrapper.put(b);
+        }
+
+        return byteBuffer;
     }
 
     public void deserialize(Game game, Object rawData) {
         Log.d(LOG_TAG, "deserialize");
 
-        byte[] dataArray = rawData instanceof double[] ?
-                doubleArrayToByte((double[])rawData) :
-                (byte[])rawData;
+        byte[] dataArray = (byte[])rawData;
 
         if (dataArray == null || dataArray.length == 0) {
             return;
@@ -160,17 +202,12 @@ public final class SaveLoad {
         if (version > BuildConfig.VERSION_CODE)
             return;
 
-        game.load(byteBuffer);
-    }
-
-    private byte[] doubleArrayToByte(double[] rawData) {
-        byte[] result = new byte[rawData.length * Double.SIZE / Byte.SIZE];
-        ByteBuffer byteBuffer = ByteBuffer.wrap(result);
-
-        for (double value : rawData) {
-            byteBuffer.putDouble(value);
+        try {
+            game.load(byteBuffer);
         }
-
-        return result;
+        catch (UnsupportedEncodingException e)
+        {
+            Log.d(LOG_TAG, "Exception?", e);
+        }
     }
 }

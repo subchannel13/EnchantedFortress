@@ -34,10 +34,13 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.io.UnsupportedEncodingException;
+
 import hr.kravarscan.enchantedfortress.logic.Difficulty;
 import hr.kravarscan.enchantedfortress.logic.Game;
 import hr.kravarscan.enchantedfortress.logic.Technology;
 import hr.kravarscan.enchantedfortress.storage.HighScores;
+import hr.kravarscan.enchantedfortress.storage.LastGameSettings;
 import hr.kravarscan.enchantedfortress.storage.SaveLoad;
 
 public class GameActivity extends AppCompatActivity {
@@ -45,9 +48,10 @@ public class GameActivity extends AppCompatActivity {
     private static final String LOG_TAG = "GameActivity";
 
     public static final String ContinueGame = "ContinueGame";
+    public static final String PlayerName = "PlayerName";
     public static final String StartDifficulty = "StartDifficulty";
 
-    private Game game = new Game(Difficulty.Medium);
+    private Game game = new Game(Difficulty.Medium, LastGameSettings.DefaultName);
     private final String[] techList = new String[5];
 
     private ArrayAdapter<String> techListAdapter;
@@ -80,7 +84,10 @@ public class GameActivity extends AppCompatActivity {
         }
         else
         {
-            this.game = new Game(Difficulty.Levels[intent.getIntExtra(StartDifficulty, Difficulty.Medium.getIndex())]);
+            this.game = new Game(
+                    Difficulty.Levels[intent.getIntExtra(StartDifficulty, Difficulty.Medium.getIndex())],
+                    intent.getStringExtra(PlayerName)
+            );
         }
 
         this.findViewById(R.id.newsButton).setOnClickListener(new View.OnClickListener() {
@@ -216,7 +223,12 @@ public class GameActivity extends AppCompatActivity {
         super.onSaveInstanceState(outState);
         Log.d(LOG_TAG, "onSaveInstanceState");
 
-        outState.putDoubleArray(SaveLoad.SaveKey, SaveLoad.get().serialize(this.game));
+        try {
+            outState.putByteArray(SaveLoad.SaveKey, SaveLoad.get().serialize(this.game));
+        }
+        catch (UnsupportedEncodingException e) {
+            Log.d(LOG_TAG, "Exception?", e);
+        }
     }
 
     private void onNews() {

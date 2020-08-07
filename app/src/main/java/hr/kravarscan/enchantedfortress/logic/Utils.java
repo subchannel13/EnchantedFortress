@@ -21,6 +21,13 @@ package hr.kravarscan.enchantedfortress.logic;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.UnsupportedEncodingException;
+import java.nio.ByteBuffer;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+import hr.kravarscan.enchantedfortress.storage.SaveLoad;
 
 public class Utils {
     private Utils()
@@ -49,5 +56,44 @@ public class Utils {
         if (readLength != buffer.length){
             throw new IOException("Read " + readLength + " bytes instead of expected " + buffer.length);
         }
+    }
+
+    public static List<Byte> toBytes(int num)
+    {
+        byte[] bytes = new byte[Integer.SIZE / Byte.SIZE];
+        ByteBuffer byteBuffer = ByteBuffer.wrap(bytes);
+        byteBuffer.putInt(num);
+
+        return toList(bytes);
+    }
+
+    public static List<Byte> toBytes(double num)
+    {
+        byte[] bytes = new byte[Double.SIZE / Byte.SIZE];
+        ByteBuffer byteBuffer = ByteBuffer.wrap(bytes);
+        byteBuffer.putDouble(num);
+
+        return toList(bytes);
+    }
+
+    public static List<Byte> toBytes(String text) throws UnsupportedEncodingException {
+        byte[] textBytes = text.getBytes(SaveLoad.Encoding);
+        byte[] bytes = new byte[Integer.SIZE / Byte.SIZE + textBytes.length];
+        ByteBuffer byteBuffer = ByteBuffer.wrap(bytes);
+
+        byteBuffer.putInt(textBytes.length);
+        byteBuffer.put(textBytes);
+
+        return toList(bytes);
+    }
+
+    private static List<Byte> toList(byte[] bytes) {
+        ArrayList<Byte> result = new ArrayList<Byte>(bytes.length);
+
+        for (int i = 0; i < bytes.length; i++) {
+            result.add(bytes[i]);
+        }
+
+        return result;
     }
 }

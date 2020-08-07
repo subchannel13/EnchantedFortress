@@ -19,8 +19,7 @@
 
 package hr.kravarscan.enchantedfortress.storage;
 
-@SuppressWarnings("unused")
-public enum LatestSaveKeys {
+public enum SaveKeysV15 {
     VERSION,
 
     DIFFICULTY,
@@ -52,9 +51,6 @@ public enum LatestSaveKeys {
     REPORT_VICTIMS,
     REPORT_SCOUTED_DEMONS,
     BANISH_COST_GROWTH,
-
-    NAME_LENGTH,
-    PLAYER_NAME,
 
     KEY_COUNT
 }

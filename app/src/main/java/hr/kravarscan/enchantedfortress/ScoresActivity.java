@@ -58,6 +58,7 @@ public class ScoresActivity extends AppCompatActivity {
 
             ((TextView)itemView.findViewById(R.id.turnsText)).setText(Integer.toString(score.getTurn()));
             ((TextView)itemView.findViewById(R.id.difficultyText)).setText(difficultyNames[score.getDifficulty()]);
+            ((TextView)itemView.findViewById(R.id.playerName)).setText(score.getName());
 
             listView.addView(itemView);
         }

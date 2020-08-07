@@ -26,17 +26,20 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import hr.kravarscan.enchantedfortress.logic.Difficulty;
+import hr.kravarscan.enchantedfortress.storage.LastGameSettings;
 
 public class NewGameActivity extends AppCompatActivity {
 
     private static final String LOG_TAG = "NewGameActivity";
 
+    private EditText nameInput;
     private Spinner difficultySelector;
 
     private TextView startPopText;
@@ -48,7 +51,10 @@ public class NewGameActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         Log.d(LOG_TAG, "onCreate");
         setContentView(R.layout.activity_new_game);
+        LastGameSettings.init(this);
 
+        nameInput = (EditText) this.findViewById(R.id.nameInput);
+        nameInput.setText(LastGameSettings.get().getName());
         this.startPopText = this.findViewById(R.id.difficultyStartPop);
         this.demonSpawnText = this.findViewById(R.id.difficultyDemonSpawn);
         this.demonGrowthText = this.findViewById(R.id.difficultyDemonGrowth);
@@ -83,7 +89,7 @@ public class NewGameActivity extends AppCompatActivity {
                 //No operation
             }
         });
-        difficultySelector.setSelection(Difficulty.Medium.getIndex());
+        difficultySelector.setSelection(LastGameSettings.get().getDifficulty().getIndex());
 
         this.findViewById(R.id.startButton).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -111,9 +117,18 @@ public class NewGameActivity extends AppCompatActivity {
 
     private void onNewGameStart()
     {
+        String name = nameInput.getText().toString().trim();
+        if (name.length() < 2)
+            name = LastGameSettings.DefaultName;
+
+        LastGameSettings.get().setName(name);
+        LastGameSettings.get().setDifficulty(Difficulty.Levels[difficultySelector.getSelectedItemPosition()]);
+        LastGameSettings.get().save();
+
         Intent intent = new Intent(this, GameActivity.class);
         intent.putExtra(GameActivity.ContinueGame, false);
         intent.putExtra(GameActivity.StartDifficulty, difficultySelector.getSelectedItemPosition());
+        intent.putExtra(GameActivity.PlayerName, name);
         intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
         startActivity(intent);
     }
