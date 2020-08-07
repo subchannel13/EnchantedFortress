@@ -56,7 +56,14 @@ public class NewsActivity extends AppCompatActivity {
         else
             goalReport.setText(getResources().getString(R.string.banishProgressShort, intent.getIntExtra(BanishCost, 0) / 100));
 
-        //TODO add battle report
+        TextView battleReport = this.findViewById(R.id.battleReport);
+        if (intent.getIntExtra(BattleAttackers, 0) <= 0)
+            battleReport.setVisibility(View.GONE);
+        else
+            battleReport.setText(getResources().getString(
+                    R.string.battleReport,
+                    intent.getIntExtra(BattleAttackers, 0),
+                    intent.getIntExtra(BattleVictims, 0)));
 
         TextView scoutReport = this.findViewById(R.id.scoutReport);
         scoutReport.setText(

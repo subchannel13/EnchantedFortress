@@ -2,10 +2,10 @@
 All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
-
-## [v1.14] 2020-03-26
 ### Added
 - Brazilian Portuguese translation (thanks to Ivan Amaro)
+- Player can pick a name that will show in Hall of Fame
+- Battle reprot in news screen
 ### Changed
 - Internal representation of high score data
 - Allowed more high score entries
@@ -14,6 +14,12 @@ All notable changes to this project will be documented in this file.
 ### Fixed
 - Main screens updates "Continue" button even if it was not restarted
 - Game screen propely navigates back to main screen
+
+## [v1.14] 2020-03-26
+### Added
+- Brazilian Portuguese translation (thanks to Ivan Amaro)
+### Changed
+- Internal representation of high score data
 
 ## [v1.13] 2020-03-10
 ### Added

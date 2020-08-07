@@ -84,6 +84,7 @@
     <string name="alertYes">Yes</string>
     <string name="alertNo">No</string>
     <string name="nameHeader">Name:</string>
+    <string name="battleReport">%1d demons attacked and killed %2d people.</string>
     <!-- Accessibility -->
     <string name="minusButton">Minus button</string>
     <string name="plusButton">Plus button</string>
