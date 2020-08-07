@@ -103,7 +103,7 @@ public class LastGameSettings {
             FileInputStream stream = context.openFileInput(FileName);
 
             Utils.readStream(stream, intBuffer);
-            int version = (int)ByteBuffer.wrap(intBuffer).getDouble();
+            int version = (int)ByteBuffer.wrap(intBuffer).getInt();
 
             Utils.readStream(stream, intBuffer);
             int difficultyIndex = (int) ByteBuffer.wrap(intBuffer).getInt();
