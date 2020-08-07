@@ -36,6 +36,7 @@
         </activity>
         <activity
             android:name=".GameActivity"
+            android:launchMode="singleTop"
             android:parentActivityName=".MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"

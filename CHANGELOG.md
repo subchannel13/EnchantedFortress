@@ -2,10 +2,12 @@
 All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
+
+## [v1.15] 2020-08-07
 ### Added
 - Brazilian Portuguese translation (thanks to Ivan Amaro)
 - Player can pick a name that will show in Hall of Fame
-- Battle reprot in news screen
+- Battle report in news screen
 ### Changed
 - Internal representation of high score data
 - Allowed more high score entries
