@@ -331,52 +331,38 @@ public class Game {
         int attackers = rand.nextInt(this.demons + 1);
         double defenderStr = this.militaryStrength();
         double peopleStr = defenderStr / this.roundedPop();
+        double startingPopulation = this.population;
         Log.d(LOG_TAG, "doCombat attack!, attackers: " + attackers + " out of " + this.demons + ", defenderStr: " + defenderStr + ", peopleStr: " + peopleStr);
+        CombatSide humanSide = new CombatSide(startingPopulation, peopleStr);
 
         this.demons -= attackers;
         this.reportAttackers = attackers;
         double demonStrBonus = Math.pow(this.difficulty.getDemonPowerBase(), this.demonLevel);
-        double attackerStr = attackers * DemonStrength * demonStrBonus;
-        Log.d(LOG_TAG, "doCombat demonLevel: " + this.demonLevel + ", demonStrBonus: " + demonStrBonus + ", attackerStr: " + attackerStr);
+        Log.d(LOG_TAG, "doCombat demonLevel: " + this.demonLevel + ", demonStrBonus: " + demonStrBonus + ", attackerStr: " + (attackers * DemonStrength * demonStrBonus));
+        CombatSide demonSide = new CombatSide(attackers, demonStrBonus * DemonStrength);
 
-        for (int i = 0; attackerStr > 0 && defenderStr > 0 && i < CombatRounds; i++) {
-            double firstStrikers = rand.nextDouble();
-            if (rand.nextDouble() > 0.5) {
-                defenderStr -= attackerStr * firstStrikers * Utils.interpolate(rand.nextDouble(), 0.1, 0.5);
-                Log.d(LOG_TAG, "doCombat round: " + i + ", demons first, defenderStr down to " + defenderStr);
-                if (defenderStr < 0)
-                    break;
-                attackerStr -= Math.min(defenderStr * Utils.interpolate(rand.nextDouble(), 0.1, 0.5), attackerStr * firstStrikers);
-                Log.d(LOG_TAG, "doCombat humans retaliate, attackerStr down to " + attackerStr);
-            } else {
-                double attackerLocalStr = attackerStr * (1 - firstStrikers);
-                attackerStr -= attackerLocalStr;
-                attackerLocalStr -= Math.max(defenderStr * Utils.interpolate(rand.nextDouble(), 0.1, 0.5), 0);
-                Log.d(LOG_TAG, "doCombat round: " + i + ", humans first, attackerStr down to " + attackerStr);
+        for (int i = 0; humanSide.getNumbers() > 0 && demonSide.getNumbers() > 0 && i < CombatRounds; i++) {
+            CombatSide firstStrikers = demonSide.split(rand.nextDouble());
 
-                defenderStr -= attackerLocalStr * Utils.interpolate(rand.nextDouble(), 0.1, 0.5);
-                Log.d(LOG_TAG, "doCombat demons retaliate, defenderStr down to " + defenderStr);
-                attackerStr += attackerLocalStr;
-            }
+            firstStrikers.attack(rand, humanSide);
+            humanSide.attack(rand, firstStrikers, demonSide);
+            demonSide.attack(rand, humanSide);
+
+            demonSide.join(firstStrikers);
         }
 
-        if (attackerStr < 0)
-            attackerStr = 0;
-        if (defenderStr < 0)
-            defenderStr = 0;
-
-        this.demons += (int)(attackerStr / DemonStrength / demonStrBonus);
+        this.demons += (int)demonSide.getNumbers();
         if (this.demons < 0)
             this.demons = 0;
 
-        this.reportVictims = (int) ((this.militaryStrength() - defenderStr) / peopleStr);
-        this.population -= this.reportVictims;
+        this.reportVictims = (int) (startingPopulation - humanSide.getNumbers());
+        this.population = humanSide.getNumbers();
 
         this.reportScoutedDemons -= this.reportAttackers;
         if (this.reportScoutedDemons < 0)
             this.reportScoutedDemons = 0;
 
-        Log.d(LOG_TAG, "doCombat combat ended, attackerStr: " + attackerStr + ", defenderStr: " + defenderStr + ", demons left: " + this.demons + ", victims: " + this.reportVictims + ", population left: " + this.population);
+        Log.d(LOG_TAG, "doCombat combat ended, attackers: " + demonSide.getNumbers() + ", defenders: " + humanSide.getNumbers() + ", demons left: " + this.demons + ", victims: " + this.reportVictims + ", population left: " + this.population);
     }
 
     private void spawnDemons() {
