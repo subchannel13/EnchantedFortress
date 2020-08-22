@@ -1,0 +1,92 @@
+<!--
+  ~ Copyright 2020 Ivan Kravarščan
+  ~
+  ~ This file is part of Enchanted Fortress.
+  ~
+  ~ Enchanted Fortress is free software: you can redistribute it and/or modify
+  ~ it under the terms of the GNU General Public License as published by
+  ~ the Free Software Foundation, either version 3 of the License, or
+  ~ (at your option) any later version.
+  ~
+  ~ Enchanted Fortress is distributed in the hope that it will be useful,
+  ~ but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  ~ GNU General Public License for more details.
+  ~
+  ~ You should have received a copy of the GNU General Public License
+  ~ along with Enchanted Fortress.  If not, see <http://www.gnu.org/licenses/>.
+  -->
+
+<resources>
+    <string name="app_name">Enchanted Fortress</string>
+    <string name="newGame">Новая игра</string>
+    <string name="end_turn">Завершить ход</string>
+    <string name="population">Население</string>
+    <string name="farmers">Крестьяне</string>
+    <string name="scholars">Учёные</string>
+    <string name="builders">Строители</string>
+    <string name="soldiers">Солдаты</string>
+    <string name="popDelta">Прирост населения</string>
+    <string name="wallDelta">Новые укрепления</string>
+    <string name="militaryStrength">Военная мощь</string>
+    <string name="researchDelta">Очки технологий</string>
+    <string name="walls">Количество городских стен</string>
+    <string name="scouted">Доклад лазутчиков: %1$s - количество замеченных демонов</string>
+    <string name="scoutedLong">Доклад лазутчиков:\n%1$s - количество замеченных демонов\n%2$s - сила\n%3$s - полная военная мощь</string>
+    <string name="attacked">Атака!\n%1$s количество атакующих демонов\n%2$s количество жертв</string>
+    <string name="noVictims">Отака демонов отражена без потерь!</string>
+    <string name="farmingTech">Земледелие</string>
+    <string name="buildTech">Строительство</string>
+    <string name="soldierTech">Военное искусство</string>
+    <string name="scholarTech">Фундаментальные науки</string>
+    <string name="banishTech">Изгнание демонов</string>
+    <string name="gameOver">Назад в главное меню</string>
+    <string name="defeat">Демоны победили!\nКрепость пала. Эрафия в опасности!</string>
+    <string name="victory">Победа!\nВы изгнали всех демонов.\nВрата временно недоступны, повторите попытку позже.</string>
+    <string name="help">Сюжет и игровая справка</string>
+    <string name="helpText"><b>Сюжет</b>\n\nТёмные времена настали для вашего королевства. Какие-то помешанные люди, открыв Врата, заключили договор с демонами, и теперь те начали захватывать этот мир. Со временем их армия будет только расти, и если их не остановить Ваше королевство падёт!\n\nВаши учёные считают, что если существовует ритуал открытия Врат, то должен быть способ из закрыть. Помогите им произвести обряд и победить демонов.\n\n<b>Как играть</b>\n\nБольшая часть игры состоит в распределении населения по следующим специальностям:\n- Земледельцы (увеличивают прирост населения)\n- Строители (строят стены)\n- Солдаты (увеличивают военную мощь)\n- Учёные (ускоряют изучение технологий и изгоняют демонов) \n\nС течением времени (ходов), армия демонов будет расти, и, когда они будут достаточно уверены в своих силах, они будут нападать. Атаки не будут неожиданными, так как ваши люди будут докладывать, сколько они видели демонов. Однако, учтите, что это будет минимально возможное их число. Во время нападения всё население участвует в обороне, при этом солдаты, естественно, будут сильнее мирных жителей. Также высокие городские стены позволят Вам обороняться эффективнее.\n\nВообще, успех зависит от верного соотношения экономического и военного развития. Может показаться, что нанять как можно больше солдат - выгодное решение, но если ожидаемая атака не начнётся, то это будет, возможно роковой ошибкой. Поначалу наиболее выгодным занятием является земледелие, потому что оно отвечает за прирост населения, а чем больше населения, тем выше различные характеристики крепости. Изучение технологий увеличивает эффективность трудящихся. Всё население участвует в нём, однако, не все вносят одинаковый вклад. Учёные (люди, не приписанные к фермерам, строителям или солдатам) приносят больше всего очков исследования.\n\nСтены, к сожалению, не сделают крепость неприступной; в определённый момент демоны станут достаточно сильны, чтобы их не сдержала Ваша защита. Единственный способ остановить вторжение - это провести ритуал изгнания демонов и закрытия Врат.</string>
+    <string name="aboutMe">Дополнительные сведения</string>
+    <string name="turns">ходы</string>
+    <string name="turn">Ход</string>
+    <string name="continueText">Продолжить</string>
+    <string name="difficultySelect">Выбор сложности:</string>
+    <string name="aboutDevelopBy">Разработчик - %1$s</string>
+    <string name="aboutTranslateBy">Перевод\n%1$s</string>
+    <string name="aboutTrackerAt">Доклады об ошибках сюда:\n%1$s</string>
+    <string name="aboutCodeAt">Исходный код:\n%1$s</string>
+    <string name="aboutVersion">Версия: %1$s</string>
+    <string name="aboutSupportAt">Поддержать разработку:\n%1$s</string>
+    <string name="startGame">Начать игру</string>
+    <string name="gatesClosed">Закрыто Врат: %1d</string>
+    <string name="gatesOpened">, открыто Врат %1d</string>
+    <string name="gatesLeft">осталось %1d</string>
+    <string name="difficultyStartingPop">Начальное количество людей: %1s</string>
+    <string name="difficultyDemonSpawn">Скорость появления демонов: %1s</string>
+    <string name="difficultyDemonGrowth">Увеличение силы демонов: %1s</string>
+    <string name="banishNever">безнадёжно</string>
+    <string name="banishSlow">долго, очень долго</string>
+    <string name="scoresTitle">Доска почёта</string>
+    <string name="scoresTurns">Ходы</string>
+    <string name="scoresDifficulty">Сложность</string>
+    <string name="scoresButton">Доска почёта</string>
+    <string name="noScores">Выиграйте, и оставите здесь след.</string>
+    <string name="banishProgress">Учёные пытаются провести обряд, а демоны - увеличить силу. Сейчас она равна %1d.</string>
+    <string name="banishProgressShort">Сейчас сила демонов равна %1d.</string>
+    <string name="newsButton">Список новостей</string>
+    <string name="moreNews">Больше новостей</string>
+    <string name="battleNotification">Нас атакуют1!!</string>
+    <string name="banishNotification">изгнание</string>
+    <string name="scoutNotification">разведка докладывает</string>
+    <string name="settings">Настройки</string>
+    <string name="nightMode">Дневной/ночной режим</string>
+    <string name="resetHofPreference">Сбросить доску почёта</string>
+    <string name="resetHofDialogTitle">Вы точно хотите сбросить доску почёта?</string>
+    <string name="alertYes">Да</string>
+    <string name="alertNo">Нет</string>
+    <string name="nameHeader">Имя:</string>
+    <string name="battleReport">Атакующих (демоны) - %1d, убитых (люди) - %2d.</string>
+    <!-- Accessibility -->
+    <string name="minusButton">Кнопка минус</string>
+    <string name="plusButton">Кнопка плюс</string>
+    <string name="nameHint">Имя игрока</string>
+</resources>
